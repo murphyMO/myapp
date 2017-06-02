@@ -1,0 +1,80 @@
+<ion-view view-title="搜索结果" ng-controller="businessSearchResultController">
+	<ion-header-bar align-title="center" class="bar-light">
+	<!-- 	<div class="item-input-inset" ng-click="topBack()">
+			<span>
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div> -->
+		<button class="button button-icon icon" ng-click="topBack()">
+			<i class="ion-chevron-left"></i>
+		</button>
+		<h1 class="title fontsize-16 color-black">搜索会议室</h1>
+	</ion-header-bar>
+	<div class="bar bar-subheader" ng-class="{'business-no-bg' : allCity}">
+		<span class="xkd-p-5 m-l-15" ng-click="allCity=!allCity" ng-class="{'assertive' : selectedCity != '全国' && selectedCity != '全部城市'}">{{selectedCity}}</span>
+		<i ng-if="!allCity" ng-click="allCity=!allCity" class="ion-android-arrow-dropdown business-officeroom-icon " style="margin-top : 7px;"></i>
+		<i ng-if="allCity" class="ion-android-arrow-dropup business-officeroom-icon " style="margin-top : 7px;"></i>
+		<span class="xkd-p-5 m-l-15" ng-click="priceSelect()">价格</span>
+		<!-- 上下箭头 -->
+		<div class="business-officeroom-iconwrap" ng-click="priceSelect()">
+			<i class="ion-android-arrow-dropup business-officeroom-icon" ng-class="{'assertive' : priceIndex == '1'}"></i>
+			<i class="ion-android-arrow-dropdown " ng-class="{'assertive' : priceIndex == '2'}"></i>
+		</div>
+	</div>
+	<!-- 城市选择筛选 -->
+	<div class="text-center row row-wrap has-subheader business-officeroom-citys padding-none" ng-show="allCity" style="height: 25%;">
+<!-- 		<div ng-repeat="city in citys" class="col col-25" ng-click="selectCity(city,$index)" ng-class="{'assertive' : cityIndex==$index}">{{city.city_name}}</div> -->
+		<div class="col padding-none" style="max-width: 40%">
+			<ion-scroll style="height:100%">
+				<ul class="list">
+					<li class="item" ng-repeat="item in addrAry" ng-click="showChildren($index)">
+					{{item.name1}}{{addrAry.children}}
+					</li>
+				</ul>
+			</ion-scroll>
+		</div>
+		<div class="col padding-none" style="max-width: 60%;">
+			<ion-scroll style="height:100%;">
+				<ul class="list">
+					<li class="item padding-10" ng-repeat="i in addrAry[childrenItem].children">
+					{{i.name2}}
+					</li>
+				</ul>
+			</ion-scroll>
+		</div>
+	</div>
+
+	<ion-content class="has-header has-subheader">
+		<div class="ConferenceRoomList" ng-repeat="item in items">
+			<div style="position:relative">
+				<img class="xkd-profucPhoto xkd-list-pic-full-width" image-lazy-src="{{item.url[0]}}" image-lazy-loader="ios" image-lazy-distance-from-bottom-to-load="100" err-src="img/store4.jpg" ng-click="conferenceDetail(item,'conferenceRoomList')">
+				<div class="productTips col">
+					<span class="PruCategory" ng-if="item.is_inner == 1">自营</span>
+					<!-- <span>98%好评</span> -->
+					<span class="pull-right" ng-if="item.distance">距您:{{item.distance}}</span>
+				</div>
+			</div>
+			<div class="item row padding-15 b-l-none b-r-none business-officeroom-box">
+				<div class="col-80" style="white-space: normal;">
+					<div class="xkd-recommend-list-title">{{item.capacity}}人会议室-{{item.store_name}}{{item.meeting_room_name}}
+					</div>
+					<div class="xkd-recommend-list-content">
+						<i class="ion-ios-location-outline"></i>
+						<span>{{item.store_address}}</span>
+					</div>
+					<span class="xkd-label">超甲级</span>
+					<span class="xkd-label">地铁口</span>
+				</div>
+				<div class="col-20 text-right item-note" ng-if="user_id !='279'">
+					<button class="button assertive button-small" style="border:1px solid #ef473a" ng-click="buy(item)">立即预订</button>
+				</div>
+			</div>
+		</div>
+		<div class="text-center" ng-if="items.length==0 && !isEmptyData">
+			<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"
+>
+		</div>
+		<ion-infinite-scroll ng-if="isEmptyData" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+	</ion-content>
+	<i ng-click="scrollTop()" ng-if="currentCity.city_name != '全国'" class="backtoTopBtn ion-android-arrow-up back-top rounded-500 text-center"></i>
+</ion-view>

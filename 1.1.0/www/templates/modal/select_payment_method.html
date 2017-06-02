@@ -1,0 +1,24 @@
+<div class="modal xkd-select-city-modal">
+	<ion-header-bar class="bg-blue b-b-none">
+		<p class="title" style="text-align: center;">付款方式</p>
+		<div class="buttons">
+			<div class="item-input-inset" on-tap="closeModal()">
+				<i class="ion-close"></i>
+			</div>
+		</div>
+	</ion-header-bar>
+	<ion-content class="bg-dark">
+
+		<div class="selected-city-content">
+			<ion-scroll direction="y" style="height:200px" delegate-handle="selectCityScroll">
+				<div style="height:100%">
+					<div class="list">
+						<a ng-repeat="paymentMethod in order.pay_method" ng-if="paymentMethod.pay_id != 3" class="item item-icon-right" ng-class="{'positive' : paymentMethod.checked}" on-tap="selectItem(paymentMethod)">{{paymentMethod.pay_text}}
+							<i class="icon ion-checkmark" ng-if="paymentMethod.checked" style="font-size: inherit;"></i>
+						</a>
+					</div>
+				</div>
+			</ion-scroll>
+		</div>
+</ion-content>
+</div>

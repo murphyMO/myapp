@@ -1,0 +1,42 @@
+<ion-view view-title="企业动态列表" ng-controller="CompanyActiveListCtrl">
+
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="back()">
+			<span >
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-white">企业动态列表</h1>
+	</ion-header-bar>
+
+	<div class="bar bar-subheader item-input-inset" style="background-image:none">
+		<label class="item-input-wrapper">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" ng-model="activeSearch.keyword"  placeholder="搜索">
+		</label>
+	</div>
+
+	<ion-content class="has-subheader" style="background-color: #f0f3f4;">
+
+		<ion-refresher pulling-text="下拉刷新" on-refresh="demandDoRefresh()"></ion-refresher>
+		<div class="card" style="margin-bottom:8px;" ng-repeat="item in items track by $index" ng-show="!isOverLoad">
+			<div class="item item-avatar" style="border-bottom-width:0px">
+				<img ng-src="{{path.route_path}}{{path.photo_path}}{{item.one_inch_photo_url}}" err-src="img/icon_empty_head.png" ui-sref="personalmsg({user_id:item.article_data_user_id})">
+				<h2>{{item.article_data_title}}</h2>
+				<small class="calm">{{item.com_name}}</small>
+				<span class="badge badge-calm">
+					<span>活动</span>
+				</span>
+			</div>
+			<div class="item item-avatar b-t-none">
+				<p ng-click="materialDetail(service)">{{item.article_content}}</p>
+			</div>
+		</div>
+
+		<ion-infinite-scroll ng-if="!isEmptyData" on-infinite="getCompanyTrendsList()" distance="7%"></ion-infinite-scroll>
+
+		<div class="text-center" ng-show="isOverLoad">
+			<img style="width: 50%;margin-top:50px" src="img/icon_empty_img.png"/>
+		</div>
+	</ion-content>
+</ion-view>

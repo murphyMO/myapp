@@ -1,0 +1,55 @@
+<ion-view view-title="闲置出租" ng-controller="LeaveRentCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<button class="button button-clear" ng-click="myBack()">
+			<i class="ion-chevron-left color-blue"></i>
+		</button>
+		<h1 class="title fontsize-16 color-black">闲置出租</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-white">
+
+	<div class="bg-dark list">
+		<div class="item item-text-wrap">
+			<h2 class="color-ddark text-center">立即体验侠客岛新空间定制</h2>
+			<p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.</p>
+
+
+				<p style="margin-top: 20px"><span style="margin-right: 35px">1.是否接受联合办公</span>
+					<input type="radio" name="shi" value="1" ng-model="item.is_lianhe">是&nbsp;&nbsp;
+					<input type="radio" name="fou" value="0" ng-model="item.is_lianhe">否
+				</p>
+				<p>多家企业共享同一办公场地，包括开放办公区，私密办公室，服务配套。配套咖啡厅、路演厅、电影院、公共会议室等休闲区，共享前台、场地管理及行政服务。</p>
+
+				<p style="margin-top: 20px"><span style="margin-right: 50px">2.是否需要精装修</span>
+					<input type="radio" name="shi1" value="1" ng-model="item.is_jinzhuangxiu">是&nbsp;&nbsp;
+					<input type="radio" name="fou2" value="0" ng-model="item.is_jinzhuangxiu">否
+				</p>
+				<p>侠客岛精装修，定制装修方案、EO级家具，出口级人体工程座椅，全套强弱电方案，真正拎包入住，成本减少50%，工期缩短30%，最快一周交付场地。</p>
+
+				<p style="margin-top: 20px"><span style="margin-right: 20px">3.旧场地是否需要转租</span>
+					<input type="radio" name="shi3" value="1" ng-model="item.is_zhuanzu">是&nbsp;&nbsp;
+					<input type="radio" name="fou4" value="0" ng-model="item.is_zhuanzu">否
+				</p>
+				<p>侠客岛场地升级能力，快速精准招商能力，快速实现旧场地升值出租，免除后顾之忧</p>
+
+				<p style="margin-top: 20px"><span style="margin-right: 20px">4.是否需要场地智能化</span>
+					<input type="radio" name="shi5" value="1" ng-model="item.is_zhinenghua">是&nbsp;&nbsp;
+					<input type="radio" name="fou6" value="0" ng-model="item.is_zhinenghua">否
+				</p>
+				<p>智能wifi环境、人脸识别、云打印、无线投影系统，访客自主管理系统、智能灯光空调系统，自主搭配，空间全面数字化，从未有过的办公体验</p>
+
+				<p style="margin-top: 20px"><span style="margin-right: 20px">5.是否需要侠客岛资源型企业服务</span>
+					<input type="radio" name="shi7" value="1" ng-model="item.is_qiyefuwu">是&nbsp;&nbsp;
+					<input type="radio" name="fou8" value="0" ng-model="item.is_qiyefuwu">否
+				</p>
+				<p>侠客岛梳理超10条垂直产业链，跨4国，超过10个城市顶级资源，涵盖市场、人才、资源、资本多个板块，智能推送，专属资源官位企业整合侠客岛全平台资源对接，助力事业全面发展</p>
+
+		</div>
+
+			</div>
+		<div class="padding">
+			<button class="button button-calm button-block fontsize-32 bg-orglight yd-team-btn" ng-click="submitOffice()">立即体验新空间私人订制</button>
+		</div>
+
+	</ion-content>
+</ion-view>

@@ -1,0 +1,37 @@
+<ion-view view-title="全部订单列表" ng-controller="MineOrdersListCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<button class="button button-clear" ng-click="myBack()">
+			<i class="ion-chevron-left color-blue"></i>
+		</button>
+		<h1 class="title fontsize-16 color-black">全部订单</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-white">
+		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+		<div ng-repeat="item in items" ng-click="goMineorderdetail(item,$index)">
+			<div class="bg-dark list">
+				<div class="item">
+					<b>{{item.com_name}}</b>
+					<span class="pull-right xkd-text-danger">{{item.status_text}}</span>
+				</div>
+				<div class="item item-text-wrap" ng-repeat="i in item.order_desc">
+					<h2>
+						<b>{{i.meeting_room_name}}</b>
+						<span class="fontsize-18 xkd-text-orange" style="float:right;">&yen;{{i.total}}</span>
+					</h2>
+					<p class="m-t-15">时间：{{i.reserve_time_from|limitTo:16}} - {{i.reserve_time_to|limitTo:5:11}}</p>
+					<p>单价：{{i.unit_price}}元/小时</p>
+					<p>数量：{{i.amount}}</p>
+				</div>
+				<div class="item m-b-10">
+					<span class="pull-right"><b>合计：￥{{item.to_pay}}元</b></span>
+				</div>
+			</div>
+		</div>
+		<div class="text-center" ng-show="isOverLoad">
+			<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"
+>
+		</div>
+		<ion-infinite-scroll ng-if="isEmptyData" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+	</ion-content>
+</ion-view>

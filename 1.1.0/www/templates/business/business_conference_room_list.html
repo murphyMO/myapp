@@ -1,0 +1,166 @@
+<style>
+	.scroll {
+		height: 100%;
+	}
+</style>
+<ion-view view-title="会议室列表" ng-controller="ConferenceSpaceSlideController">
+	<ion-header-bar align-title="center" class="bar-light">
+		<button class="button button-icon icon color-black" ng-click="topBack()" style="position: absolute;left: 5px;top: 5px">
+			<i class="ion-chevron-left color-blue"></i>
+		</button>
+		<div class="xkd-topSwitchTab">
+		    <a class="pull-left"  ng-click="clickConference()" ng-class="{'xkd-topSwitchTab-active' : nowPage == 0}">
+		      会议室
+		    </a>
+
+		    <a class="pull-left"  ng-click="clickSpace()" ng-class="{'xkd-topSwitchTab-active' : nowPage == 1}">
+		      活动场地
+		    </a>
+		</div>
+	</ion-header-bar>
+
+
+	<ion-content class="has-header">
+
+		<tab-slide-box tab="0">
+			<ion-slide-box show-pager="false" on-slide-changed="boxChanged($index)" active-slide="nowPage">
+				<ion-slide ng-controller="ConferenceRoomListController">
+					<div class="bar" style="position: relative;" ng-class="{'business-no-bg' : allCity || allStore}">
+
+						<span class="xkd-p-5 m-l-15" ng-click="allCity=!allCity;allStore=false" ng-class="{'heroBlue' : selectedCity != '全国'}">{{selectedCity}}</span>
+						<i ng-if="!allCity" ng-click="allCity=!allCity;allStore=false" class="ion-android-arrow-dropdown business-officeroom-icon " style="margin-top : 7px;"></i>
+						<i ng-if="allCity" class="ion-android-arrow-dropup business-officeroom-icon " style="margin-top : 7px;"></i>
+
+						<span class="xkd-p-5 m-l-15" ng-click="allStore=!allStore;allCity=false" ng-class="{'heroBlue' : selectedStore != '所有岛'}">{{selectedStore}}</span>
+						<i ng-if="!allStore" ng-click="allStore=!allStore;allCity=false" class="ion-android-arrow-dropdown business-officeroom-icon " style="margin-top : 7px;"></i>
+						<i ng-if="allStore" class="ion-android-arrow-dropup business-officeroom-icon " style="margin-top : 7px;"></i>
+
+						<span class="xkd-p-5 m-l-15" ng-click="priceSelect()">价格</span>
+						<!-- 上下箭头 -->
+						<div class="business-officeroom-iconwrap" ng-click="priceSelect()">
+							<i class="ion-android-arrow-dropup business-officeroom-icon" ng-class="{'heroBlue' : priceIndex == '1'}"></i>
+							<i class="ion-android-arrow-dropdown " ng-class="{'heroBlue' : priceIndex == '2'}"></i>
+						</div>
+					</div>
+					<!-- 城市选择筛选 -->
+					<div class="text-center row row-wrap business-officeroom-citys" ng-show="allCity" style="position: absolute;">
+						<div ng-repeat="city in citys" class="col col-25" ng-click="selectCity(city,$index)" ng-class="{'heroBlue' : cityIndex==$index}">{{city.city_name}}</div>
+					</div>
+					<!-- 岛选择筛选 -->
+					<div class="text-center row row-wrap business-officeroom-citys" ng-show="allStore" style="position: absolute;margin-top: 0;padding-top: 5px;">
+						<div ng-repeat="store in stores2" class="col col-25" ng-click="selectStore(store,$index)" ng-class="{'heroBlue' : storeIndex==$index}">{{store.store_name}}</div>
+					</div>
+					<ion-scroll style="height:100%">
+						<div class="ConferenceRoomList" ng-repeat="item in items">
+							<div style="position:relative">
+								<img class="xkd-profucPhoto xkd-list-pic-full-width" image-lazy-src="{{item.url[0]}}" image-lazy-loader="ios" image-lazy-distance-from-bottom-to-load="100" err-src="img/store4.jpg" ng-click="conferenceDetail(item,'conferenceRoomList')">
+								<div class="productTips col">
+									<span class="PruCategory" ng-if="item.is_inner == 1">自营</span>
+									<!-- <span>98%好评</span> -->
+									<span class="pull-right" ng-if="item.distance">距您:{{item.distance}}</span>
+								</div>
+							</div>
+							<div class="item row padding-15 b-l-none b-r-none business-officeroom-box">
+								<div class="col-80" style="white-space: normal;">
+									<div class="xkd-recommend-list-title">{{item.capacity}}人会议室-{{item.store_name}}{{item.meeting_room_name}}
+									</div>
+									<div class="xkd-recommend-list-content">
+										<i class="ion-ios-location-outline"></i>
+										<span>{{item.store_address}}</span>
+									</div>
+									<h2 class="assertive">
+										<span>￥{{item.unit_price}}/小时</span>
+										<span class="fontsize-12">会员价￥{{item.unit_price_member}}/小时</span>
+									</h2>
+								</div>
+								<div class="col-20 text-right item-note" ng-if="user_id !='279'">
+									<button class="button assertive button-small" style="border:1px solid #ef473a" ng-click="buy(item)">立即预订</button>
+								</div>
+							</div>
+						</div>
+						<div class="text-center" ng-if="items.length==0 && !isEmptyData">
+							<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"
+>
+						</div>
+						<ion-infinite-scroll ng-if="isEmptyData" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+					</ion-scroll>
+				</ion-slide>
+				<ion-slide ng-controller="SpaceRoomListController">
+					<div class="bar" style="position: relative;" ng-class="{'business-no-bg' : allCity || allStore}">
+						<span class="xkd-p-5 m-l-15" ng-click="allCity=!allCity;allStore=false" ng-class="{'heroBlue' : selectedCity != '全国'}">{{selectedCity}}</span>
+						<i ng-if="!allCity" ng-click="allCity=!allCity;allStore=false" class="ion-android-arrow-dropdown business-officeroom-icon " style="margin-top : 7px;"></i>
+						<i ng-if="allCity" class="ion-android-arrow-dropup business-officeroom-icon " style="margin-top : 7px;"></i>
+
+						<span class="xkd-p-5 m-l-15" ng-click="allStore=!allStore;allCity=false" ng-class="{'heroBlue' : selectedStore != '所有岛'}">{{selectedStore}}</span>
+						<i ng-if="!allStore" ng-click="allStore=!allStore;allCity=false" class="ion-android-arrow-dropdown business-officeroom-icon " style="margin-top : 7px;"></i>
+						<i ng-if="allStore" class="ion-android-arrow-dropup business-officeroom-icon " style="margin-top : 7px;"></i>
+
+						<span class="xkd-p-5 m-l-15" ng-click="priceSelect()">价格</span>
+						<!-- 上下箭头 -->
+						<div class="business-officeroom-iconwrap" ng-click="priceSelect()">
+							<i class="ion-android-arrow-dropup business-officeroom-icon" ng-class="{'heroBlue' : priceIndex == '1'}"></i>
+							<i class="ion-android-arrow-dropdown " ng-class="{'heroBlue' : priceIndex == '2'}"></i>
+						</div>
+					</div>
+					<!-- 城市选择筛选 -->
+					<div class="text-center row row-wrap business-officeroom-citys" ng-show="allCity" style="position: absolute;">
+						<div ng-repeat="city in citys" class="col col-25" ng-click="selectCity(city,$index)" ng-class="{'heroBlue' : cityIndex==$index}">{{city.city_name}}</div>
+					</div>
+
+					<!-- 岛选择筛选 -->
+					<div class="text-center row row-wrap business-officeroom-citys" ng-show="allStore" style="position: absolute;margin-top: 0;padding-top: 5px;">
+						<div ng-repeat="store in stores2" class="col col-25" ng-click="selectStore(store,$index)" ng-class="{'heroBlue' : storeIndex==$index}">{{store.store_name}}</div>
+					</div>
+					<ion-scroll style="height:100%">
+						<div class="ConferenceRoomList" ng-repeat="item in items track by $index">
+							<div style="position:relative">
+								<!-- <img class="xkd-profucPhoto" src="{{item.url[0]}}" err-src="img/store4.jpg" ng-click="spaceDetail(item,'spaceRoomList')"> -->
+								<img class="xkd-profucPhoto xkd-list-pic-full-width" image-lazy-src="{{item.url[0]}}" image-lazy-loader="ios" image-lazy-distance-from-bottom-to-load="100" err-src="img/store4.jpg" ng-click="spaceDetail(item,'spaceRoomList')">
+								<div class="productTips col">
+									<span class="PruCategory" ng-if="item.is_inner == 1">自营</span>
+									<!-- <span>98%好评</span> -->
+									<span class="pull-right" ng-if="item.distance">距您:{{item.distance}}</span>
+								</div>
+							</div>
+							<div class="item row padding-15 b-none  m-n">
+								<div class="col-80" style="white-space: normal;">
+									<div class="xkd-recommend-list-title">{{item.store_name}}{{item.meeting_room_name}}</div>
+									<div class="xkd-recommend-list-content">
+										<i class="ion-ios-location-outline"></i>
+										<span>{{item.store_address}}</span>
+									</div>
+									<h2 class="assertive">
+										<span>
+											<span>￥{{item.min_price}}/小时</span>
+											<span style="font-size:6px;">起</span>
+										</span>
+										<span>
+											<span>会员价￥{{item.min_price_member}}/小时</span>
+											<span style="font-size:6px;">起</span>
+										</span>
+									</h2>
+								</div>
+								<!-- <div class="item item-text-wrap" style="border: none;padding: 2px">
+										<h2><b>{{item.store_name}}{{item.meeting_room_name}}</b></h2>
+										<p><i class="icon ion-ios-location-outline"></i> {{item.store_address}}</p>
+										<h2 class="assertive">￥{{item.unit_price}}/小时</h2>
+								</div> -->
+								<div class="col-20 text-right item-note" ng-if="user_id !='279'">
+									<button class="button assertive button-small" style="border:1px solid #ef473a" ng-click="buy(item)">立即预订</button>
+								</div>
+							</div>
+
+
+						</div>
+						<div class="text-center" ng-if="items.length==0 && !isEmptyData">
+							<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"
+>
+						</div>
+						<ion-infinite-scroll ng-if="isEmptyData" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+					</ion-scroll>
+				</ion-slide>
+			</ion-slide-box>
+		</tab-slide-box>
+	</ion-content>
+	<i ng-click="scrollTop()" class="backtoTopBtn ion-android-arrow-up back-top rounded-500 text-center"></i>
+</ion-view>

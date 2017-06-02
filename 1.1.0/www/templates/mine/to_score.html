@@ -1,0 +1,28 @@
+<ion-view view-title="去评分" ng-controller="ToScoreCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<button class="button button-clear" ng-click="myBack()">
+			<i class="ion-chevron-left color-blue"></i>
+		</button>
+		<h1 class="title color-black">去评分</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header">
+	<div>
+		<img src="img/team-02.jpg" width="100%">
+	</div>
+	<div class="m-15 padding-t-15">
+		<div class="row">
+			<div class="col">
+				<a class="button button-positive button-block" on-tap="toStore()">好评打赏</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<a class="button button-stable button-block" ng-click="clickBad()">差评吐槽</a>
+			</div>
+		</div>
+	</div>
+
+	</ion-content>
+
+</ion-view>

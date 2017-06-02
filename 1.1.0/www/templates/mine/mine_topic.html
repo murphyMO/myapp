@@ -1,0 +1,163 @@
+<style>
+	.minetopic-row{
+		padding-left: 80px;
+		position: relative;
+	}
+	.minetopic-row .title{
+		position: absolute;
+		left: 0px;
+		width: 60px;
+		text-align: right;
+	}
+	.scroll{
+		height:100%;
+	}	
+	
+	.timeline {
+		padding: 0;
+		margin: 0;
+	}
+	.tl-wrap {
+		display: block;
+		padding: 5px 0 5px 20px;
+		margin-left: 1em;
+		margin-right: 1em;
+		border-color: #dee5e7;
+		border-style: solid;
+		border-width: 0 0 0 4px;
+	}
+	.tl-content {
+		position: relative;
+		display: inline-block;
+	}
+	.panel {
+		border-radius: 2px;
+		background-color: #fff;
+	}
+	.padder {
+		padding-right: 15px;
+		padding-left: 15px;
+	}	
+	.arrow.left {
+		top: 50%;
+		left: -9px;
+		margin-top: -9px;
+		border-right-color: rgba(0, 0, 0, 0.1);
+		border-left-width: 0;
+	}
+	.arrow.left:after {
+		bottom: -8px;
+		left: 1px;
+		border-right-color: #ffffff;
+		border-left-width: 0;
+	}
+	.arrow.pull-left {
+		left: 19px;
+	}
+	.tl-content.block{
+		display: block;
+		width: 100%；
+	}
+	.tl-wrap:before {
+		position: relative;
+		top: 15px;
+		float: left;
+		width: 10px;
+		height: 10px;
+		margin-left: -27px;
+		background: #edf1f2;
+		border-color: #F8A245;
+		border-style: solid;
+		border-width: 3px;
+		border-radius: 50%;
+		content: "";
+		box-shadow: 0 0 0 4px #f0f3f4;
+	}
+</style>
+<ion-view title="我的话题" ng-controller="MyTopicCtrl">
+	<ion-header-bar align-title="center" class="bar bar-header bar-dark has-tabs-top">
+		<!-- 返回 -->
+		<div class="item-input-inset" ui-sref="tab.mine">
+			<span>
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div>
+		<h1 class="title">我的话题</h1>
+	</ion-header-bar>
+
+	<div class="row text-center bar bar-subheader padding-b-none">
+		<div class="col col-33" ng-class="{'business-xkd-header-active' : current_slide == 0,'padding-b-3' : current_slide == 0}" ng-click="clickWaitTopic()"><span>待审核</span></div>
+		<div class="col col-33" ng-class="{'business-xkd-header-active' : current_slide == 1,'padding-b-3' : current_slide == 1}" ng-click="clickAgreeTopic()"><span>已同意</span></div>
+		<div class="col col-33" ng-class="{'business-xkd-header-active' : current_slide == 2,'padding-b-3' : current_slide == 2}" ng-click="clickRejectTopic()"><span>未同意</span></div>
+	</div>
+	<ion-content class="bg-dark has-header has-subheader">
+		<tab-slide-box tab="0">
+			<ion-slide-box class="content"  show-pager="false" on-slide-changed="changeTopicType($index)" active-slide="current_slide">
+				<ion-slide ng-controller="WaitTopicCtrl" style="height:100%" class="b-t-none">
+					<ion-scroll style="height:100%" overflow-scroll="true" style="overflow: hidden">
+						<ion-refresher pulling-text="下拉刷新" on-refresh="doTopicRefresh()" pulling-icon="ion-android-arrow-down"></ion-refresher>
+						<ul class="timeline">
+							<li class="tl-item tl-left" ui-sref="minetopicdetail({prevpage_slide: 0,topic_id:item.topic_id})" ng-repeat="item in items">
+								<div class="tl-wrap">
+									<div class="tl-content panel block xkd-reactiveInfo">
+										<span class="arrow left pull-up"></span>
+										<span class="heroYello padder xkd-reactiveInfo block">#{{item.topic_title}}</span>
+										<div class="b-t padder xkd-reactiveInfo color-gray">{{item.topic_content}}</div>
+									</div>
+								</div>
+							</li>
+						</ul>						
+						<ion-infinite-scroll ng-if="!topicIsOverLoad" on-infinite="getMineTopicList()" distance="1%"></ion-infinite-scroll>
+						<div class="text-center" ng-show="topicIsEmptyData">
+							<img style="width: 50%;margin-top:50px" src="img/icon_empty_img.png"/>
+						</div>
+					</ion-scroll>
+					<i ng-click="scrollTop()" class="backtoTopBtn ion-android-arrow-up back-top rounded-500 text-center"></i>
+				</ion-slide>
+				<ion-slide ng-controller="WaitTopicCtrl" style="height:100%" class="b-t-none">
+					<ion-scroll style="height:100%" overflow-scroll="true" style="overflow: hidden">
+						<ion-refresher pulling-text="下拉刷新" on-refresh="doTopicRefresh()" pulling-icon="ion-android-arrow-down"></ion-refresher>
+						<ul class="timeline">
+							<li class="tl-item tl-left" ui-sref="minetopicdetail({prevpage_slide: 0,topic_id:item.topic_id})" ng-repeat="item in items">
+								<div class="tl-wrap">
+									<div class="tl-content panel block">
+										<span class="arrow left pull-up"></span>
+										<span class="heroYello padder xkd-reactiveInfo block">#{{item.topic_title}}</span>
+										<div class="b-t padder xkd-reactiveInfo color-gray">{{item.topic_content}}</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<ion-infinite-scroll ng-if="!topicIsOverLoad" on-infinite="getMineTopicList()" distance="1%"></ion-infinite-scroll>
+						<div class="text-center" ng-show="topicIsEmptyData">
+							<img style="width: 50%;margin-top:50px" src="img/icon_empty_img.png"/>
+						</div>
+					</ion-scroll>
+					<i ng-click="scrollTop()" class="backtoTopBtn ion-android-arrow-up back-top rounded-500 text-center"></i>
+				</ion-slide>
+				<ion-slide ng-controller="WaitTopicCtrl" style="height:100%" class="b-t-none">
+					<ion-scroll style="height:100%" overflow-scroll="true" style="overflow: hidden">
+						<ion-refresher pulling-text="下拉刷新" on-refresh="doTopicRefresh()" pulling-icon="ion-android-arrow-down"></ion-refresher>
+						<ul class="timeline">
+							<li class="tl-item tl-left" ui-sref="minetopicdetail({prevpage_slide: 0,topic_id:item.topic_id})" ng-repeat="item in items">
+								<div class="tl-wrap">
+									<div class="tl-content panel block">
+										<span class="arrow left pull-up"></span>
+										<span class="heroYello padder xkd-reactiveInfo block">#{{item.topic_title}}</span>
+										<div class="b-t padder xkd-reactiveInfo color-gray">{{item.topic_content}}</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<ion-infinite-scroll ng-if="!topicIsOverLoad" on-infinite="getMineTopicList()" distance="1%"></ion-infinite-scroll>
+						<div class="text-center" ng-show="topicIsEmptyData">
+							<img style="width: 50%;margin-top:50px" src="img/icon_empty_img.png"/>
+						</div>
+					</ion-scroll>
+					<i ng-click="scrollTop()" class="backtoTopBtn ion-android-arrow-up back-top rounded-500 text-center"></i>
+				</ion-slide>
+			</ion-slide-box>
+		</tab-slide-box>
+	</ion-content>	
+</ion-view>
+

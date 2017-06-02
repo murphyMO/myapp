@@ -1,0 +1,25 @@
+<ion-view view-title="话题申请" ng-controller="TopicApplyController">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset color-white" on-tap="back()">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">话题申请</h1>
+		<div class="buttons">
+			<div class="item-input-inset">
+				<a class="color-blue fontsize-16" on-tap="applyTopic()">申请</a>
+			</div>
+		</div>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-dark">
+		<label class="item item-input m-t-15">
+			<textarea class="customer-textarea" elastic ng-model="topic.name" rows="1" placeholder="话题名称(必填)" ng-blur="checkTopicNameValid()"></textarea>
+		</label>
+		<label class="item item-input m-t-15">
+			<textarea class="customer-textarea" elastic ng-model="topic.desc" rows="5" placeholder="话题描述(必填)"></textarea>
+		</label>
+	</ion-content>
+
+</ion-view>

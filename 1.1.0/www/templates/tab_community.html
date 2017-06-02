@@ -1,0 +1,228 @@
+<style>
+	.scroll {
+		height: 100%;
+	}
+
+	.tabbed-slidebox .tsb-icons:after {
+		display: none;
+	}
+</style>
+<ion-view title="Scrollable Tabbed Slide box" ng-controller="CommunityBoxCtrl">
+	<ion-header-bar align-title="center" class="bar bar-header bar-dark has-tabs-top">
+		<h1 class="title">动态</h1>
+		<!-- <div class="row text-center color-white">
+			<div class="col col-20"><span ng-class="{'header-active' : nowPage == 0,'padding-b-3' : nowPage == 0}" ng-click="clickService()">服务</span></div>
+			
+			<div class="col col-20"><span ng-class="{'header-active' : nowPage == 2,'padding-b-3' : nowPage == 2}" ng-click="clickActivity()">活动</span></div>
+		</div> -->
+		<div class="pull-right button button-clear m-r-10" ui-sref="postdynamic" ui-sref="postdynamic"><i class="ion-plus fontsize-18" style="vertical-align: middle;"></i>发布</div>
+		<!-- <div class="pull-right button button-clear m-r-10" ui-sref="posttypelist" ui-sref="posttypelist"><i class="ion-plus fontsize-18" style="vertical-align: middle;"></i></div> -->
+	</ion-header-bar>
+	<ion-content scroll="false" class="bg-dark">
+		<tab-slide-box tab="0">
+			 <ion-slide-box show-pager="false" on-slide-changed="boxChanged($index)" active-slide="nowPage">
+				<!-- 第一屏 -->
+			<!---slide ng-controller="CommunityServiceCtrl">
+					<ion-scroll style="height:100%">
+						<div class="business-warpbox bg-white overflow-hidden padding-5 " ng-if="serviceTwoTypeList">
+							<div class="col-25" ng-if="$index < 11" ng-repeat="type in serviceTwoTypeList track by $index">
+								<a ng-click="toServiceListPageForCommunity(type)">
+									<img src="img/{{type.icon_name}}"/>
+									<p class="fontsize-12 color-black">{{type.text}}</p>
+								</a>
+							</div>
+						</div>
+						服务产品列表
+						<div class="m-t-15 b-t-none">
+							<div class="item b-t-none dark text-center">
+								热门服务&nbsp;
+							</div>
+							<ion-list>
+								<ion-item class="business-recommend" ng-repeat="service in serviceList" type="item-text-wrap" ng-click="toBusinessProduct(service)">
+									<img ng-src="{{commonPath.host_path}}{{service.material_thumb}}" err-src="img/icon_empty_head.png">
+									<span class="color-white list-title fontsize-14" ng-if="service.inner_type">&nbsp;{{service.inner_type == 0 ? "自营" : "推荐"}}</span>
+									<div class="pull-right">
+										<span class="dark button button-outline button-dark button-small" ng-if="service.store_name">{{service.store_name}}</span>
+										<span class="color-calm button button-outline button-calm button-small" ng-if="service.inner_type">{{service.inner_type == 0 ? "自营" : "推荐"}}</span>
+									</div>
+									<i class="ion-chevron-down pull-right" ng-click="report()" style="z-index:3"></i>
+									<h2 class="m-t-5 padding-l-10 font-family"><strong>{{service.com_service_name}}</strong></h2>
+									<p class="m-t-5 padding-l-10 company-name" style="white-space: normal;">{{service.com_service_des}}</p>
+									<p class="padding-l-10" ng-if="service.com_name" style="margin-top:3%">
+										<i class="ion-android-bookmark fontsize-18" ></i>&nbsp;{{service.com_name}}
+									</p>
+									<p class="padding-l-10" ng-if="service.store_name">
+										<i class="ion-location fontsize-18" ></i>&nbsp;{{service.store_name}}
+									</p>
+									<p class="fontsize-16 padding-l-10 m-t-10" >
+										<i class="ion-heart fontsize-18"></i> {{service.like_num}}
+										<span class="m-l-15"><i class="ion-chatbox-working fontsize-18"></i> {{service.message_num}}</span>
+										<span class="m-l-10">参考价格： ￥{{service.unit_value}}{{service.unit}}</span>
+									</p>
+								</ion-item>
+							</ion-list>
+						</div>
+						<ion-infinite-scroll ng-if="!isEmptyData" on-infinite="getServiceDatas()" distance="1%"></ion-infinite-scroll>
+					</ion-scroll>
+					<i ng-click="scrollTop()" class="ion-arrow-up-b back-top rounded-500 text-center" style="position:absolute;right:30px;bottom:50px;font-size:30px;"></i>
+				</ion-slide>-->
+				<!-- 第二屏 -->
+				<ion-slide ng-controller="CommunityDynamicCtrl">
+					<div class="bar bar-header item-input-inset">
+						<label class="item-input-wrapper">
+							<i class="icon ion-ios-search placeholder-icon"></i>
+							<input type="search" ng-model="dynamicSearch.keyword" placeholder="搜索">
+						</label>
+					</div>
+					<ion-scroll style="height:100%">
+						<ion-refresher pulling-text="下拉刷新" on-refresh="dynamicDoRefresh()"></ion-refresher>
+						<div ng-repeat="dynamicItem in dynamicList">
+							<div class="item item-avatar" style="border-bottom-width:0px">
+								<img ui-sref="personalmsg({user_id:dynamicItem.article_data_user_id,com_id:dynamicItem.article_com_id,from:'tab.communitydynamic'})" ng-src="{{commonPath.route_path}}{{commonPath.photo_path}}{{dynamicItem.one_inch_photo_url}}" err-src="img/icon_emptyPeron.png">
+								<h3 style="text-overflow: ellipsis;white-space: nowrap;course:hand;width: 72%"><strong>{{dynamicItem.article_data_title}}</strong></h3>
+								<small class="xkd-subTit gray" ui-sref="commsg({com_id:dynamicItem.article_com_id})">{{dynamicItem.com_name}}</small>
+								<span ng-switch="dynamicItem.article_type_id">
+									<span class="badge badge-calm" ng-switch-when="1">需求</span>
+									<span class="badge badge-balanced" ng-switch-when="2">服务</span>
+									<span class="badge badge-positive" ng-switch-when="3">公司简介</span>
+									<span class="badge badge-stable" ng-switch-when="4">人员简介</span>
+									<span class="badge badge-royal" ng-switch-when="5">随便</span>
+									<span class="badge badge-assertive" ng-switch-when="6">活动</span>
+									<span class="badge badge-assertive" ng-switch-when="8">派对</span>
+								</span>
+							</div>
+							<div class="item item-avatar b-t-none">
+								<p class="m-b-10" style="white-space: pre-line;">{{dynamicItem.article_content}}</p>
+								<div>
+									<ion-gallery ion-gallery-items="dynamicItem.dynamicImgItems" ion-gallery-item-edit="false"></ion-gallery>
+								</div>
+								<!-- <div ui-sref="postMaterialDetail({id:dynamicItem.com_article_material_id,from:'tab.communitydynamic'})" class="item m-t-10" style="background: #f3f0f0;padding: 3px;border: none;" ng-if="dynamicItem.com_article_material_id">
+									<span class="pull-left" style="display: inline-block;width: 30px;height: 30px;">
+										<img style="width:80%;margin-top:50px" ng-src="{{dynamicItem.material_thumb}}" err-src="img/icon_empty_img.png">
+									</span>
+									<a class="pull-left m-l-10 m-t-5 fontsize-12 " >{{dynamicItem.material_abstract}}</a>
+								</div> -->
+							</div>
+							<div class="item item-avatar b-t-none">
+								<div class="pull-left">
+									<a class="gray" style="line-height:35px">{{dynamicItem.article_cre_time}}</a>
+								</div>
+								<div class="pull-right m-b-10">
+
+									<a ng-click="likeYou(1,dynamicItem,dynamicItem.is_like)" class="button button-small">
+										<span ng-show="dynamicItem.is_like==0"><i class="ion-heart"></i> 赞</span>
+										<span ng-show="dynamicItem.is_like==1"><i class="ion-heart assertive"></i> 取消赞</span>
+									</a>
+									<a ng-click="replayShow(1,dynamicItem,-1,1)" class="button button-small"><i class="ion-chatbox-working"></i> 评论</a>
+								</div>
+								<div class="m-t-sm bg-light" style="clear:both;border-radius:5px;"
+									 ng-show="dynamicItem.service_like_info.length>0||dynamicItem.service_message_info.length>0">
+									<div style="position: relative">
+										<div style="width:0; height:0; border-width:8px; border-style:solid; border-color:transparent transparent #edf1f2 transparent; font-size:0; line-height:0;position: absolute;bottom: -1px;left: 10px">
+										</div>
+									</div>
+									<div>
+										<div class="padding-5" ng-class="{'b-b':dynamicItem.service_message_info.length>0}"
+											 ng-show="dynamicItem.service_like_info.length>0">
+											<i class="ion-heart fontsize-12"></i>
+											<a class="positive fontsize-12" ng-repeat="like in dynamicItem.service_like_info">{{like.like_user_name}}&nbsp;&nbsp;</a>
+										</div>
+										<div class="padding-5" style="white-space: normal;word-break: break-all;" ng-show="dynamicItem.service_message_info.length>0">
+											<div on-hold="onHold(message.message_user_name,message.message_id)" ng-repeat="message in dynamicItem.service_message_info"
+												 ng-click="replayShow(2,dynamicItem,$index,1)">
+												<a class="positive fontsize-12">{{message.message_user_name}}</a><span class="fontsize-12" ng-if="message.message_parent_user_name"> 回复 </span><a class="positive fontsize-12">{{message.message_parent_user_name}}</a><span>:</span>
+												<span class="fontsize-12">{{message.message_content}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<ion-infinite-scroll ng-if="!dynamicIsEmptyData" on-infinite="getDynamicList()" distance="1%"></ion-infinite-scroll>
+						<div class="text-center" ng-show="dynamicIsOverLoad">
+							<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"/>
+
+						</div>
+					</ion-scroll>
+						<div style="bottom:0">
+							<ion-footer-bar keyboard-attach class="bar bar-footer item-input-inset has-tabs" ng-show="replay_show" style="position:fixed;">
+								<label class="item-input-wrapper">
+									<input type="search" ng-blur="replayBlur()" ng-model="re.message_content" placeholder="说点什么呢？" auto-focus-when="replay_show">
+								</label>
+								<button class="button button-small button-calm" ng-click='sendReplay()'>
+									发送
+								</button>
+							</ion-footer-bar>
+						</div>
+					<i ng-click="scrollTop()" class="ion-arrow-up-b back-top rounded-500 text-center" style="position:absolute;right:30px;bottom:50px;font-size:30px;"></i>
+				</ion-slide>
+				<!-- 第三屏 -->
+				<!-- <ion-slide ng-controller="CommunityActivityCtrl">
+					<ion-scroll style="height:100%">
+						<ion-refresher pulling-text="下拉刷新" on-refresh="activityDoRefresh()"></ion-refresher>
+
+							<div class="m-t-15 b-t-none bg-white" ng-repeat="activityItem in activityList" ui-sref="activityitem({id:activityItem.party_id,from:'tab.community'})" >
+							    <div class="padding-10">
+									<h4 class="text-center font-family"><strong>{{activityItem.title}}</strong></h4>
+								</div>
+								<div class="business-banner">
+									<img ng-src="{{commonPath.host_path}}{{activityItem.material_thumb}}" err-src="img/icon_empty.png">
+								</div>
+									<div class="padding-10">
+									<p>
+										<span>&nbsp;<i class="ion-ios-time"></i>&nbsp;{{activityItem.start_time}} -  {{activityItem.end_time}}</span>
+									</p>
+
+									<p>
+										<span>&nbsp;<i class="ion-ios-location fontsize-16">&nbsp;</i>{{activityItem.address}}</span>
+									</p>
+									<p>
+										<span>&nbsp;<i class="ion-android-bookmark fontsize-16">&nbsp;</i>{{activityItem.com_name}}</span>
+									</p>
+									<p>
+										<button disabled="disabled" class="button button-small">{{activityItem.enroll_num}}  人参加</button>
+										<button disabled="disabled" class="button button-small m-l-5" >{{activityItem.message_num}}  人评论</button>
+										<button disabled="disabled" class="button button-small m-l-5">{{activityItem.like_num}}  人赞</button>
+									</p>
+								</div>
+
+							<div class="col col-67">
+									<h2 class="font-family"><strong>{{activityItem.title}}</strong></h2>
+									<p><span><i class="ion-ios-time"></i>  {{activityItem.start_time | date:'yyyy-MM-dd'}}</span></p>
+									<p><span><i class="ion-ios-time-outline"></i>  {{activityItem.end_time}}</span></p>
+									<p><span><i class="ion-ios-location fontsize-16"></i>  {{activityItem.address}}</span></p>
+									<p><span><i class="ion-android-bookmark fontsize-16"></i>  {{activityItem.com_name}}</span></p>
+									<p class="m-t-5">
+										<button disabled="disabled" class="button button-small">{{activityItem.enroll_num}}  人参加</button>
+										<button disabled="disabled" class="button button-small m-l-5" >{{activityItem.message_num}}  人评论</button>
+										<button disabled="disabled" class="button button-small m-l-5">{{activityItem.like_num}}  人赞</button>
+									</p>
+								</div>
+							</div>
+
+
+
+							<div class="row item" style="padding:10px;" ng-repeat="activityItem in activityList" ui-sref="activityitem({id:activityItem.party_id,from:'tab.community'})" >
+								<div class="col col-33 text-center" style="background:url('{{commonPath.host_path}}{{activityItem.material_thumb}}');background-repeat:no-repeat;background-position:center;background-size:cover;background-clip:content-box">
+								</div>
+								<div class="col col-67">
+									<h2 class="font-family"><strong>{{activityItem.title}}</strong></h2>
+									<p><span><i class="ion-ios-time"></i>  {{activityItem.start_time | date:'yyyy-MM-dd'}}</span></p>
+									<p><span><i class="ion-ios-time-outline"></i>  {{activityItem.end_time}}</span></p>
+									<p><span><i class="ion-ios-location fontsize-16"></i>  {{activityItem.address}}</span></p>
+									<p><span><i class="ion-android-bookmark fontsize-16"></i>  {{activityItem.com_name}}</span></p>
+									<p class="m-t-5">
+										<button disabled="disabled" class="button button-small">{{activityItem.enroll_num}}  人参加</button>
+										<button disabled="disabled" class="button button-small m-l-5" >{{activityItem.message_num}}  人评论</button>
+										<button disabled="disabled" class="button button-small m-l-5">{{activityItem.like_num}}  人赞</button>
+									</p>
+								</div>
+							</div>
+						<ion-infinite-scroll ng-if="!activityIsEmptyData" on-infinite="getActivityList()" distance="1%"></ion-infinite-scroll>
+											</ion-scroll>
+											<i ng-click="scrollTop()" class="ion-arrow-up-b back-top rounded-500 text-center" style="position:absolute;right:30px;bottom:50px;font-size:30px;"></i>
+										</ion-slide> -->
+			</ion-slide-box>
+		</tab-slide-box>
+	</ion-content>
+</ion-view>

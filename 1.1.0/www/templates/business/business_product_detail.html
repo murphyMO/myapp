@@ -1,0 +1,63 @@
+<ion-view view-title="服务" ng-controller="BusinessProductDetailCtrl">
+	<ion-header-bar align-title="center" class="bar-dark" >
+		<div class="item-input-inset">
+			<span ui-sref="tab.business">
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div>
+		<div class="tabs-striped tabs-top tabs-background-dark tabs-color-light">
+			<div class="tabs product_tab">
+				<a class="tab-item" ui-sref="businessProduct({com_service_id:com_service_id,from:'tab.business'})">
+					服务
+				</a>
+				<a class="tab-item active" ui-sref="businessProductDetail({com_service_id:com_service_id,com_article_material_id:service.com_article_material_id})">
+					详情
+				</a>
+			</div>
+		</div>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-dark has-footer">
+		<div ng-show="!hasMaterial" class="text-center zwsc" >
+			<a style="line-height: 38px">抱歉( ▼-▼ )暂无素材哦~</a><br>
+			<!-- 
+			<button class="button button-balanced" ui-sref="postneeds">
+				去发布需求
+				<i class="ion-android-arrow-forward"></i>
+			</button>
+			 -->
+		</div>
+		<div ng-show="hasMaterial" class="card">
+			<div class="item item-divider">
+				<span class="h4 sucai-title">{{material.material_title}}</span><br>
+				<small>{{material.cre_time}}<span class="m-l-10">{{material.cre_name}}</span></small>
+			</div>
+			<div class="item item-text-wrap">
+				<p class="sucai-neirong" ng-bind-html="material.material_content"></p>
+			</div>
+			<!-- 
+			<div class="item item-divider">
+				<small>阅读量  5</small>
+			</div> -->
+		</div>
+	</ion-content>
+	
+	<div class="tabs tabs-icon-top" ng-show="hasMaterial">
+		<div class="business-product-footone">
+			<a class="tab-item" ng-click="hiMessageClick()">
+				<i class="icon ion-chatbox-working"></i>
+				回复
+			</a>
+		</div>
+		<div class="business-product-foottwo">
+			<a class="tab-item" ng-class="{'calm': isLike}" ng-click="hiLickClick()">
+				<i class="icon ion-heart"></i>
+				点赞
+			</a>
+		</div>
+		<div class="business-product-footthree button button-calm no-radius">
+			<i class="icon ion-chatbubble-working"></i>
+			 &nbsp;聊天
+		</div>
+	</div>
+</ion-view>

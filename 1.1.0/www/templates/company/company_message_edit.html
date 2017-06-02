@@ -1,0 +1,50 @@
+<ion-view view-title="编辑企业基础信息" ng-controller="CompanyTagCtrl">
+		<ion-header-bar class="bar-light">
+			<div class="item-input-inset" ng-click="backClick()">
+				<span>
+					<i class="ion-chevron-left color-blue"></i>
+				</span>
+			</div>
+			<h1 class="title" style="text-align:center;">{{editData.title}}</h1>
+			<i class="share fontsize-16 color-blue" ng-click="confirmClick()">确定</i>
+		</ion-header-bar>
+		<ion-content>
+			<div style="position:relative;padding:0px 20px;border-bottom:1px solid #eee;" ng-if="message == 0">
+				<input type="number" ng-model="editData.content" class="fontsize-16"  style="height:50px;width:100%;padding-right:30px;" placeholder="{{editData.placeholder}}">
+				<i class="icon ion-ios-close-outline" style="position:absolute;right:20px;top:10px;font-size:30px;" ng-click="deleteData()"></i>
+			</div>
+			<div style="position:relative;padding:0px 20px;border-bottom:1px solid #eee;" ng-if="message == 1">
+				<input type="text" ng-model="editData.content" class="fontsize-16"  style="height:50px;width:100%;padding-right:30px;" placeholder="{{editData.placeholder}}">
+				<i class="icon ion-ios-close-outline" style="position:absolute;right:20px;top:10px;font-size:30px;" ng-click="deleteData()"></i>
+			</div>
+			<ion-list ng-if="message == 2">
+				<ion-radio ng-value="0" ng-model="editData.content">公司</ion-radio>
+				<ion-radio ng-value="1" ng-model="editData.content">团队</ion-radio>
+			</ion-list>
+			<ion-list ng-if="message == 3">
+				<ion-radio ng-value="3" ng-model="editData.content" class="color-blue"><span class="color-black">磨子桥岛</span></ion-radio>
+				<ion-radio ng-value="4" ng-model="editData.content" class="color-blue"><span class="color-black">菁蓉岛</span></ion-radio>
+				<ion-radio ng-value="5" ng-model="editData.content" class="color-blue"><span class="color-black">节能岛</span></ion-radio>
+				<ion-radio ng-value="7" ng-model="editData.content" class="color-blue"><span class="color-black">望京岛</span></ion-radio>
+				<ion-radio ng-value="8" ng-model="editData.content" class="color-blue"><span class="color-black">虹桥岛</span></ion-radio>
+				<ion-radio ng-value="9" ng-model="editData.content" class="color-blue"><span class="color-black">金山岛</span></ion-radio>
+			</ion-list>
+			<div class="list" ng-if="message == 4">
+				<label class="item item-divider">
+					热门行业
+				</label>
+				<ion-list>
+					<ion-checkbox ng-model="tag.isSelect" ng-repeat="tag in tagInfo" ng-change="selectTag(tag)">{{tag.business_label_des}}</ion-checkbox>
+				</ion-list>
+			</div>
+			<div class="list" ng-if="message == 5">
+				<label class="item item-divider">
+					热门城市
+				</label>
+				<ion-radio ng-repeat="city in cityList" ng-change="selectCity(city)" ng-value="city.city_name" ng-model="editData.content.city_name">{{city.city_name}}</ion-radio>
+				<label class="item item-divider">
+					其他城市
+				</label>
+			</div>
+		</ion-content>
+	</ion-view>

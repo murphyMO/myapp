@@ -1,0 +1,50 @@
+<ion-view view-title="话题" ng-controller="CommunityTopicCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" on-tap="back()">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		<h1 class="title">话题</h1>
+		<div class="buttons">
+			<div class="item-input-inset">
+				<a class="color-blue fontsize-16" ui-sref="topicapply({from:'topiclist'})">申请</a>
+			</div>
+		</div>
+	</ion-header-bar>
+	<div class="bar bar-subheader item-input-inset">
+		<label class="item-input-wrapper text-center">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" ng-model="topicSearch.keyword" placeholder="搜索">
+		</label>
+	</div>
+
+	<ion-content class="has-header bg-dark" style="margin-top:43px;"">
+		<ion-scroll style="height:100%;clear:both;">
+			<ion-refresher pulling-text="下拉刷新" on-refresh="topicDoRefresh()"></ion-refresher>
+				<div class="bg-white b-b xkd-topiclist-box" ng-repeat="item in topicList">
+					<h4 ng-click="topicDetail(item)" ng-if="$index==0 && (topicSearch.keyword==null || topicSearch.keyword=='')">TOP1</h4>
+					<h4 ng-click="topicDetail(item)" ng-if="$index==1 && (topicSearch.keyword==null || topicSearch.keyword=='')">TOP2</h4>
+					<h4 ng-click="topicDetail(item)" ng-if="$index==2 && (topicSearch.keyword==null || topicSearch.keyword=='')">TOP3</h4>
+					<a ng-click="topicDetail(item)">
+						<h4>
+							<strong class="heroBlue">
+								#{{item.topic_title}}#
+							</strong>
+							<span class="badge badge-assertive" ng-show="item.recommend == 1" style="font-size:14px;font-weight: normal;line-height:16px">hot</span>
+						</h4>
+						<p class="xkd-topic-content heroBlack">{{item.topic_content}}</p>
+						<p>{{item.like_number}} 赞 &nbsp;&nbsp;{{item.message_number}} 回复 &nbsp;&nbsp;
+						{{item.read_number}} 阅读量</p>
+					</a>
+				</div>
+
+			<ion-infinite-scroll ng-if="!topicIsEmptyData" on-infinite="getTopicList()" distance="1%"></ion-infinite-scroll>
+			<div class="text-center" ng-show="topicIsOverLoad">
+				<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"/>
+
+			</div>
+		</ion-scroll>
+	</ion-content>
+	<i ng-click="scrollTop()" class="backtoTopBtn ion-android-arrow-up back-top rounded-500 text-center"></i>
+</ion-view>

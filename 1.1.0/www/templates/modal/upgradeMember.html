@@ -1,0 +1,121 @@
+<style>
+
+
+	.content-active{
+		display: block;
+	}
+	.content-none{
+		display: none;
+	}
+	.border-bottom{
+		border-bottom: 1px solid #ddd;
+	}
+
+
+
+</style>
+<!-- 升级会员等级弹框 -->
+<div class="modal">
+    <ion-header-bar align-title="center" class="bar-light">
+		<h1 class="title">开通会员</h1>
+		<div class="button button-clear m-r-10" ng-click="closeModal()"><i class="ion-close fontsize-18 color-blue" style="vertical-align: middle;"></i></div>
+	</ion-header-bar>
+
+<!-- 	<ion-header-bar>
+
+		<h1 class="title">开通会员</h1>
+		<button class="button button-small button-outline button-balanced" ng-click="closeModal()">
+			关闭
+		</button>
+	</ion-header-bar> -->
+	<ion-content>
+		<div class="bg-dark">
+<!-- 			<div class="row bg-white m-b-5 padding-l-15 padding-r-15">
+				<div class="">
+					<img class="m-t-10 m-b-15 XKD-headIcon"  ng-src="{{commonPath.host_path}}/authority3.png" err-src="img/icon_emptyPeron.png" >
+				</div>
+
+
+				<p class="padding-10" style="margin-top:3%">
+					<h4>{{user.name}}</h4>
+					{{}}
+				</p>
+
+			</div> -->
+
+
+			<div class="mine-header bg-white">
+			<div class="list padding-10 ">
+				<a class="item item-thumbnail-left b-none">
+					<img class="rounded-500" ng-src="{{commonPath.host_path}}/authority3.png" err-src="img/icon_emptyPeron.png" alt="...">
+					<h2 class="m-t-10 padding-t-10 fontsize-20"><b>{{user.name}}</b></h2>
+					<p ng-switch="user.user_type">
+						<span ng-switch-when="0">侠客岛员工</span>
+						<span ng-switch-when="1">注册用户</span>
+						<span ng-switch-when="2">云会员 </span>
+						<span ng-switch-when="3">入驻会员</span>
+						<span ng-switch-when="9">灵活会员 </span>
+						<span ng-switch-default>未开通</span>
+					</p>
+					<button ng-show="!user.user_type" class="button button-small button-assertive pull-right" ng-click="openModal($index)">
+						开通会员
+					</button>
+				</a>
+			</div>
+		   </div>
+
+
+			<div class="row bg-white padding-none xkd-tabs m-t-10" >
+				<div class="col col-33 text-center" ng-click="setActive($index)" ng-class="{'item-active':activeId==($index)}" ng-repeat="td in typeDetail">{{td.name}}</div>
+			</div>
+			<div ng-show="activeId==$index" ng-repeat="td in typeDetail">
+				<ion-list>
+					<ion-item class="business-recommend xkd-row padding-15" type="item-text-wrap" ng-repeat="tdlist in td.data" ng-hide="tdlist.data">
+
+						<div class="col-33 padding-l-30 padding-t-5">{{tdlist.text}}</div>
+						<div class="col-33 text-right assertive  padding-t-5">&yen;{{tdlist.price}}</div>
+						<div class="col-33  assertive padding-l-25">
+							<button class="button button-small button-assertive" ng-click="chatWithXsm()" ng-show="tdlist.is_pay==2">
+								联系小师妹
+							</button>
+							<button class="button button-small button-assertive" ng-click="alipay(td.name,tdlist.text,tdlist.member_reserve_type)" ng-show="tdlist.is_pay==1">
+								立即开通
+							</button>
+						</div>
+					</ion-item>
+
+					<div ng-repeat="tdlist in td.data" ng-show="tdlist.data">
+						<ion-item ng-click="tdlist.show=!tdlist.show">
+							<i class="icon pull-right" ng-class="tdlist.show? 'ion-chevron-down' : 'ion-chevron-right'"></i>
+							{{tdlist.store_name}}
+						</ion-item>
+						<div class="active xkd-row border-bottom padding-15" ng-repeat="seat in tdlist.data" ng-show="tdlist.show">
+							<div class="col-33 padding-l-30  padding-t-5">{{seat.type_text}}</div>
+							<div class="col-33 text-right assertive  padding-t-5">&yen;{{seat.text}}</div>
+							<div class="col-33  assertive padding-l-25">
+							<button class="button button-small button-assertive" ng-click="chatWithXsm()">
+							联系小师妹
+						</button></div>
+
+						</div>
+					</div>
+
+				</ion-list>
+			</div>
+		</div>
+		<div class="padding-15 gray"  ng-show="activeId==$index" ng-repeat="item in items">
+			<p  ng-bind-html="item.comments">
+				{{item.comments}}
+			</p>
+			<p>
+				温馨提示：<br/>
+				<small>请仔细确认您的订单，然后再进行支付</small><br/>
+				<small>如有任何疑问请致电400-900-9088</small>
+			</p>
+		</div>
+
+	</ion-content>
+	<!-- <div class="bar bar-footer bg-light">
+		<a ui-sref="confirmOrder" class="button button-assertive pull-right">去结算</a>
+	</div> -->
+</div>

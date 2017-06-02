@@ -1,0 +1,63 @@
+<style>
+	.minetopic-row{
+		padding: 5px 5px 5px 80px;
+		position: relative;
+	}
+	.minetopic-row .title{
+		position: absolute;
+		left: 0px;
+		width:60px;
+		text-align: right;
+	}
+</style>
+<ion-view view-title="话题详情" ng-controller="MyReleaseCtrl">
+	<ion-header-bar align-title="center" class="bar bar-header bar-dark has-tabs-top">
+		<!-- 返回 -->
+		<div class="item-input-inset" ng-click="back()">
+			<span>
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div>
+		<h1 class="title">我的话题</h1>
+	</ion-header-bar>
+	<ion-content class="bg-dark has-header">
+		<ion-refresher pulling-text="下拉刷新" on-refresh="doTopicDetailRefresh()"></ion-refresher>
+		<div class="card bg-white item m-t-10 rounded" style="margin: 0px 20px;">
+			<div class="xkd-reactiveInfo item-title">
+				<div class="minetopic-row">
+					<div class="title">
+						<p>话题名称</p>
+					</div>	
+					<div class="content item-text-wrap">
+						<h2 class="heroYello">#{{item.topic_title}}</h2>
+					</div>												
+				</div>
+				<div class="minetopic-row">
+					<div class="title">
+						<p>话题描述</p>
+					</div>
+					<div class="content item-text-wrap">
+						<p>{{item.topic_content}}</p>
+					</div>						
+				</div>
+				<div class="minetopic-row">
+					<div class="title">
+						<p>状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</p>
+					</div>	
+					<div class="content item-text-wrap">
+						<h3 class="bg-blue inline" style="padding: 3px 10px;border-radius:4px;">{{statustext}}</h3>
+					</div>												
+				</div>
+				<div class="minetopic-row">
+					<div class="title">
+						<p>创建时间</p>
+					</div>
+					<div class="content item-text-wrap">
+						<p>{{item.cre_time}}</p>
+					</div>						
+				</div>				
+			</div>							
+		</div>
+		<ion-infinite-scroll ng-if="!topicIsEmptyData" on-infinite="getTopicDetail()" distance="0%"></ion-infinite-scroll>
+	</ion-content>
+</ion-view>

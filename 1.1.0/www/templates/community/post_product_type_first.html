@@ -1,0 +1,22 @@
+<ion-view view-title="选择产品类型" ng-controller="PostProductTypeCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="myGoBack()">
+			<span>
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div>
+		<h1 class="title">选择产品类型</h1>
+	</ion-header-bar>
+	<ion-content class="has-header bg-dark">
+		<ion-list>
+			<a ng-if="productTypeList.length" ng-repeat="typeItem in productTypeList" class="item item-icon-right item-avatar" ng-click="confirmSelectProductType(typeItem)">
+				<img ng-src="img/{{typeItem.icon_name}}" err-src="img/icon_empty.png">
+				<i class="icon ion-ios-arrow-right item-note"></i>
+				{{typeItem.text}}
+			</a>
+			<a ng-if="!productTypeList.length" class="item">
+				暂无数据
+			</a>
+		</ion-list>
+	</ion-content>
+</ion-view>

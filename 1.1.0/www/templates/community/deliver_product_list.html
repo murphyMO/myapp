@@ -1,0 +1,37 @@
+<ion-view view-title="选择产品" ng-controller="DeliverProductListCtrl">
+	<ion-header-bar align-title="center" class="bar bar-header bg-blue">
+		<div class="item-input-inset color-white" ng-click="myGoBack()">
+			<span>
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">选择产品</h1>
+		<div class="buttons">
+			<!-- <button class="button button-calm button-small" ng-click="confirmSelectMaterial()">
+				确认
+			</button> -->
+			<div class="item-input-inset">
+				<a style="color:#fff" ng-click="confirmSelectProduct()">确认</a>
+			</div>
+		</div>
+	</ion-header-bar>
+	<ion-content class="has-header bg-dark">
+		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+		<div class="list">
+			<div ng-if="productList.length > 0" ng-repeat="item in productList" class="item item-thumbnail-left item-icon-right">
+				<img ng-if="item.display_thumb" ng-src="{{commonPath.route_path + commonPath.service_thumb_path + item.display_thumb}}" err-src="img/icon_empty_img.png" ui-sref="businessProduct({com_service_id:item.com_service_id,from:'deliverproductlist'})">
+				<img ng-if="!item.display_thumb" ng-src="img/icon_empty_img.png" err-src="img/icon_empty_img.png" ui-sref="businessProduct({com_service_id:item.com_service_id,from:'deliverproductlist'})">
+				<h2 ui-sref="businessProduct({com_service_id:item.com_service_id,from:'deliverproductlist'})">{{item.com_service_name}}</h2>
+				<p ui-sref="businessProduct({com_service_id:item.com_service_id,from:'deliverproductlist'})">{{item.com_service_des}}</p>
+				<label class="checkbox icon">
+					<input type="checkbox" name="material" ng-model="item.checked" ng-click="updateSelection($index, productList)" >
+					<!-- ng-checked="selectedMaterialId == item.com_article_material_id" -->
+				</label>
+			</div>
+			<div ng-if="productList.length == 0" class="item">
+				暂无数据
+			</div>
+		</div>
+		<ion-infinite-scroll ng-if="!isEmptyData" on-infinite="getProductList()" distance="1%"></ion-infinite-scroll>
+	</ion-content>
+</ion-view>

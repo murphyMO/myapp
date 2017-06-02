@@ -1,0 +1,55 @@
+<ion-view view-title="员工列表" ng-controller="PersonalListCtrl">
+
+	<ion-header-bar align-title="center" class="bar bg-light">
+		<div class="item-input-inset" ng-click="topBack()">
+			<a>
+				<i class="ion-chevron-left color-blue"></i>
+			</a>
+		</div>
+		<h1 class="title fontsize-16 color-black">员工列表</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-dark" ng-class="{'has-footer': loginUser.isManager}">
+		<div class="m-t-15" ng-hide="isEmptyData">
+			<ion-list>
+				<ion-item class="item-thumbnail-left" ng-repeat="item in dataItems" type="item-text-wrap" ng-click="personalListCick(item)">
+					<img class="rounded-500" ng-src="{{photo_path}}{{item.one_inch_photo_url}}" err-src="img/icon_emptyPeron.png">
+					<h2 class="m-t-15">{{item.full_name}}</h2>
+					<p>{{item.post_name}}</p>
+				</ion-item>
+			</ion-list>
+		</div>
+		<div class="text-center" ng-show="isEmptyData">
+			<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"/>
+
+		</div>
+	</ion-content>
+
+
+	<div class="tabs tabs-icon-top xkd-botmButoon" ng-show="loginUser.isManager">
+		<div class="business-product-footthree bg-blue fontsize-18" ui-sref="personaladd({dept_id:dept_id,dept_name:dept_name})">
+			添加员工
+		</div>
+		<div style="border-right: 1px solid #2693fe;" class="business-product-footthree bg-blue fontsize-18" ui-sref="deptadd({dept_id:dept_id,dept_type:dept_type,dept_name:dept_name})">
+			添加子部门
+		</div>
+		<div class="business-product-footthree bg-blue fontsize-18" ui-sref="deptedit({dept_id:dept_id,dept_name:dept_name})">
+			编辑部门
+		</div>
+
+	</div>
+
+<!-- 	<div class="tabs-striped tabs-bottom tabs-background-stable tabs-color-blue" ng-show="loginUser.isManager">
+		<div class="tabs b-t">
+			<a class="tab-item" ui-sref="personaladd({dept_id:dept_id,dept_name:dept_name})">
+				添加员工
+			</a>
+			<a class="tab-item b-l" ui-sref="deptadd({dept_id:dept_id,dept_type:dept_type,dept_name:dept_name})">
+				添加部门
+			</a>
+			<a class="tab-item b-l" ui-sref="deptedit({dept_id:dept_id,dept_name:dept_name})">
+				编辑部门
+			</a>
+		</div>
+	</div> -->
+</ion-view>

@@ -1,0 +1,76 @@
+<ion-view view-title="服务列表" ng-controller="BusinessServiceListCtrl">
+  <ion-header-bar align-title="搜索" class="bar-dark item-input-inset xkd-seArchbar">
+    <span class="m-r-10" ng-click="topBack()">
+    <i class="ion-chevron-left"></i>
+    </span>
+    <label class="item-input-wrapper">
+      <i class="icon ion-ios-search placeholder-icon"></i>
+      <input type="search" placeholder="搜索服务" ng-model="filterOptions">
+    </label>
+    <!--<button class="button button-calm" ui-sref="businessSearch">取消</button>-->
+    <!--<button class="button button-calm" ng-click="jump()">取消</button>-->
+  </ion-header-bar>
+
+	<ion-content class="has-header bg-dark">
+		<div class="item item-avatar item-text-wrap">
+			<img src="img/{{serviceType.icon_name}}">
+			<h2>{{serviceType.service_type_des}}</h2>
+			<p>{{serviceType.service_type_comments}}</p>
+		</div>
+		<div class="business-warpbox bg-white overflow-hidden padding-5 m-t-10" ng-if="serviceTypeList.length>0">
+			<div class="col-25" ng-if="$index < 12" ng-repeat="type in serviceTypeList track by $index">
+				<a ng-click="refreshServiceListPage(type)">
+					<img src="img/{{type.icon_name}}"/>
+					<p class="fontsize-12 color-black">{{type.text}}</p>
+				</a>
+			</div>
+		</div>
+
+		<!-- 服务产品列表 -->
+		<div class="m-t-15 b-t-none">
+			<ion-list>
+				<ion-item class="business-recommend" ng-repeat="service in serviceList" type="item-text-wrap" ng-click="toBusinessProduct(service)">
+					<img ng-src="{{commonPath.host_path}}{{service.material_thumb}}" err-src="img/icon_empty_head.png">
+					<span  class="color-white list-title fontsize-14" ng-if="service.inner_type">&nbsp;{{service.inner_type == 0 ? "自营" : "推荐"}}</span>
+					<h2 class="m-t-5 padding-l-10">{{service.com_service_name}}</h2>
+					<!-- <p class="m-t-5 padding-l-10 company-name" style="white-space: normal;">{{service.com_service_des}}</p> -->
+					<p class="padding-l-10" ng-if="service.com_name" style="margin-top:3%">
+						<i class="ion-android-bookmark fontsize-18" ></i>&nbsp;{{service.com_name}}
+					</p>
+					<p class="padding-l-10" ng-if="service.store_name">
+						<i class="ion-location fontsize-18"></i>&nbsp;{{service.store_name}}
+					</p>
+					<p class="fontsize-16 padding-l-10 m-t-10">
+						<i class="ion-heart fontsize-18"></i> {{service.like_num}}
+						<span class="m-l-15"><i class="ion-chatbox-working fontsize-18"></i> {{service.message_num}}</span>
+					</p> 
+				</ion-item>
+			</ion-list>
+		</div>
+
+		<!-- <div class="m-t-15">
+			<ion-list>
+				<ion-item class="item-thumbnail-left business-recommend" ng-repeat="service in serviceList" type="item-text-wrap" ui-sref="businessProduct({com_service_id:service.com_service_id,from:'businessServiceList',type_id:type_id})">
+					<img ng-src="{{serviceThumbPath}}{{service.com_service_thumb_img}}" err-src="img/icon_empty_head.png">
+					<div class="pull-right">
+						<span class="color-calm button button-outline button-calm button-small" ng-if="service.store_name">{{service.store_name}}</span>
+						<span class="color-calm button button-outline button-calm button-small" ng-if="service.inner_type">{{service.inner_type == 0 ? "自营" : "推荐"}}</span>
+					</div>
+					<h2 class="m-t-5">{{service.com_service_name}}</h2>
+					<p class="m-t-10">{{service.com_service_des}}</p>
+					<p class="fontsize-12 m-t-5">
+						点赞数:{{service.like_num}}
+						<span class="m-l-10">回复数： {{service.message_num}}</span>
+						<span class="m-l-10">参考价格： ￥{{service.unit_value}}{{service.unit}}</span>
+					</p>
+				</ion-item>
+			</ion-list>
+		</div> -->
+
+		<ion-infinite-scroll ng-if="!isEmptyData" on-infinite="getServiceDatas()" distance="10%"></ion-infinite-scroll>
+
+		<div class="text-center" ng-show="isOverLoad">
+			<img style="width: 50%;margin-top:50px" src="img/icon_empty_img.png"/>
+		</div>
+	</ion-content>
+</ion-view>

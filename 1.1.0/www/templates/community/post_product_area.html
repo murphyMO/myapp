@@ -1,0 +1,17 @@
+<ion-view view-title="选择服务范围" ng-controller="PostProductAreaCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="myGoBack()">
+			<span>
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div>
+		<h1 class="title">选择服务范围</h1>
+	</ion-header-bar>
+	<ion-content class="has-header bg-dark">
+		<ion-list>
+			<a ng-repeat="typeItem in areas" class="item" ng-click="confirmSelectArea(typeItem)">
+				{{typeItem.label}}
+			</a>
+		</ion-list>
+	</ion-content>
+</ion-view>

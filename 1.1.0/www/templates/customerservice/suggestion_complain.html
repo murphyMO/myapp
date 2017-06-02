@@ -1,0 +1,46 @@
+<ion-view view-title="意见和投诉" ng-controller="SugComplainCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="back()">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		 <h1 class="title fontsize-16 color-black">意见和投诉</h1>
+	</ion-header-bar>
+
+	<ion-content class="bg-white">
+		<div class="bg-divide">
+			<div class="calm title-word-2">
+				意见和投诉
+				<p class="note m-t-5" style="margin-bottom:0px;">亲爱的侠客，感谢您对侠客岛联合办公室的支持和建议。</p>
+				<p class="note">我们将在两个工作日及时给您处理并反馈。</p>
+			</div>
+			
+		</div>
+		<div class="list list-inset m-t-15">
+			<label class="item item-input">
+				<span class="input-label">意见和投诉内容<i class="energized">*</i></span>
+			</label>
+			<label class="item item-input">
+				<textarea rows="5" ng-model="sugComplain.content" placeholder="请输入您的意见或者投诉..."></textarea>
+			</label>
+			<label class="item item-input">
+				<span class="input-label label-width-3">意见反馈人<i class="energized">*</i></span>
+				<input type="text" style="padding-right:0px;" ng-model="sugComplain.user_name" placeholder="请输入您的姓名" class="border-center">
+			</label>
+			<label class="item item-input item-icon-right">
+				<span class="input-label label-width-3">反馈人联系电话<i class="energized">*</i></span>
+				<input type="text" style="padding-right:0px;" ng-model="sugComplain.phone_number" placeholder="请输入您的联系电话" class="border-center">
+			</label>
+			<label class="item item-input item-icon-right" ng-click="willingisland()">
+				<span class="input-label label-width-3">意向分岛</span>
+				<span class="border-center">{{sugComplain.store_name}}</span>
+				<i class="icon ion-chevron-right mark-right"></i>
+			</label>
+		</div>
+
+		<div class="padding">
+			<button class="button button-calm button-block button-style" ng-click="savesugComplainMsg()">保存</button>
+		</div>
+	</ion-content>
+</ion-view>

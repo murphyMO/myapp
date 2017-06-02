@@ -1,0 +1,58 @@
+‘<ion-view view-title="企业投递" ng-controller="CompanyPostCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ui-sref="tab.mine({thisItem:1})">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">企业投递</h1>
+	</ion-header-bar>
+
+
+	<ion-content class="has-header bg-dark">
+		<div class="bar bar-header item-input-inset">
+			<label class="item-input-wrapper">
+				<i class="icon ion-ios-search placeholder-icon"></i>
+				<input type="search" ng-model="postSearch.keyword"  placeholder="搜索">
+			</label>
+		</div>
+
+		<ion-refresher pulling-text="下拉刷新" on-refresh="demandDoRefresh()"></ion-refresher>
+			<div class="m-b-15 bg-white b-t-none" ng-repeat="item in dataItems">
+				<div class="item m-l-15 m-r-15 b-r-none b-t-none b-l-none">
+					<!-- <img ng-src="{{path.route_path}}{{path.photo_path}}{{item.one_inch_photo_url}}" err-src="img/icon_empty_head.png" alt="..."> -->
+					<h2><strong>{{item.com_feedback_name}}</strong></h2>
+
+					<span class="badge bg-blue" ng-switch="item.article_type_id">
+						<span ng-switch-when="1">需求</span>
+						<span ng-switch-when="2">服务</span>
+						<span ng-switch-when="3">公司简介</span>
+						<span ng-switch-when="4">人员简介</span>
+						<span ng-switch-when="5">项目</span>
+						<span ng-switch-when="6">活动</span>
+					</span>
+				</div>
+				<!-- <div class="item item-body b-t-none">
+					<p>{{dynamicItem.article_content}}</p>
+				</div> -->
+				<div class="padding-25" >
+					<p class="m-b-10 color-black">{{item.article_data_content}}</p>
+					<div class="mt-s-m">
+						<small class="m-r-10 color-gray"><i >{{item.cre_time| date:'yyyy-MM-dd'}}</i>  用  <i>{{item.com_service_name}}</i>  投递</small>
+					</div>
+				</div>
+				<!-- <div class="padding-25" >
+					<p class="m-b-10 color-black">{{item.article_data_content}}</p>
+					<div class="mt-s-m">
+						<small class="m-r-10"><i class="heroBlue">{{item.cre_time| date:'yyyy-MM-dd'}}</i>  用  <i class="heroBlue" ng-click="tomaDe(item)">{{item.com_service_name}}</i>  投递</small>
+					</div>
+				</div> -->
+			</div>
+
+		<ion-infinite-scroll ng-if="!isEmptyData" on-infinite="getCompanyMailingList()" distance="1%"></ion-infinite-scroll>
+		<div class="text-center" ng-show="isOverLoad">
+			<img style="width: 50%;margin-top:50px" src="img/icon_empty_img.png"/>
+		</div>
+
+	</ion-content>
+</ion-view>

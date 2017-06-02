@@ -1,0 +1,133 @@
+<ion-view view-title="个人信息" ng-controller="PersonalChangeCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-show="usermsg" ng-click="myBack()">
+			<a >
+				<i class="ion-chevron-left color-blue" ></i>
+			</a>
+		</div>
+		<div class="item-input-inset" ng-show="!usermsg" ng-click="usermsgClick()">
+			<a >
+				<i class="ion-chevron-left color-blue"></i>
+			</a>
+		</div>
+		<h1 class="title fontsize-16 color-black">个人信息</h1>
+		<a class="share color-blue fontsize-16" ng-show="!usermsg" ng-click="confirmClick()">确定</a>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-white">
+		<div class="list" ng-show="usermsg">
+			<userimg class="item item-icon-right" upload-images="person.photo" camera-options="cameraOptions" >
+				<span class="gray" style="line-height:70px;">头像</span>
+				<i class="icon ion-ios-arrow-right"></i>
+				<div class="pull-right" style="display:inline-block;width:80px;height:80px;overflow:hidden;border-radius:100px;background-repeat:no-repeat;background-position:center;background-size:cover;background-image:url(img/icon_emptyPeron.png)" ng-style="xkdUserImg"></div>
+				<!--<img class="pull-right rounded-500" ng-src="{{commonPath.route_path + commonPath.photo_path + person.photo}}" height="70" err-src="img/icon_emptyPeron.png">-->
+			</userimg>
+			<a class="item item-icon-right" ng-click="userNameClick()">
+				<span class="gray">用户名</span>
+				<span class="pull-right">{{user.username}}</span>
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</a>
+			<a class="item item-icon-right" ng-click="descriptionClick()">
+				<span class="gray">简介</span>
+				<span class="pull-right">{{user.description}}</span>
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</a>
+			
+			<a class="item item-icon-right" ng-click="sexClick()">
+				<span class="gray">性别</span>
+				<span class="pull-right" ng-switch="user.sex">
+					<span ng-switch-when="1">男</span>
+					<span ng-switch-when="2">女</span>
+					<span ng-switch-when="">请选择</span>
+				</span>
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</a>
+			<a class="item item-icon-right" ng-click="phoneClick()">
+				<span class="gray">手机号</span>
+				<span class="pull-right">{{user.mobilePhoneNumber||'无'}}</span>
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</a>
+			<a class="item item-icon-right" ng-click="weixinClick()">
+				<span class="gray">微信号</span>
+				<span class="pull-right" style="max-width:60%;text-align:right;white-space:normal;" >{{
+				user.weixin||'无'}}</span>
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</a>
+			<a class="item item-icon-right" ng-click="qqClick()">
+				<span class="gray">QQ</span>
+				<span class="pull-right">{{user.qq||'无'}}</span>
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</a>
+
+		<!-- 	<a class="item item-icon-right" ng-click="selectAreaCity()">
+				<span class="gray">地区</span>
+				<span class="pull-right" ng-bind="person.locate_city"></span>
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</a> -->
+
+			<!-- <a class="item item-icon-right" ng-model="person.post_name" ng-click="positionNameClick()" ng-disabled="isGuest">
+				<span class="gray">职位</span>
+				<span class="pull-right">{{person.post_name||'职位暂无'}}</span>
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</a> -->
+			<!-- toggle图标 -->
+			<!-- <div class="item item-toggle" ng-model="person.post_name"  ng-disabled="isGuest">
+			     <span class="gray">是否保密</span>
+			     <label class="toggle toggle-postive">
+			       <input type="checkbox" ng-model="is_public.is_public" ng-change="confirmClick()">
+			       <div class="track m-r-10">
+			         <div class="handle"></div>
+			       </div>
+			     </label>
+			</div> -->
+		</div>
+
+		<div class="list" ng-show="name">
+			<label class="item item-input item-icon-right">
+				<input type="text" ng-model="person.username" placeholder="用户名" minlength="1" maxlength="10"/>
+				<a ng-click="person.username = ''"><i class="icon ion-ios-close-outline"></i></a>
+			</label>
+			<span class="bg-white fontsize-12 padding-l-15">1-10个字符组成，可由任何字符组成</span>
+		</div>
+		<div class="list" ng-show="description">
+			<label class="item item-input item-icon-right">
+				<input type="text" ng-model="person.description" placeholder="介绍一下你自己吧" minlength="1" maxlength="30"/>
+				<a ng-click="person.description = ''"><i class="icon ion-ios-close-outline"></i></a>
+			</label>
+			<span class="bg-white fontsize-12 padding-l-15">1-30个字符组成，可由任何字符组成</span>
+		</div>
+		<div class="list" ng-show="phone">
+			<label class="item item-input item-icon-right">
+				<input type="text" ng-model="person.phone" placeholder="请输入您的手机号" maxlength="11"/>
+				<a ng-click="person.phone = ''"><i class="icon ion-ios-close-outline"></i></a>
+			</label>
+			<span class="bg-white fontsize-12 padding-l-15">由11位数字组成</span>
+		</div>
+		<div class="list" ng-show="weixin">
+			<label class="item item-input item-icon-right">
+				<input type="text" ng-model="person.weixin" placeholder="请输入您的微信号" maxlength="11"/>
+				<a ng-click="person.weixin = ''"><i class="icon ion-ios-close-outline"></i></a>
+			</label>
+			<span class="bg-white fontsize-12 padding-l-15"></span>
+		</div>
+		<div class="list" ng-show="qq">
+			<label class="item item-input item-icon-right">
+				<input type="text" ng-model="person.qq" placeholder="请输入您的QQ" minlength="5" maxlength="12"/>
+				<a ng-click="person.qq = ''"><i class="icon ion-ios-close-outline"></i></a>
+			</label>
+			<span class="bg-white fontsize-12 padding-l-15">由5-12位数字组成</span>
+		</div>
+		<div class="list" ng-show="sex">
+			<ion-radio  ng-value="" ng-model="person.sex">请选择</ion-radio>
+			<ion-radio  ng-value="1" ng-model="person.sex">男生</ion-radio>
+			<ion-radio  ng-value="2" ng-model="person.sex">女生</ion-radio>
+		</div>
+
+		<!-- <div class="list" ng-show="positionName">
+			<label class="item item-input item-icon-right">
+				<input type="text" ng-model="person.post_name" placeholder="职位" maxlength="20"/>
+				<a ng-click="deletePositionName()"><i class="icon ion-ios-close-outline"></i></a>
+			</label>
+		</div> -->
+	</ion-content>
+</ion-view>

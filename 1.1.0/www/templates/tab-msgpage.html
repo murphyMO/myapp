@@ -1,0 +1,20 @@
+<ion-view title="消息" ng-controller="msgpageListController">
+	<ion-header-bar align-title="center" class="bar bar-header bar-dark has-tabs-top">
+		<button class="button button-icon icon" ng-click="topBack()">
+			<i class="ion-chevron-left"></i>
+		</button>
+		<h1 class="title">消息</h1>
+		<div class="pull-right button button-clear m-r-10"><small>清空</small></div>
+	</ion-header-bar>
+	<ion-content class="has-header bg-white">
+		<div class="list">
+			<a class="item item-avatar item-icon-right" ng-repeat="i in [1,2,3,4,5]">
+				<img src="http://www.runoob.com/try/demo_source/venkman.jpg">
+				<h2>王迪</h2>
+				<p>祝你几年大吉吧！</p>
+				<small>10:32</small>
+				<img src="http://www.runoob.com/try/demo_source/venkman.jpg" style="position: absolute;top: 16px;right: 16px;max-width: 50px;max-height: 50px;width: 100%;height: 100%;border-radius: 8px;">
+			</a>
+		</div>
+	</ion-content>
+</ion-view>

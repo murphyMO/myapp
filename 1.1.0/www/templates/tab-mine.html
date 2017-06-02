@@ -1,0 +1,87 @@
+<ion-view view-title="我的" ng-controller="MineCtrl">
+	<div>
+	    <div class="XKD-myTopCon" style="height: 19rem;position: relative;">
+         <i ng-hide='isCurrent' ng-click="goBack()" class="icon ion-chevron-left" style="position: absolute;left: 10px;top: 10px;font-size: 30px;color: #ffffff;"></i>
+	    	<i ui-sref="about" class="icon ion-navicon-round" style="position: absolute;right: 10px;top: 10px;font-size: 30px;color: #ffffff;" ng-click="goLogOut()"></i>
+		    <div class="XKD-myBg"></div>
+			<div class="XKD-myInfo text-center">
+				<p class="margin-none" style="position: relative;">
+					<i class="XKD-mineHead" style="display:inline-block;overflow:hidden;border-radius:80px;background-repeat:no-repeat;background-position:center;background-size:cover;background-image:url({{avatar}})" ng-style="xkdUserImg"></i>
+					<button ng-show="isCurrent" class="button button-green button-small" style="position: absolute;right: 20px;top: 50px;" ui-sref="change">编辑资料</button>
+				</p>
+				<h2>
+					<span>{{userInfo.username}}</span>
+				</h2>
+				<div class="b-b-gyay padding-b-5 gray" style="margin: 0 30%;overflow: hidden;">
+					<span ui-sref="focus({id:userInfo.objectId})" class="pull-left">关注:{{focusLen}}</span>
+					<span ui-sref="fans({id:userInfo.objectId})" class="pull-right">粉丝:{{followLen}}</span>
+					<span class="clearup"></span>
+				</div>
+				<p class="gray m-t-5">简介：{{userInfo.description}}</p>
+			</div>
+	     </div>
+	     <!-- tab -->
+	     <div style="position: absolute;height: 100%;width: 100%;">
+	     	<div class="bar bar-header bar-light">
+	     		<div class="xkd-topSwitchTab">
+	     		    <a class="pull-left"  ng-click="clickLike()" ng-class="{'xkd-topSwitchTab-active' : thisItem == 0}" id="haha">
+	     		      喜欢
+	     		    </a>
+	     		    <a class="pull-left"  ng-click="clickTopic()" ng-class="{'xkd-topSwitchTab-active' : thisItem == 1}">
+	     		      话题
+	     		    </a>
+	     		    <a class="pull-left"  ng-click="clickInfo()" ng-class="{'xkd-topSwitchTab-active' : thisItem == 2}">
+	     		      信息
+	     		    </a>
+	     		</div>
+	     	</div>
+     		<ion-content class="has-header bg-dark" style="margin-top: -3px;">
+     			<ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)" active-slide="thisItem">
+     				<!-- 喜欢 -->
+     				<ion-slide>
+     					<div class="list bg-dark xkd-mine">  
+     						<div ng-repeat="item in likes">
+     							<p>{{item.title}}<br>{{item.content}}</p>
+     						</div>
+     	                   	<div ng-show="likeIsEmpty" class="text-center">你还没有喜欢的内容哦~~~</div>
+     					</div>
+     				</ion-slide>
+     				<ion-slide>
+     					<div class="list bg-dark xkd-mine">  
+     						<div ng-repeat="item in topics">
+     							<p>{{item.title}}<br>{{item.content}}</p>
+     						</div>
+     	                   	<div ng-show="topicIsEmpty" class="text-center">你还没有收藏话题哦~~~</div>
+     					</div>
+     				</ion-slide>
+     				<!-- 个人信息 -->
+     				<ion-slide>
+     					<div class="list bg-dark xkd-mine">
+     						<a class="item item-icon-right" ng-click="phoneClick()">
+     							<span class="gray">邮箱</span>
+     							<span class="pull-right">{{userInfo.email}}</span>
+     						</a>  
+     						<a class="item item-icon-right" ng-click="phoneClick()">
+     							<span class="gray">手机号</span>
+     							<span class="pull-right">{{userInfo.mobilePhoneNumber}}</span>
+     						</a>
+     						<a class="item item-icon-right" ng-click="selectAreaCity()">
+     							<span class="gray">性别</span>
+     							<span class="pull-right">{{userInfo.sex}}</span>
+     						</a>
+     						<a class="item item-icon-right" ng-click="qqClick()">
+     							<span class="gray">QQ</span>
+     							<span class="pull-right">{{userInfo.qq}}</span>
+     						</a>
+     						
+     					</div>
+     				</ion-slide>
+     			</ion-slide-box>
+     		</ion-content>
+	     </div>
+	</div>
+     
+
+</ion-view>
+
+

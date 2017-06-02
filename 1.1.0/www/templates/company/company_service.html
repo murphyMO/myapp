@@ -1,0 +1,41 @@
+<ion-view view-title="企业服务列表" ng-controller="CompanySumServiceCtrl">
+
+	<div class="bar bar-header bar-dark">
+		<div class="row text-center">
+			<div class="item-input-inset" ng-click="back()">
+			<span >
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div>
+			<div class="col calm" ui-sref="compServicelist({com_id:133})"><strong>服务</strong></div>
+			<div class="col" ui-sref="companyNeedlist({com_id:133})">需求</div>
+		</div>
+	</div>
+
+	<ion-content class="has-header" style="background-color: #f0f3f4;">
+		<div class="bar bar-header item-input-inset">
+			<label class="item-input-wrapper">
+				<i class="icon ion-ios-search placeholder-icon"></i>
+				<input type="search" ng-model="serviceSearch.keyword"  placeholder="搜索">
+			</label>
+		</div>
+		<div class="card" style="margin-bottom:8px;" ng-repeat="service in services">
+			<div class="item item-avatar" style="border-bottom-width:0px">
+				<img ng-src="{{userPath}}{{service.one_inch_photo_url}}" err-src="img/icon_empty_head.png">
+				<h2>{{service.com_service_name}}</h2>
+				<small class="calm">
+				{{service.com_name}}</small>
+				<span class="badge badge-assertive">
+					<span>服务</span>
+				</span>
+			</div>
+			<div class="item item-avatar b-t-none">
+				<p ng-click="materialDetail(service)">{{service.com_service_des}}</p>
+			</div>
+		</div>
+		<!-- 分页加载更多
+		<div class="weui-infinite-scroll" id="wyxScrollLoading">
+			<div class="infinite-preloader"></div>正在加载...
+		</div> -->
+	</ion-content>
+</ion-view>

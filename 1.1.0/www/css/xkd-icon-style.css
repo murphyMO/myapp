@@ -1,0 +1,171 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?2cpqr');
+  src:  url('../fonts/icomoon.eot?2cpqr#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?2cpqr') format('truetype'),
+    url('../fonts/icomoon.woff?2cpqr') format('woff'),
+    url('../fonts/icomoon.svg?2cpqr#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-hiicons_edit:before {
+  content: "\e92e";
+}
+.icon-hiicons_broadcast:before {
+  content: "\e92f";
+}
+.icon-hiicons_apartment:before {
+  content: "\e928";
+}
+.icon-hiicons_publitopic:before {
+  content: "\e911";
+}
+.icon-hiicons_publimess:before {
+  content: "\e916";
+}
+.icon-hiicons_publisevser:before {
+  content: "\e917";
+}
+.icon-hiicons_publineed:before {
+  content: "\e926";
+}
+.icon-hiicons_publiactivit:before {
+  content: "\e927";
+}
+.icon-hiicons_clearaply:before {
+  content: "\e907";
+}
+.icon-hiicons_fixaply:before {
+  content: "\e913";
+}
+.icon-hiicons_mynet:before {
+  content: "\e914";
+}
+.icon-hiicons_mypackage:before {
+  content: "\e915";
+}
+.icon-hiicons_orderbook:before {
+  content: "\e929";
+}
+.icon-hiicons_placesrverpor:before {
+  content: "\e92a";
+}
+.icon-hiicons_srverHome:before {
+  content: "\e92b";
+}
+.icon-hiicons_steward:before {
+  content: "\e92c";
+}
+.icon-hiicons_workbook:before {
+  content: "\e92d";
+}
+.icon-hiicons_aptitude:before {
+  content: "\e918";
+}
+.icon-hiicons_checkme:before {
+  content: "\e919";
+}
+.icon-hiicons_compantpost:before {
+  content: "\e91a";
+}
+.icon-hiicons_companyinfo:before {
+  content: "\e91b";
+}
+.icon-hiicons_framework:before {
+  content: "\e91c";
+}
+.icon-hiicons_jurisdiction:before {
+  content: "\e91d";
+}
+.icon-hiicons_manageactive:before {
+  content: "\e91e";
+}
+.icon-hiicons_manageneed:before {
+  content: "\e91f";
+}
+.icon-hiicons_myattion:before {
+  content: "\e920";
+}
+.icon-hiicons_mydynamic:before {
+  content: "\e921";
+}
+.icon-hiicons_myinfo:before {
+  content: "\e922";
+}
+.icon-hiicons_myjoin:before {
+  content: "\e923";
+}
+.icon-hiicons_myoeder:before {
+  content: "\e924";
+}
+.icon-hiicons_statistics:before {
+  content: "\e925";
+}
+.icon-hiicons_activityPortal:before {
+  content: "\e900";
+}
+.icon-hiicons_activPlacePortal:before {
+  content: "\e901";
+}
+.icon-hiicons_applyClearPortal:before {
+  content: "\e902";
+}
+.icon-hiicons_backlog:before {
+  content: "\e903";
+}
+.icon-hiicons_community:before {
+  content: "\e904";
+}
+.icon-hiicons_community2:before {
+  content: "\e905";
+}
+.icon-hiicons_daoliLogo:before {
+  content: "\e906";
+}
+.icon-hiicons_home:before {
+  content: "\e908";
+}
+.icon-hiicons_home2:before {
+  content: "\e909";
+}
+.icon-hiicons_key:before {
+  content: "\e90a";
+}
+.icon-hiicons_meetingroom:before {
+  content: "\e90b";
+}
+.icon-hiicons_meetingRoomPortal:before {
+  content: "\e90c";
+}
+.icon-hiicons_message:before {
+  content: "\e90d";
+}
+.icon-hiicons_message2:before {
+  content: "\e90e";
+}
+.icon-hiicons_mine:before {
+  content: "\e90f";
+}
+.icon-hiicons_mine2:before {
+  content: "\e910";
+}
+.icon-hiicons_newactive:before {
+  content: "\e912";
+}
+

@@ -1,0 +1,41 @@
+<ion-view view-title="企业需求列表" ng-controller="CompanyNeedListCtrl">
+
+	<div class="bar bar-header bar-dark">
+		<div class="row text-center">
+			<div class="item-input-inset" ng-click="myBack()">
+			<span>
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div>
+			<div class="col " ui-sref="compServicelist({com_id:current_user.com_id})"><strong>服务</strong></div>
+			<div class="col calm" ui-sref="companyNeedlist({com_id:current_user.com_id})">需求</div>
+		</div>
+	</div>
+
+	<ion-content class="has-header" style="background-color: #f0f3f4;">
+		<div class="bar bar-header item-input-inset">
+			<label class="item-input-wrapper">
+				<i class="icon ion-ios-search placeholder-icon"></i>
+				<input type="search" ng-model="needSearch.keyword"  placeholder="搜索">
+			</label>
+		</div>
+		<div class="card" style="margin-bottom:8px;" ng-repeat="item in items">
+			<div class="item item-avatar" style="border-bottom-width:0px">
+				<img ng-src="{{userPath}}{{item.one_inch_photo_url}}" err-src="img/icon_empty_head.png">
+
+				<h2>{{item.com_needs_name}}</h2>
+				<small class="calm" >{{item.com_name}}</small>
+				<span class="badge badge-balanced">
+					<span>需求</span>
+				</span>
+			</div>
+			<div class="item item-avatar b-t-none">
+				<p ng-click="materialDetail(service)">{{item.com_needs_des}}</p>
+			</div>
+		</div>
+		<!-- 分页加载更多
+		<div class="weui-infinite-scroll" id="wyxScrollLoading">
+			<div class="infinite-preloader"></div>正在加载...
+		</div> -->
+	</ion-content>
+</ion-view>

@@ -1,0 +1,55 @@
+<ion-view view-title="入驻手续清单" ng-controller="EntryListCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="back()">
+			<span>
+				<i class="ion-chevron-left color-black"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">入驻手续清单</h1>
+	</ion-header-bar>
+	<ion-content class="has-header bg-white" style="text-align: justify;">
+		<div class="m-b-15 list entryList">
+			<a class="item item-icon-left" ng-repeat="item in entryList.items">
+				<i class="icon" ng-class="{'ion-help-circled' : item.status == 2,'gray' : item.status == 2,'ion-checkmark-circled' : item.status == 1,'positive' : item.status == 1}"></i>
+				{{item.content}}
+			</a>
+		</div>
+		<div class="list">
+			<a class="item">
+				<div ng-repeat="check in entryList.checkin_list_data" ng-if="check.type != '3'">
+					<span ng-switch="check.type">
+						<span ng-switch-when="1">行政管家</span>
+						<span ng-switch-when="2">店长</span>
+						<span ng-switch-when="3">管理员</span>
+					</span>：{{check.user_name}} {{check.user_mobile}}
+					<span class="item-note">
+						<span ng-switch="check.status">
+							<span ng-switch-when="1">待确认</span>
+							<span ng-switch-when="2">已确认</span>
+						</span>
+					</span>
+				</div>
+			</a>
+		</div>
+		<div class="row" ng-if="buttonShow">
+			<div class="col text-center">
+				<small>请尽快联系门店完成以上手续哦！小师妹在侠客岛等您</small>
+			</div>
+		</div>
+		<div ng-repeat="check in entryList.checkin_list_data" ng-if="check.type == '3'">
+			<div class="pull-right m-r-15">
+				<p>确认人：{{check.user_name}}</p>
+				<p>时间：{{check.time|limitTo:16}}</p>
+			</div>
+		</div>
+		<div class="row" ng-if="buttonShow">
+			<div class="col">
+				<button class="button button-block button-positive" ng-click="check()">确认</button>
+			</div>
+		</div>
+
+
+	</ion-content>
+</ion-view>
+
+

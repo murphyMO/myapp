@@ -1,0 +1,118 @@
+<style type="text/css">
+	.w{
+		width: 138px;
+	}
+	.fontStyle{
+		font-family: "微软雅黑";
+	}
+</style>
+<ion-view view-title="定制招聘" ng-controller="SubmitEmployController">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="ComBack()">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">定制招聘</h1>
+
+	</ion-header-bar>
+
+	<ion-content class="has-header">
+		<div class="list">
+			<div class="item item-divider">基本信息</div>
+			<label class="item item-input">
+				<span class="input-label w">公司名称</span>
+				<input type="text" ng-model="item.com_name" placeholder="必填">
+			</label>
+			<label class="item item-input">
+				<span class="input-label w">房间号</span>
+				<input type="text" class="fontStyle" ng-model="item.room_number" placeholder="非必填">
+			</label>
+			<label class="item item-input">
+				<span class="input-label w">座位号</span>
+				<input type="text" ng-model="item.seat_number" placeholder="非必填"><!-- ng-disabled="user.user_type != 3" -->
+			</label>
+			<!-- <label class="item item-input" ng-click="itemClick()">
+				<span class="input-label w">门店</span>
+				<span class="pull-left" ng-model="item.store_id">{{item.store_id}}</span>
+			</label> -->
+			<!-- <label class="item item-input" ng-click="clickIsland()">
+				<span class="input-label w">门店</span>
+				<span class="pull-left" ng-model="item.store_id">{{item.island}}</span>
+			</label> -->
+			<label class="item item-input item-select">
+				<span class="input-label w">门店</span>
+				<select style="border:none;background-color:#fff;" class="fontStyle fontsize-16 " ng-model="item.store_id" >
+					<option value="" selected hidden></option>
+					<option ng-selected="item.store_id=={{island.store_id}}" class="fontStyle fontsize-16" value="{{island.store_id}}" ng-repeat="island in allIsland">{{island.store_name}}</option>
+					<!-- <option ng-selected="item.store_id==2" class="fontStyle fontsize-16" value="2">航天岛</option>
+					<option ng-selected="item.store_id==3" class="fontStyle fontsize-16" value="3">磨子桥岛</option>
+					<option ng-selected="item.store_id==4" class="fontStyle fontsize-16" value="4">菁蓉岛</option>
+					<option ng-selected="item.store_id==5" class="fontStyle fontsize-16" value="5">节能岛</option>
+					<option ng-selected="item.store_id==7" class="fontStyle fontsize-16" value="7">望京岛</option>
+					<option ng-selected="item.store_id==8" class="fontStyle fontsize-16" value="8">虹桥岛</option>
+					<option ng-selected="item.store_id==9" class="fontStyle fontsize-16" value="9">金山岛</option> -->
+				</select>
+			</label>
+			<label class="item item-input">
+				<span class="input-label w">联系人</span>
+				<input type="text" class="fontStyle" ng-model="item.contact_name" placeholder='必填'>
+			</label>
+			<label class="item item-input">
+				<span class="input-label w">联系电话</span>
+				<input type="tel" class="fontStyle" ng-model="item.contact_phone" placeholder="必填">
+			</label>
+
+			<div class="item item-divider">需求详情</div>
+			<label class="item item-input">
+				<textarea rows="5" ng-model="item.content" placeholder="（请填写对招聘岗位的需求信息）"></textarea>
+			</label>
+		</div>
+		<div class="padding">
+		<button class="button button-block bg-blue " ng-click="submitemploy();">
+			提交信息
+		</button>
+		</div>
+	</ion-content>
+
+	<script id="select.html" type="text/ng-template">
+		<div class="modal">
+			<ion-header-bar class="bar-dark">
+				<h1 class="title">{{modal.title}}</h1>
+				<div class="button button-clear m-r-10" ng-click="closeModal()"><i class="ion-close fontsize-18" style="vertical-align: middle;"></i></div>
+			</ion-header-bar>
+			<ion-content>
+				<!-- <div class="list" ng-show="modal.item">
+					<label class="item item-input item-icon-right padding-15" ng-click="itemSelect('航天岛')">
+						航天岛
+					</label>
+					<label class="item item-input item-icon-right padding-15" ng-click="itemSelect('磨子桥岛')">
+						磨子桥岛
+					</label>
+					<label class="item item-input item-icon-right padding-15" ng-click="itemSelect('菁蓉岛')">
+						菁蓉岛
+					</label>
+					<label class="item item-input item-icon-right padding-15" ng-click="itemSelect('节能岛')">
+						节能岛
+					</label>
+					<label class="item item-input item-icon-right padding-15" ng-click="itemSelect('望京岛')">
+						望京岛
+					</label>
+					<label class="item item-input item-icon-right padding-15" ng-click="itemSelect('虹桥岛')">
+						虹桥岛
+					</label>
+					<label class="item item-input item-icon-right padding-15" ng-click="itemSelect('金山岛')">
+						金山岛
+					</label>
+				</div> -->
+				<div class="list" ng-show="modal.island">
+					<label ng-repeat="island in allIsland" class="item item-input item-icon-right padding-15" ng-click="selectIsland(island.store_name)">
+						{{island.store_name}}
+					</label>
+				</div>
+			</ion-content>
+		</div>
+	</script>
+
+
+</ion-view>

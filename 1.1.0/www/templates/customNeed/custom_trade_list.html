@@ -1,0 +1,51 @@
+
+<ion-view view-title="所属行业"  ng-controller="CustomTradeCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<button class="button button-clear" ng-click="myBack()">
+			<i class="ion-chevron-left color-blue"></i>
+		</button>
+		<h1 class="title fontsize-16 color-black">所属行业</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header" style="background-color: #f0f3f4;">
+		<div class="list">
+			<label class="item item-divider">
+				所属行业
+			</label>
+			<div class="panel panel-default" style="border-bottom:1px solid #ddd;">
+				<div class="panel-body padding-15" style="background-color:#fff;">
+					<button ng-click="deletehobbies(h.interest_id,$index)" class="button button-small m-r-5 m-b-5" ng-repeat="h in hobbies" ng-class="{0:'button-balanced',1:'button-assertive',2:'button-energized',3:'button-calm',4:'button-positive',5:'button-dark',6:'button-royal'}[$index%7]">
+						<i class="ion-ios-trash-outline m-l-10 m-r-10" ></i>{{h.interest_name}}
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="list">
+			<label class="item item-divider">
+				添加行业
+			</label>
+
+			<div class="panel panel-default">
+				<div class="panel-body padding-15" style="background-color:#fff;">
+					<a class="button button-small button-stable m-r-5 m-b-5" ng-click="addhobbies('IT|通信|电子|互联网')"><i class="ion-ios-plus-empty m-l-10 m-r-10"></i>IT|通信|电子|互联网</a>
+					<a class="button button-small button-calm m-r-5 m-b-5" ng-click="addhobbies('IT|通信|电子|互联网')"><i class="ion-ios-plus-empty m-l-10 m-r-10"></i>IT|通信|电子|互联网</a>
+					<a class="button button-small button-balanced m-r-5 m-b-5" ng-click="addhobbies('贸易|批发|零售|租赁业')"><i class="ion-ios-plus-empty m-l-10 m-r-10" ></i>贸易|批发|零售|租赁业 </a>
+					<a class="button button-small button-royal m-r-5 m-b-5" ng-click="addhobbies('交通|运输|物流|仓储')"><i class="ion-ios-plus-empty m-l-10 m-r-10"></i>交通|运输|物流|仓储 </a>
+					<a class="button button-small button-assertive m-r-5 m-b-5" ng-click="addhobbies('工艺美术生产|加工|制造')"><i class="ion-ios-plus-empty m-l-10 m-r-10"></i>工艺美术生产|加工|制造</a>
+					<a class="button button-small button-positive m-r-5 m-b-5" ng-click="addhobbies('房地产|建筑')"><i class="ion-ios-plus-empty m-l-10 m-r-10"></i>房地产|建筑</a>
+					<a class="button button-small button-calm m-r-5 m-b-5" ng-click="addhobbies('商业服务')"><i class="ion-ios-plus-empty m-l-10 m-r-10"></i>商业服务</a>
+					<a class="button button-small button-energized m-r-5 m-b-5" ng-click="addhobbies('文体教育')"><i class="ion-ios-plus-empty m-l-10 m-r-10"></i>文体教育</a>
+					<a class="button button-small button-dark m-r-5 m-b-5" ng-click="addhobbies('服务业')"><i class="ion-ios-plus-empty m-l-10 m-r-10"></i>服务业</a>
+					<a class="button button-small button-stable m-r-5 m-b-5" ng-click="addhobbies('文化|传媒|娱乐|体育')"><i class="ion-ios-plus-empty m-l-10 m-r-10"></i>文化|传媒|娱乐|体育</a>
+					<a class="button button-small button-positive m-r-5 m-b-5" ng-click="addhobbies('能源|矿产|环保')"><i class="ion-ios-plus-empty m-l-10 m-r-10"></i>能源|矿产|环保</a>
+				</div>
+			</div>
+
+			<div class="item item-input item-button-right">
+				<input type="text" placeholder="其他" ng-model="addHob.name">
+				<button class="button button-calm fontsize-14" ng-click="addOtherhobbies()">添加</button>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

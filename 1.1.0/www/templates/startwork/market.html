@@ -1,0 +1,76 @@
+<ion-view view-title="整合营销" ng-controller="MarketController">
+	<ion-header-bar align-title="center" class="bar-light">
+		<button class="button button-icon icon" ng-click="topBack()">
+			<i class="ion-chevron-left color-blue"></i>
+		</button>
+		<h1 class="title fontsize-16 color-blackk">整合营销</h1>
+		<!-- <button class="button button-clear fontsize-14" ng-click="report()">举报</button> -->
+	</ion-header-bar>
+
+
+
+    	<ion-content class="has-header bg-white" style="bottom:50px;">
+		<div class="bg-dark">
+
+			<div class="box">
+				<img width="100%" ng-src="{{detailImg}}" err-src="img/service_zhyx.jpg">
+			</div>
+			<div class="bg-white padding-25 padding-t-5">
+				<div class="b-b-gyay">
+					<h4>
+						<div class="pull-left strat-to-work-left-box m-r-5 m-t-5 bg-blue"></div>
+						<b class="fontsize-14 bg-white">优势分析</b>
+					</h4>
+				</div>
+				<div class="text-left fontsize-12 padding-t-5 gray" >
+					• 活动策划：包括活动方案、物料制作、活动宣传、嘉宾邀请、场地活动执行；<br/>
+						• 品牌营销（成都本地包）：成都地铁视频、成都新城快报、三家本地门户网站宣传、两家电媒电视宣传、五家新媒体宣传；<br/>
+						• 品牌营销（重庆本地包）：重庆地铁视频、两家重庆平媒宣传、一家重庆电媒宣传、五家新媒体宣传
+				</div>
+			</div>
+
+			<div class="bg-white padding-25 padding-t-5 m-b-10 m-t-10">
+				<div>
+					<h4>
+						<div class="pull-left strat-to-work-left-box m-r-5 m-t-5 bg-blue"></div>
+						<b class="fontsize-14 bg-white">产品收费</b>
+					</h4>
+				</div>
+				<table class="fontsize-12 gray xkd-serviPriceTab">
+					<tbody>
+						<tr>
+							<td>会员企业</td>
+							<td class="text-left">
+								（1）活动策划5000元起<br/>
+								（2）品牌营销：成都本地包5000元起<br/>
+								（3）重庆本地包3000元起
+							</td>
+						</tr>
+						<tr>
+							<td >非会员企业</td>
+							<td class="text-left">
+							价格为会员价1.5倍
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p class="gray fontsize-12 padding-t-10">注：会员可享更多优惠，点击下方按钮成为岛里会员吧！</p>
+
+				<button class="button button-block  button-calm bg-blue" ui-sref="memauthority">
+					会员通道
+				</button>
+			</div>
+		</div>
+
+	</ion-content>
+
+	<div class="tabs tabs-icon-top xkd-botmButoon">
+		<div class="business-product-footthree bg-blue fontsize-18" ng-click="toChat()">
+			入驻咨询
+		</div>
+		<div class="business-product-footthree bg-blue fontsize-18" ng-click="callPhone(4009009088)">
+			电话联系
+		</div>
+
+	</div>
+</ion-view>

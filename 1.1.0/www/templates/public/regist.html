@@ -1,0 +1,63 @@
+<ion-view view-title="注册" name="regist-view">
+	<ion-header-bar align-title="center" class="bar bar-light color-white">
+		<div class="item-input-inset" ui-sref="login">
+			<span>
+				<i class="ion-chevron-left color-green"></i>
+			</span>
+		</div>
+		<h1 class="title">注册</h1>
+	</ion-header-bar>
+	<ion-content ng-controller="RegistCtrl">
+		<!-- <div class="regist-logo login-height">
+			<img src="img/logo2.png" width="150">
+		</div> -->
+		<div ng-hide="smsConfirmed">
+			<div class="list regist-height">
+				<div class="item item-input item-button-right" style="margin-bottom:8px;">
+					<input type="text" placeholder="请输入用户名" maxlength="11" ng-model="user.userName">
+				</div>
+				<div class="item item-input ">
+					<input type="passWord" placeholder="请输入密码" required maxlength="8" ng-model="user.passWord">
+				</div>
+			</div>
+			<div class="padding-10">
+				<button class="button button-block button-green button-regist" ng-click="regist()">立即注册</button>
+				<p style = "text-align:center;">注册即视为您同意本产品&nbsp;<span style="color:#11c1f3;" ng-click="tiaokuan()">《用户服务条款》</span></p>
+			</div>
+		</div>
+		<!-- 验证通过的 -->
+		<div ng-show="smsConfirmed">
+			<!-- <ion-header-bar align-title="center" class="bar-light">
+				<div class="item-input-inset" ui-sref="regist">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+				</div>
+			 <h1 class="title color-white" ng-hide="info">完善个人信息</h1>
+			</ion-header-bar> -->
+			<div class="list list-inset regist-height">
+				<label class="item item-input">
+				<p class="input-label">真实姓名<span style="color:red;">*</span></p>
+				<input type="text" ng-model="user.full_name"  class="fontsize-16" placeholder="必填项" ng-disabled="isCurrentUser">
+			</label>
+			<label class="item item-input">
+				<p class="input-label">企业名称<span style="color:red;">*</span></p>
+				<input type="text" placeholder="请输入企业名称" ng-model="user.tem_com_name" class="fontsize-16" maxlength="15" ng-disabled="isCurrentUser">
+			</label>
+			<label class="item item-input">
+				<p class="input-label">职位<span style="color:red;">*</span></p>
+				<input type="text" placeholder="请输入职位名称" ng-model="user.com_employee_duty" maxlength="10" class="fontsize-16" ng-disabled="isCurrentUser">
+			</label>
+			</div>
+			<div class="padding">
+				<button class="button button-block button-calm button-regist" ng-click="regist()">完成注册</button>
+			<p style = "font-size:1px;text-align:center;">本软件为<span style="color:red;">实名制</span>注册请您真实填写您的姓名和工商注册企业名称</p>
+				<!-- <button class="button button-block button-calm button-outline" ui-sref="login">
+					<i class="ion-android-arrow-back"></i>
+					&nbsp;&nbsp;返回登录
+				</button> -->
+			</div>
+		</div>
+
+	</ion-content>
+</ion-view>

@@ -1,0 +1,29 @@
+<ion-modal-view class="imageView">
+<!-- 导致浏览大图的时候顶部一部分被遮挡，暂未发现这个头部是拿来干啥的，先注释 -->
+<!--   <ion-header-bar class="headerView" ng-show="!hideAll">
+  </ion-header-bar> -->
+    
+  <ion-content class="has-no-header" scroll="false">
+    <ion-slide-box does-continue="true" active-slide="selectedSlide" show-pager="false" class="listContainer" on-slide-changed="slideChanged($index)">
+      <ion-slide ng-repeat="single in slides track by $index" ng-click="closeModal()">
+        <ion-scroll direction="xy"
+                    locking="false" 
+                    zooming="true"
+                    min-zoom="1"
+                    scrollbar-x="false"
+                    scrollbar-y="false"
+                    ion-slide-action
+                    delegate-handle="slide-{{$index}}"
+                    overflow-scroll="false"
+                    >
+        <div class="item item-image gallery-slide-view b-none">
+          <img ng-src="{{single.src}}">
+        </div>
+        <div ng-if="single.sub.length > 0" class="image-subtitle" ng-show="!hideAll">
+            <span ng-bind-html='single.sub'></span>
+        </div>
+        </ion-scroll>
+      </ion-slide>
+    </ion-slide-box>
+  </ion-content>
+</ion-modal-view>

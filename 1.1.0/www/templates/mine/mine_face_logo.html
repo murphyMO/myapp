@@ -1,0 +1,32 @@
+<ion-view view-title="个人头像" ng-controller="MineFaceLogoCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ui-sref="tab.mine">
+			<span>
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div>
+		<h1 class="title">个人头像</h1>
+	</ion-header-bar>
+
+
+<ion-content class="has-header" style="background-color: #f0f3f4;">
+	<div class="list" >
+	<ion-item class="item-input item-stacked-label">  
+		<div style="border-radius:100%;overflow:hidden;height:200px;width:200px;margin:0 auto">
+			<input onchange="angular.element(this).scope().imgChange(this)" type="file" multiple accept="image/*" style="width: 100%; height: 100%; display:block; border: none;opacity: 0;position: absolute;" />  
+			<img id="face" src="img/test/8.jpg" ng-src="{{userInfo.headImage}}" style="width: 100%; height: 100%;">
+		</div>
+</ion-item>
+<!-- 		<div style="border-radius:100%;overflow:hidden;height:200px;width:200px;margin:0 auto">
+			<img width="100%" id="face" ng-src="{{userInfo.headImage}}">
+			<div style="width:200px;height:50px;line-height:50px;position:relative;bottom:50px;background:rgba(0,0,0,0.5)" class="text-center calm fontsize-18"><span>点击修改</span></div>
+			<input onchange="angular.element(this).scope().imgChange(this)" type="file" multiple accept="image/*" style="width:100%;height:100%;position:relative;bottom:200px;opacity:0">
+		</div> -->
+		<div class="padding">
+		<button class="button button-block button-calm" ng-click="updateBase();">
+			保存
+		</button>
+		</div>
+	</div>
+</ion-content>
+</ion-view>

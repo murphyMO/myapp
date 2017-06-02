@@ -1,0 +1,10 @@
+<div class="list card chat-card" >
+	<a ui-sref="personalmsg({user_id:personinfo.id, com_id:personinfo.com_id, from:'chatSend'})">
+		<div class="item item-divider"><span class="item-note" style="font-size:10px;float:none">个人名片</span></div>
+		<div class="item item-avatar">
+			<img ng-src="{{personinfo.photo}}" err-src="img/icon_emptyPeron.png">
+			<h2>{{personinfo.name}}</h2>
+			<p class="item-note fontsize-12" style="float:none">{{personinfo.com_name}}</p>
+		</div>
+	</a>
+</div>

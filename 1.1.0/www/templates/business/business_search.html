@@ -1,0 +1,190 @@
+<style type="text/css">
+
+	#searchBody{
+		position: fixed;
+		top: 38px;
+		width: auto;
+		height: auto;
+		
+		z-index: 10;
+		left: 63px;
+		opacity: 1;
+		color:#fff;
+		
+	}
+	.searchCateg{
+		background: #0081fe;
+		border-radius: 5px;
+		padding:10px;
+	}
+
+	#searchBody.ios{
+		top:30px;
+	}
+
+	#searchBody ul li {
+		background: #0081fe;
+		color: #000;
+		border: none;
+		margin:-2px;
+		padding: 10px;
+	}
+
+	#searchBody ul li.active{
+		color: #fff;
+	}
+
+	#searchdiv.notIE {
+		position: absolute;
+		display: inline-block;
+		left: 68px;
+	}
+
+	/* Select arrow styling */
+
+	#searchdiv.notIE .fancyArrow {
+		width: 23px;
+		height: 28px;
+		/*position: absolute;
+		display: inline-block;
+		top: 1px;
+		right: 3px;*/
+		background: url("img/select-arrow.png") right bottom/ 90% no-repeat transparent ;
+		pointer-events: none;
+	}
+
+	.trigonIcon{
+		width: 0px;
+		height: 0px;
+		border-top: 10px solid transparent;
+		border-bottom: 10px solid #0081fe;
+		border-left: 10px solid transparent;
+		border-right:10px solid transparent;
+
+		margin-left: 20px;
+
+
+	}
+	/*target Internet Explorer 9 and Internet Explorer 10:*/
+
+	/*@media screen and (min-width: 0\0) {
+		#searchdiv.notIE .fancyArrow {
+			display: none;
+		}
+	}*/
+  ion-item span{
+    float:left;
+  }
+</style>
+
+<ion-view view-title="服务" ng-controller="BusinessSearchCtrl">
+	<!-- 搜索框，没找到插件，自己写个弹出框吧 -->
+	<div id="searchBody" ng-show="searchBodyShow" class="{{device}} ng-hide">
+	    <div class="trigonIcon"> </div>
+	    <div class="searchCateg">
+			<ul class="list">
+				<li class="item {{item.search_type_id == search.search_type_id ? 'active':''}}" ng-repeat="item in searchType" ng-click="setSelectSearch(item)">
+					{{item.search_type_text}}
+				</li>
+			</ul>
+		 </div>
+	</div>
+	<ion-header-bar align-title="搜索" class="bar-light xkd-seArchbar">
+		<div class="item-input-inset" ui-sref="tab.business">
+			<span>
+			<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		<label class="item-input-wrapper b-a">
+			<div id="searchdiv" class="notIE" on-tap="switchDisplaySearchTypeList()">
+				<label><span>{{search.search_type_text}}<i class="fancyArrow  pull-right"></i></span></label>
+			</div>
+
+			<input class="fontsize-14" style="height: 16px; line-height: 16px;padding-left: 47px;width: 100%" type="search" placeholder="请输入{{search.search_type_text}}名称" ng-model="filterOptions">
+		</label>
+
+		<button ng-click="goSearchList(filterOptions)" class="button color-blue  button-calm">搜索</button>
+	</ion-header-bar>
+
+	<ion-content class="has-header">
+		<div class="b-b-none" ng-show="!isOverLoad">
+			<ion-list>
+
+			     <ion-scroll class="b-b-gyay" direction="x" scrollbar-x="false">
+				<div class="row">
+				    <div class="xkd-hotsreach-boxf">
+				    <strong>热门搜索</strong>
+				    </div>
+					<div class="col  text-center">
+						<div class="xkd-hotsreach-box rounded-5" ui-sref="businessSearchList({com_service_type:89})">
+							会议室
+						</div>
+					</div>
+<!-- 					<div class="col  text-center">
+						<div class="xkd-hotsreach-box rounded-5" ui-sref="businessSearchList({com_service_type:92})">
+							定制办公
+						</div>
+					</div>
+					<div class="col  text-center">
+						<div class="xkd-hotsreach-box rounded-5" ui-sref="businessSearchList({com_service_type:200})">
+							灵活办公
+						</div>
+					</div> -->
+					<div class="col  text-center">
+						<div class="xkd-hotsreach-box rounded-5" ui-sref="businessSearchList({com_service_type:117})">
+							路演厅
+						</div>
+					</div>
+					<div class="col  text-center">
+						<div class="xkd-hotsreach-box rounded-5"  ui-sref="businessSearchList({com_service_type:113})">
+							头脑风暴室
+						</div>
+					</div>
+				</div>
+			</ion-scroll>
+
+                <div class="padding-t-10 bg-dark b-t-none">
+                </div>
+				<div>
+					<ion-item class="item b-t-none color-black ">
+						<strong>最近搜索</strong>
+					</ion-item>
+					<ion-item class="color-silver" ng-repeat="record in history" ng-click="goSearchList(record.search_content)">
+						{{record.search_content}}
+					</ion-item>
+				</div>
+				<div class="row text-center m-t-10">
+						<button class="button button-block button-outline button-light button-small" style="width: 150px; margin: 0 auto;" ng-click="openEditModal(user.userInfo.user_type)">
+						· 清空历史搜索 ·
+						</button>
+			     </div>
+			<div>
+			<!-- <ion-item class="item b-b-none b-t-none bg-dark color-silver fontsize-14 padding-10">
+				找办公室
+			</ion-item>
+			<ion-item class="b-t-none">
+				<span ui-sref="businessSearchList({com_service_type:89})" class="search-label color-black m-r-5 m-b-10 button button-outline button-dark button-small">办公室/位</span>
+				<span ui-sref="businessSearchList({com_service_type:92})" class="search-label color-black m-r-5 m-b-10 button button-outline button-dark button-small">定制办公</span>
+				<span ui-sref="businessSearchList({com_service_type:200})" class="search-label color-black m-r-5 m-b-10 button button-outline button-dark button-small">灵活办公</span>
+			</ion-item>
+			<ion-item class="item b-b-none b-t-none bg-dark color-silver fontsize-14 padding-10">
+				找场地
+			</ion-item>
+			<ion-item class="b-t-none">
+				<span ui-sref="businessSearchList({com_service_type:117})" class="search-label color-black m-r-5 m-b-10 button button-outline button-dark button-small">路演厅</span>
+				<span ui-sref="businessSearchList({com_service_type:113})" class="search-label color-black m-r-5 m-b-10 button button-outline button-dark button-small">头脑风暴室</span>
+			</ion-item> -->
+<!-- 			<ion-item class="search-kind item b-b-none color-silver">
+				找服务
+			</ion-item>
+			<ion-item class="b-t-none">
+				<span ui-sref="businessSearchList({com_service_type:202})" class="search-label color-black m-r-5 m-b-10 button button-outline button-dark button-small">品牌推广</span>
+				<span ui-sref="businessSearchList({com_service_type:213})" class="search-label color-black m-r-5 m-b-10 button button-outline button-dark button-small">设计服务</span>
+				<span ui-sref="businessSearchList({com_service_type:210})" class="search-label color-black m-r-5 m-b-10 button button-outline button-dark button-small">股权融资</span>
+				<span ui-sref="businessSearchList({com_service_type:204})" class="search-label color-black m-r-5 m-b-10 button button-outline button-dark button-small">资源对接</span>
+			</ion-item> -->
+			</div>
+			</ion-list>
+		</div>
+	</ion-content>
+</ion-view>

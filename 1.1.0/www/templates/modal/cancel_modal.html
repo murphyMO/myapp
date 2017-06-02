@@ -1,0 +1,35 @@
+<!-- 法律声明弹框 -->
+<div class="modal">
+	<ion-header-bar align-title="center" class="bar-light">
+		<h1 class="title">退款提示</h1>
+		<div class="button button-clear m-r-10" ng-click="closeModal()"><i class="ion-close fontsize-18" style="vertical-align: middle;"></i></div>
+	</ion-header-bar>
+	<ion-content class="bg-dark">
+		<div class="padding-10">
+			<div class="text-left" style="text-align: justify;">
+				<strong>退款规则</strong>
+				<small style="text-indent:2em;">
+					<p>1.200元/小时以上（含）；提前72小时取消不收取任何费用，72小时内取消扣除20%，24小时内取消扣除50%，时间到未到场扣除100%；</p>
+					<p>2.按半天计费：200元/小时（不含）以下；提前24小时取消不收取任何费用，24小时内取消扣除20%，4小时内取消扣除50%，时间到未到场扣除100%；</p>
+				</small>
+			</div>
+			<div class="text-right">
+				<h4 class="xkd-text-danger">预计退款：{{order.order_info.refund_estimated}}元</h4>
+				<span class="xkd-text-danger fontsize-12">*具体退款金额根据退款规则计算</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<button class="button button-block bg-gray" ng-click="closeModal()">
+					取消
+				</button>
+
+			</div>
+			<div class="col">
+				<button class="button button-block button-calm" ng-click="cancelSure()">
+					确定
+				</button>
+			</div>
+		</div>
+	</ion-content>
+</div>

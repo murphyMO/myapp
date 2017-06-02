@@ -1,0 +1,36 @@
+<ion-view view-title="参加活动表格" ng-controller="activityEntryFormCtrl">
+	<ion-header-bar align-title="center" class="bg-blue">
+		<div class="item-input-inset" ui-sref="tab.mine">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		 <h1 class="title fontsize-16 color-black">参加活动信息</h1>
+	</ion-header-bar>
+
+	<ion-content class="bg-dark">
+		<div class="list">
+			<label class="item item-input">
+				<span class="input-label">姓名：&nbsp;&nbsp;&nbsp;</span>
+				<input type="text" ng-model="entry.name" placeholder="必填">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">电话：&nbsp;&nbsp;&nbsp;</span>
+				<input type="text" ng-model="entry.phone" placeholder="必填">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">人数：&nbsp;&nbsp;&nbsp;</span>
+				<input type="text" ng-model="entry.number" placeholder="必填">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">备注：&nbsp;&nbsp;&nbsp;</span>
+				<input type="text" ng-model="entry.extra" placeholder="备注">
+			</label>
+		</div>
+
+
+		<div class="padding">
+			<button class="button button-calm button-block" ng-click="saveActivityFormClick()">保存</button>
+		</div>
+	</ion-content>
+</ion-view>

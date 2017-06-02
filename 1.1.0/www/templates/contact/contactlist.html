@@ -1,0 +1,76 @@
+<!-- 联系页面 -->
+<ion-view view-title="联系" ng-controller="ContactListCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+
+		<h1 class="title fontsize-16 color-black">联系</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header">
+	<div class="list seviveBox ">
+		<!-- 留言 -->
+		<a ng-if="obj.messageDatas" class="item item-avatar item-icon-right b-t-none" ng-click="contactcommentlist()">
+			<img src="img/liuyan.png" style="border-radius:0">
+				<h2>留言</h2>
+				<span class="liuyan-badge-tip" ng-if="obj.messageLength>0">{{obj.messageLength}}</span>
+				<p ng-if="obj.messageLength>0">{{obj.messageLength}}条未读留言</p>
+				<p ng-if="obj.messageLength==0">暂无未读留言</p>
+				<span class="item-note" >
+					<i class="icon ion-ios-arrow-right" ></i>
+				</span>
+
+		</a>
+		<a ng-if="obj.messageDatas==0 || !obj.messageDatas" class="item item-avatar item-icon-right b-t-none">
+			<img src="img/liuyan.png" style="border-radius:0">
+			<div class="m-t-5">
+				<div class="xkd-recommend-list-title">留言</div>
+				<div class="xkd-recommend-list-content">暂无留言</div>
+			</div>
+			<span class="item-note" >
+				<i class="icon ion-ios-arrow-right" ></i>
+			</span>
+			<!-- <div class="xkd-recommend-list-content publTimeCon">1分钟前</div> -->
+		</a>
+		<!-- 点赞 -->
+		<a ng-if="obj.likes" class="item item-avatar item-icon-right" ng-click="contactlikelist()">
+			<img src="img/dianzan.png" style="border-radius:0">
+			<h2>点赞</h2>
+			<span class="dianzan-badge-tip" ng-if="obj.likeLength>0">{{obj.likeLength}}</span>
+			<p ng-if="obj.likeLength>0">{{obj.likeLength}}个新赞</p>
+			<p ng-if="obj.likeLength==0">暂无新的点赞</p>
+			<span class="item-note" >
+				<i class="icon ion-ios-arrow-right" ></i>
+			</span>
+		</a>
+		<a ng-if="obj.likes==0 || !obj.likes" class="item item-avatar item-icon-right">
+			<img src="img/dianzan.png" style="border-radius:0">
+			<div class="m-t-5">
+				<div class="xkd-recommend-list-title">点赞</div>
+				<div class="xkd-recommend-list-content">还没有人点赞</div>
+			</div>
+			<span class="item-note" >
+				<i class="icon ion-ios-arrow-right" ></i>
+			</span>
+		</a>
+
+		<!-- 对话列表 -->
+		<ion-list>
+			<ion-item class="item item-avatar" ng-repeat="li in contacts.lists" ng-click="toChat(li)" ng-class="{'chat-last-margin' : $last}">
+				<img class="rounded-500" ng-src="{{route_path}}{{li.chat_user_face}}" err-src="img/icon_emptyPeron.png">
+				<span class="chat-badge-tip" ng-show="li.unread_cnt && li.unread_cnt>0">{{li.unread_cnt}}</span>
+				<h2 class="chat-text-overflow">{{li.chat_user_name || '无名侠客'}}  
+					<span class="item-note" style="margin-top: 3px;text-align: right;" >
+						{{li.last_update_time}}
+					</span>
+				</h2>
+				<p class="chat-text-overflow" ng-if="li.service_name && li.chat_user_id != '0000'">{{nameString(li.service_name)}}</p>
+				<p class="chat-text-overflow" ng-if="!li.service_name && li.chat_user_id != '0000'">&#12288;</p>
+				<p class="chat-text-overflow" ng-if="li.chat_user_id == '0000'">请到管理端查看详情~</p>
+				<div style="background: url('{{article_photo_path}}{{li.service_thumb[0]}}');width: 100%;height: 100px;background-size:cover;background-position:center;width:64px;height:64px;position: absolute;top: 18px;right: 10px;"></div>
+				<ion-option-button class="button-stable" ng-show="li.unread_cnt>0" ng-click="readItem($event,$index)">标为已读</ion-option-button>
+				<ion-option-button class="button-assertive" ng-click="deletItem($event,$index)">删除</ion-option-button>
+			</ion-item>
+		</ion-list>
+	</div>
+	</ion-content>
+
+</ion-view>

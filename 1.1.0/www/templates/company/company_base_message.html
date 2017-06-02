@@ -1,0 +1,91 @@
+<ion-view view-title="企业基础信息" ng-controller="CompanyDetailCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="myBack()">
+			<span >
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>		
+		<h1 class="title">企业基础信息</h1>
+	</ion-header-bar>
+
+
+	<ion-content class="has-header">
+	<!--<ion-list>
+	<ion-toggle  ng-model="settings.enableFriends">
+		Enable Friends
+	</ion-toggle>
+	</ion-list>-->
+	<div class="list" style="background-color: #f5f5f5;">
+		<div class="item item-icon-right" ng-click="editComBase('com_name',1)">
+			<span class="gray">名称</span>
+			<span class="pull-right xkd-community-topic-topthree-span">
+				{{comObj.com_name}}
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</span>			
+		</div>
+		<div class="item item-icon-right" ng-click="editComBase('com_title_type',1)">
+			<span class="gray">类型</span>
+			<span class="pull-right xkd-community-topic-topthree-span">
+				<span ng-if="comObj.com_title_type == 0">公司</span>
+				<span ng-if="comObj.com_title_type == 1">团队</span>
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</span>
+		</div>
+		<div class="item item-icon-right" ng-click="editComBase('com_phone',1)">
+			<span class="gray">企业联系方式</span>
+			<span class="pull-right" style="max-width:60%;">
+				{{comObj.com_phone}}
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</span>
+		</div>
+		<div class="item item-icon-right" ng-click="editComBase('store_id',1)">
+			<span class="gray">归属门店</span>
+			<span class="pull-right xkd-community-topic-topthree-span">
+				<span ng-if="comObj.store_id == 2">航天岛</span>
+				<span ng-if="comObj.store_id == 3">磨子桥岛</span>
+				<span ng-if="comObj.store_id == 4">菁蓉岛</span>
+				<span ng-if="comObj.store_id == 5">节能岛</span>
+				<span ng-if="comObj.store_id == 7">望京岛</span>
+				<span ng-if="comObj.store_id == 8">虹桥岛</span>
+				<span ng-if="comObj.store_id == 9">金山岛</span>			
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</span>
+		</div>		
+		<div class="item item-icon-right" ng-click="editComBase('com_address',1)">
+			<span class="gray">企业地址</span>
+			<p class="pull-right xkd-community-topic-topthree-span" style="text-align:right;">
+				<span style="white-space:normal;">{{comObj.com_address}}</span>			
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</p>
+		</div>
+		<div class="item item-icon-right" ng-click="editComBase('com_website',1)">
+			<span class="gray">企业官网</span>
+			<p class="pull-right xkd-community-topic-topthree-span" style="text-align:right;">
+				<span style="white-space:normal;">{{comObj.com_website}}</span>	
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</p>
+		</div>
+		<div class="item item-icon-right" ng-click="editComBase('business_label',1)">
+			<span class="gray">行业标签</span>
+			<p class="pull-right xkd-community-topic-topthree-span">
+				<span ng-repeat="b in comObj.business_label" class="m-l-10" style="white-space:normal;">{{b.business_label_des}}</span>			
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</p>
+		</div>
+		<div class="item item-icon-right"  ng-click="editComBase('city_name',1)">
+			<span class="gray">归属城市</span>
+			<span class="pull-right xkd-community-topic-topthree-span">
+				{{comObj.city_name}}			
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</span>
+		</div>
+		<div class="item item-icon-right" ng-click="editComBase('com_scale',1)">
+			<span class="gray">企业规模</span>
+			<span class="pull-right xkd-community-topic-topthree-span">
+				{{comObj.com_scale}}			
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</span>
+		</div>
+	</div>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,29 @@
+<ion-view view-title="保洁申请" ng-controller="CleaningCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="back()">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">上门服务</h1>
+		<div class="buttons">
+			<div class="item-input-inset">
+				<a class="color-blue" ng-click="saveForm()" ng-disabled="isGuest">提交</a>
+			</div>
+		</div>
+	</ion-header-bar>
+	<ion-content class="has-header bg-white">
+		<div class="list">
+			<a class="item item-icon-right" ng-click="dateClick()">
+				<span class="gray">选择日期</span>
+				<span class="pull-right" ng-model="item.date">{{item.date}}</span>
+				<i class="icon ion-ios-arrow-right fontsize-16"></i>
+			</a>
+			<label class="item item-input">
+				<textarea rows="5" ng-model="item.content" placeholder="给管家留言"></textarea>
+			</label>
+		</div>
+	</ion-content>
+</ion-view>
+
+

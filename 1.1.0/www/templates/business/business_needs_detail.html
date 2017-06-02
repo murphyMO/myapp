@@ -1,0 +1,118 @@
+<ion-view view-title="需求" ng-controller="BusinessNeedsDetailCtrl">
+	<ion-header-bar align-title="center" class="bar-dark color-white">
+		<div class="item-input-inset" ng-click="myBack()">
+			<span>
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">需求</h1>
+		<button class="button button-clear fontsize-14" ng-click="report()">举报</button>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-dark has-footer" style="bottom:44px;">
+		<!-- 需求详情 -->
+		<div ng-show="tabType == 1">
+			<ion-slide-box delegate-handle="bannerList" auto-play="true" does-continue="true" slide-interval=2000 show-pager="{{need.com_needs_thumb.length > 1}}">
+				<ion-slide ng-repeat="banner in need.com_needs_thumb track by $index">
+					<div class="box business-banner">
+						<img ng-src="{{serviceThumbPath}}{{banner}}" err-src="img/icon_empty.png">
+					</div>
+				</ion-slide>
+			</ion-slide-box>
+
+			<div class="item row padding-10 b-l-none b-r-none m-n">
+				<div class="col" style="white-space: normal;">
+					<div style="overflow:hidden">
+						<h2 class="pull-left"><b>{{need.com_needs_name}}</b></h2>
+						<!-- <h2 class="assertive pull-right">￥{{service.unit_value}}{{service.unit}}</h2> -->
+					</div>
+					<small class="fontsize-12">
+						<!-- <i class="ion-ios-location"></i>
+						<span>{{service.store_name}}</span>&nbsp; -->
+						<span>{{need.com_needs_des}}</span>
+					</small>
+				</div>
+			</div>
+
+			<a ng-if="need.com_name" class="item text-center m-t-10 m-b-10" ng-click="toCompanyPage(need)">{{need.com_name}}</a>
+
+			<div class="m-t-15 list" ng-show="hasreply">
+				<a class="item">回复({{need.message.length}})</a>
+				<a class="item item-avatar" on-hold="onHold(repaly)" ng-repeat="repaly in need.message track by $index">
+					<img ng-src="{{commonPath.route_path}}{{commonPath.photo_path}}{{repaly.one_inch_photo_url}}" err-src="img/icon_empty_head.png">
+					<h2>{{repaly.repley_user_name}}</h2>
+					<p style="white-space: normal;">{{repaly.message_content}}</p>
+					<p>{{repaly.cre_time}}</p>
+				</a>
+			</div>
+
+		</div>
+
+	</ion-content>
+
+		<div ng-init="hasshare=false" ng-if="hasshare">
+			<div class="card share-com">
+				<div class="item item-divider" style="height:50px;line-height:34px">
+					分享给朋友
+				</div>
+				<div class="item item-text-wrap share-social">
+	 				<a class="col" ng-click="WechatShare(need.com_needs_name,need.com_needs_des,'http://www.heroera.com/heroera/share/company/need.html?need_id='+need.com_needs_id,'Wechat.Scene.SESSION')">
+						<img src="img/icon-weixin.png">
+						<span>微信朋友圈</span>
+					</a>
+					<a class="col" ng-click="WechatShare(need.com_needs_name,need.com_needs_des,'http://www.heroera.com/heroera/share/company/need.html?need_id='+need.com_needs_id,'Wechat.Scene.TIMELINE')">
+						<img src="img/icon-weixin.png">
+						<span>微信好友</span>
+					</a>
+					<a class="col" ng-click="QQShare(need.com_needs_name,need.com_needs_des,'http://www.heroera.com/heroera/share/company/need.html?need_id='+need.com_needs_id)">
+						<img src="img/icon-qq.png">
+						<span>QQ</span>
+					</a>
+					<!-- <a class="col" ng-click="WeiboShare(service.com_service_name,service.com_service_des,'http://www.heroera.com/hicoffice/share/company/service.html?service_id='+service.com_service_id)">
+						<img src="img/icon-weibo.png">
+						<span>新浪微博</span>
+					</a> -->
+				</div>
+			</div>
+			<div class="chat-image-cover" ng-click="closeshare()"></div>
+		</div>
+
+	<div style="bottom:0">
+		<ion-footer-bar keyboard-attach class="bar bar-footer item-input-inset has-tabs" ng-show="replay_show" style="position:fixed;">
+			<label class="item-input-wrapper">
+				<input type="search" ng-blur="replayBlur()" auto-focus-when="replay_show" ng-model="msg.message" placeholder="说点什么呢？">
+			</label>
+			<button class="button button-small button-calm" ng-click='sendReplay()'>
+				发送
+			</button>
+		</ion-footer-bar>
+	</div>
+
+
+	<div class="tabs tabs-icon-top" ng-if="!replay_show">
+		<div class="business-product-footone">
+			<!-- <a class="tab-item" ng-class="{'calm': isLike}" ng-click="hiLickClick()">
+				<i class="icon ion-heart"></i>
+			</a> -->
+			<a class="tab-item fontsize-18 m-t-10" ng-click="openshare()">
+			<!-- WechatShare(item.com_name,item.comments,'http://www.heroera.com/hicoffice/share/company/service.html?service_id='+service.com_service_id) -->
+				<i class="icon ion-android-share-alt fontsize-icon"></i>
+			</a>
+		</div>
+		<div class="business-product-foottwo">
+			<a class="tab-item m-t-10" ng-click="hiMessageClick()">
+				<i class="icon ion-chatbox-working fontsize-icon"></i>
+			</a>
+		</div>
+		<div class="business-product-footthree">
+			<a class="tab-item m-t-10" ng-class="{'calm': isLike}" ng-click="hiLickClick()">
+				<i class="icon ion-heart fontsize-icon"></i>
+			</a>
+		</div>
+
+		<div class="business-product-footfour button no-radius bg-black color-white" ng-click="bottomRightClick()">
+			<i class="icon ion-chatbubble-working color-white"></i>
+			 &nbsp;{{bottomRightText}}
+		</div>
+	</div>
+</ion-view>

@@ -1,0 +1,36 @@
+.row-center{
+  /*margin-left:40px;*/
+  text-align:center;
+}
+.recommend{
+  padding:5px 15px;
+  border-top:1px solid #ccc;
+  /*border-left:4px solid #00bbff;*/
+}
+/*.col-50 img{
+  width:100%;
+  height:100%
+}*/
+.cooperation{
+  background-color:#00bbff;
+  border-radius:10px;
+  width:80px;
+  margin-left:20px;
+}
+.active-apply{
+  position: relative;
+  top:10px;
+  margin-bottom:10px
+}
+.active-detail{
+  padding:15px 23px;
+  background-color:#edf1f2
+}
+.search-label{
+  padding:0 12px;
+  border-radius:15px
+}
+.search-kind{
+  border-top:1px solid #ddd;
+  padding-bottom:5px;
+}

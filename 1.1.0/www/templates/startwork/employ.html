@@ -1,0 +1,177 @@
+<ion-view view-title="招聘服务" ng-controller="EmployController">
+	<ion-header-bar align-title="center" class="bar-light">
+		<button class="button button-icon icon " ng-click="topBack()">
+			<i class="ion-chevron-left color-blue"></i>
+		</button>
+		<h1 class="title fontsize-16 color-black">招聘服务</h1>
+		<!-- <button class="button button-clear fontsize-14" ng-click="report()">举报</button> -->
+	</ion-header-bar>
+
+	<ion-content class="bg-white has-header" style="bottom:50px;">
+		<div class="bg-dark">
+			<div class="box">
+				<img width="100%" ng-src="{{detailImg}}" err-src="img/service_zpfw.jpg">
+			</div>
+			<div class="bg-white padding-25 padding-t-5 ">
+				<div class="b-b-gyay">
+					<h4>
+						<div class="pull-left strat-to-work-left-box m-r-5 m-t-5 bg-blue"></div>
+						<b class="fontsize-14 bg-white">优势分析</b>
+					</h4>
+				</div>
+				<div class="text-left fontsize-12 padding-t-5 gray" >
+					• RO收集确认客户需求，包括招聘需求、招聘产品选择等<br/>
+					• RO将客户信息与需求递交给企服中心<br/>
+					• 企服中心分配进行服务跟踪与评价
+				</div>
+			</div>
+
+			<div class="bg-white padding-25 padding-t-5 m-b-10 m-t-10">
+				<div>
+					<h4>
+						<div class="pull-left strat-to-work-left-box m-r-5 m-t-5 bg-blue"></div>
+						<b class="fontsize-14 bg-white">产品收费</b>
+					</h4>
+				</div>
+				<!-- <div class="row text-center">
+					<div class="col color-gray col-50 b-b">招聘目标</div>
+					<div class="col color-gray col-50 b-b">会员价</div>
+				</div>
+				<div class="row text-center">
+					<div class="col col-50">级别A</div>
+					<div class="col col-50 assertive">1000</div>
+				</div>
+				<div class="row text-center">
+					<div class="col col-50">级别B</div>
+					<div class="col col-50 assertive">2000</div>
+				</div> -->
+				<table class="fontsize-12 gray xkd-serviPriceTab">
+					<tbody>
+						<tr>
+							<td>会员企业</td>
+							<td class="text-left">
+								（1）发布职位：一个职位发布40元/月（多渠道，根据客户需求）；<br>
+								（2）下载简历：简历下载20元/个（多渠道，跟进客户需求）；<br>
+								（3）面试到：免费推荐简历给企业，免费沟通候选人，免费邀约面试，面试到场100元1人1次；<br>
+								（4）定制招聘：在产品3的基础上，成功入职：月薪6k以下500元/人，月薪6-12k 1000元/人，月薪12k及以上2000元/人；<br>
+								（5）联系小师妹了解更多产品详情~
+							</td class="text-left">
+						</tr>
+						<tr>
+							<td>非会员企业</td>
+							<td>会员价格1.5倍</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="fontsize-12 text-left gray">注：<br/>
+					（1）以签发offer为成交依据，以候选人到岗作为付费起始日期客户<br/>
+					（2）如需详细了解产品请咨询企服中心喻开青：13608021653<br/>
+					（3）会员可享更多优惠，点击下方按钮成为岛里会员吧！
+				</div>
+
+			</div>
+
+			<div class="bg-white padding-25 padding-t-5 m-b-10 m-t-15">
+				<div class="b-b-gyay m-b-10">
+					<h4>
+						<div class="pull-left strat-to-work-left-box m-r-5 m-t-5 bg-blue"></div>
+						<b class="fontsize-14 bg-white">服务流程</b>
+					</h4>
+				</div>
+
+			<div class="employ-timeline bg-white">
+				<ul>
+					<strong></strong>
+					<li><strong></strong><b></b><h4 class="employ-timeline-left color-blue">01.<span class="fontsize-12 text-center" style="padding-right: 28px;color: #b2b2b2">客户提交需求信息</span></h4></li>
+					<li><strong></strong><b></b><h4 class="employ-timeline-right color-blue"><span class="fontsize-12 text-center" style="padding-left: 5px;color: #b2b2b2">确认服务，签订协议</span>02.</h4></li>
+					<li><strong></strong><b></b><h4 class="employ-timeline-left color-blue">03.<span class="fontsize-12 text-center" style="padding-right: 16px;color: #b2b2b2">简历筛选、初面推荐</span></h4></li>
+					<li><strong></strong><b></b><h4 class="employ-timeline-right color-blue"><span class="fontsize-12 text-center" style="padding-left: 5px;color: #b2b2b2">入职跟踪、人员评价</span>04.</h4></li>
+					<b></b>
+				</ul>
+				<h4 class="employ-timeline-bottom color-blue"><span class="fontsize-12 text-center gray" style="padding-left: 23px;">点击下方按钮，体验定制化招聘</span></h4>
+			</div>
+
+					<!-- <div class="row">
+						<div class="col col-25 text-center">
+							<div class="startwork-box">
+								<p class="fontsize-12">客户提交需求信息</p>
+								<div style="margin: -30px 0 0 45px">
+									<i class="ion-arrow-right-a m-l-15 color-gray"></i>
+								</div>
+							</div>
+						</div>
+						<div class="col col-25 text-center">
+							<div class="startwork-box">
+								<p class="fontsize-12">确认服务，签订协议</p>
+								<div style="margin: -50px 0 0 45px">
+									<i class="ion-arrow-right-a m-l-15 color-gray"></i>
+								</div>
+							</div>
+						</div>
+						<div class="col col-25 text-center">
+							<div class="startwork-box">
+								<p class="fontsize-12">简历筛选、初面推荐</p>
+								<div style="margin: -50px 0 0 45px">
+									<i class="ion-arrow-right-a m-l-15 color-gray"></i>
+								</div>
+							</div>
+						</div>
+						<div class="col col-25 text-center">
+							<div class="startwork-box">
+								<p class="fontsize-12">入职跟踪、人员评价</p>
+							</div>
+						</div>
+					</div> -->
+				<!-- <div class="fontsize-12 text-center" style="position: absolute;bottom: -160%;left: 32%">
+					点击下方按钮，体验定制化招聘
+				</div> -->
+				<button class="button button-block  button-calm button-assertive" ng-click="myEmploy()">
+					我要招聘
+					<!-- <i class="ion-ios-arrow-right m-l-15"></i> -->
+				</button>
+				<button class="button button-block  button-calm bg-blue" ui-sref="memauthority">
+					会员通道
+				</button>
+
+			</div>
+
+			<!-- <form name="form" class="bg-white xkd-feedback-padding" >
+			<div class="form-group">
+				<p class="fontsize-bold">应聘目标<span class="xkd-text-danger">*</span></p>
+				<div class="xkd-feedback-b">
+					<input type="text" ng-model="item.com_name" class="xkd-feedback-w-full">
+				</div>
+			</div>
+			<div class="form-group">
+				<p class="fontsize-bold">姓名<span class="xkd-text-danger">*</span></p>
+				<div class="xkd-feedback-b">
+					<input type="text" ng-model="item.name" class="xkd-feedback-w-full">
+				</div>
+			</div>
+			<div class="form-group">
+				<p><span class="fontsize-bold">联系方式</span><span class="xkd-text-danger">*</span></p>
+				<div class="xkd-feedback-b">
+					<input type="text" ng-model="item.mobile" maxlength="11" class="xkd-feedback-w-full">
+				</div>
+			</div>
+			<div class="form-group">
+				<p><span class="fontsize-bold">到岗日期</span><span class="xkd-text-danger">*</span></p>
+				<div class="xkd-feedback-b" ng-click="dateClick()">
+					<input type="text" ng-model="item.lease_time" class="xkd-feedback-w-full">
+				</div>
+			</div>
+		</form> -->
+
+		</div>
+
+	</ion-content>
+	<div class="tabs tabs-icon-top xkd-botmButoon">
+		<div class="business-product-footthree bg-blue fontsize-18" ng-click="toChat()">
+			入驻咨询
+		</div>
+		<div class="business-product-footthree bg-blue fontsize-18" ng-click="callPhone(4009009088)">
+			电话联系
+		</div>
+
+	</div>
+</ion-view>

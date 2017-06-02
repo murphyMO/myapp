@@ -1,0 +1,85 @@
+<style type="text/css">
+	.w{
+		width:106px;
+	}
+	.change{
+		white-space: normal;
+		display: inline-block;
+		width: 160px;
+	}
+	.fontStyle{
+		font-family: "微软雅黑";
+	}
+</style>
+<ion-view view-title="基础信息编辑" ng-controller="CompanyEidtCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="myBack()">
+			<span >
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">基础信息编辑</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header" >
+		<div class="list">
+			<label class="item item-input">
+				<span class="input-label">名称</span>
+				<input type="text" class="fontStyle fontsize-16" placeholder="必填项" ng-model="comObj.com_name">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">类型</span>
+				<select style="border:none;background-color:#fff;" ng-model="comObj.com_title_type"	class="fontStyle fontsize-16">
+					<option ng-selected="comObj.com_title_type==0" value="0" class="fontStyle fontsize-16">公司</option>
+					<option ng-selected="comObj.com_title_type==1" value="1" class="fontStyle fontsize-16">团队</option>
+				</select>
+			</label>
+			<label class="item item-input">
+				<span class="input-label">归属门店</span>
+				<select style="border:none;background-color:#fff;" class="fontStyle fontsize-16" ng-model="comObj.store_id">
+					<option ng-selected="comObj.store_id==2" class="fontStyle fontsize-16" value="2">航天岛</option>
+					<option ng-selected="comObj.store_id==3" class="fontStyle fontsize-16" value="3">磨子桥岛</option>
+					<option ng-selected="comObj.store_id==4" class="fontStyle fontsize-16" value="4">菁蓉岛</option>
+					<option ng-selected="comObj.store_id==5" class="fontStyle fontsize-16" value="5">节能岛</option>
+					<option ng-selected="comObj.store_id==7" class="fontStyle fontsize-16" value="7">望京岛</option>
+					<option ng-selected="comObj.store_id==8" class="fontStyle fontsize-16" value="8">虹桥岛</option>
+					<option ng-selected="comObj.store_id==9" class="fontStyle fontsize-16" value="9">金山岛</option>
+				</select>
+			</label>
+			<label class="item item-input">
+				<span class="input-label">企业联系方式</span>
+				<input type="tel" placeholder="必填项" class="fontStyle fontsize-16" ng-model="comObj.com_phone">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">企业地址</span>
+				<input type="text" placeholder="必填项" class="fontStyle fontsize-16" ng-model="comObj.com_address">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">企业官网</span>
+				<input type="text" placeholder="http://" class="fontStyle fontsize-16" ng-model="comObj.com_website">
+			</label>
+			<a class="item item-input item-icon-right" ng-click="goSelectPage('comtag')">
+				<span class="input-label">行业标签</span>
+				<span class="change">
+					<span ng-repeat="b in comObj.business_label" class="m-r-5">{{b.business_label_des}}</span>
+				</span>
+				<i class="icon ion-chevron-right fontsize-14"></i>
+			</a>
+			<a class="item item-input item-icon-right"  ng-click="goSelectPage('comarea')">
+				<span class="input-label">归属城市</span>
+					{{comObj.city_name}}
+				<i class="icon ion-chevron-right fontsize-14"></i>
+			</a>
+			<label class="item item-input">
+				<span class="input-label">企业规模</span>
+				<input type="text" placeholder="必填项" class="fontStyle fontsize-16" ng-model="comObj.com_scale">
+			</label>
+		</div>
+		<div class="padding">
+		<button class="button button-block button-calm" ng-click="updateBase();">
+			保存
+		</button>
+		</div>
+	</ion-content>
+	
+</ion-view>

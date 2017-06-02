@@ -1,0 +1,44 @@
+<ion-view view-title="需求" ng-controller="CommunityDemandSearchCtrl">
+	<ion-header-bar align-title="搜索" class="bar-white item-input-inset">
+		<label class="item-input-wrapper">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" ng-model="demandSerchInput" placeholder="搜索需求">
+		</label>
+		<button class="button button-calm" ng-if="!demandSerchInput" ui-sref="tab.community">取消</button>
+		<button class="button button-calm" ng-if="demandSerchInput" ng-click="getDemandList()">搜索</button>
+	</ion-header-bar>
+
+<!-- 	<ion-content class="has-header">
+		<div class="padding-10 m-l-15">
+				<a class="dark h5">
+					<i class="ion-android-bookmark"></i>
+					热门搜索:
+				</a>
+		</div>
+		<div class="row business-warpbox">
+			<div class="col col-25">
+				<a class="dark">
+					<img src="img/icon-bzkj.png"/>
+					<p class="fontsize-12">标准空间</p>
+				</a>
+			</div>
+			<div class="col col-25">
+				<a class="dark">
+					<img src="img/icon-dzkj.png"/>
+					<p>定制空间</p>
+				</a></div>
+			<div class="col col-25">
+				<a class="dark">
+					<img src="img/icon-flfw.png"/>
+					<p>法律服务</p>
+				</a>
+			</div>
+			<div class="col col-25">
+				<a class="dark" ui-sref="businessService">
+					<img src="img/icon-gd.png"/>
+					<p>更多服务</p>
+				</a>
+			</div>
+		</div>
+	</ion-content> -->
+</ion-view>

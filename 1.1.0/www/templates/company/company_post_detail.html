@@ -1,0 +1,65 @@
+<ion-view view-title="企业投递详情" ng-controller="CompanyPostDetailController">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" onclick="history.go(-1)">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-white">企业投递详情</h1>
+	</ion-header-bar>
+	<ion-content class="has-header bg-white">
+		<div class="card" style="margin-bottom:8px;">
+			<div class="item item-avatar" style="border-bottom-width:0px">
+				<img ng-src="{{path.route_path}}{{path.photo_path}}{{item.one_inch_photo_url}}" err-src="img/icon_empty_head.png" alt="...">
+				<h2>{{item.com_service_name}}</h2>
+				<small class="calm">{{item.com_name}}</small>
+				<span class="badge badge-calm">
+					<span>服务</span>
+				</span>
+			</div>
+			<div class="item item-avatar b-t-none">
+				<!-- <p ng-repeat="imgs in item.com_service_thumb">
+				{{messagePath}}{{imgs}}
+					<div ng-click="showPic(imgs)" style="background: url({{messagePath}}{{imgs}});width: 100px;height: 100px;background-size:cover;background-position:center"></div>
+				</p> -->
+				<p>{{item.com_service_des}}</p>
+			</div>
+			<div class="item customer-card-footer b-t-none item item-avatar b-t-none">
+				<div class="pull-right m-b-10">
+					<a ng-click="likeYou(item,item.is_like)" class="button button-small">
+						<span ng-show="item.is_like==0"><i class="ion-heart"></i> 赞</span>
+						<span ng-show="item.is_like==1"><i class="ion-heart assertive"></i> 取消赞</span>
+					</a>
+					<a ng-click="replayShow(1,item,-1)" class="button button-small"><i class="ion-chatbox-working"></i> 评论</a>
+				</div>
+				<div class="m-t-sm bg-light" style="clear:both;border-radius:5px;"
+					 ng-show="item.service_like_info.length>0||item.service_message_info.length>0">
+					<div style="position: relative">
+						<div style="width:0; height:0; border-width:8px; border-style:solid; border-color:transparent transparent #edf1f2 transparent; font-size:0; line-height:0;position: absolute;bottom: -1px;left: 10px">
+						</div>
+					</div>
+					<div>
+						<div class="padding-5" ng-class="{'b-b':item.service_like_info.length>0}" ng-show="item.service_like_info.length>0">
+							<i class="ion-heart fontsize-12"></i>
+							<a class="positive fontsize-12" ng-repeat="like in item.service_like_info">{{like.like_user_name}}&nbsp;&nbsp;</a>
+						</div>
+						<div class="padding-5" ng-show="item.service_message_info.length>0">
+							<div ng-repeat="message in item.service_message_info" ng-click="replayShow(2,item,$index)">
+								<a class="positive fontsize-12">{{message.message_user_name}}</a><span class="fontsize-12" ng-if="message.message_parent_user_name"> 回复 </span><a class="positive fontsize-12">{{message.message_parent_user_name}}</a><span>:</span>
+								<span class="fontsize-12">{{message.message_content}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="app-footer b-t bg-black clear" ng-show="replay_show">
+			<div class="item-input-inset">
+			<label class="item-input-wrapper">
+				<input type="search" ng-model="re.message_content" placeholder="说点什么呢..." autofocus="autofocus">
+			</label>
+			<button class="button button-small button-calm"  ng-click='sendReplay()'>发送</button>
+			</div>
+		</footer>
+	</ion-content>
+</ion-view>

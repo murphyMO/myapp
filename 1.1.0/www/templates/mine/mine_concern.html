@@ -1,0 +1,52 @@
+
+<style type="text/css">
+
+	 div.tabs{
+ 	 box-shadow: none;
+
+ }
+
+</style>
+<ion-view view-title="我的关注" ng-controller="MyConcernCtrl">
+   <ion-header-bar align-title="center" class="bar-light"  style="background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);">
+		<div class="item-input-inset" ng-click="back()">
+			<span >
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">我的关注</h1>
+	</ion-header-bar>
+
+	<ion-tabs class="tabs-light tabs-striped tabs-top">
+
+	 		<ion-tab title="企业">
+				<ion-view>
+					<ion-content class="has-tabs">
+						<div class="list">
+							<div class="item item-avatar b-t-none item-button-right" ng-repeat="com in coms" style="margin-bottom: 1px;">
+								<img class="rouned-500" ng-src="{{path.route_path}}{{path.com_logo_path}}{{com.one_inch_photo_url}}" err-src="img/icon_emptyCompany2.png" alt="...">
+								<h2 class="calm color-black" ui-sref="commsg({com_id:com.com_id,from:'mineconcern'})">{{com.com_name}}</h2>
+								<p class="color-gray">{{com.summary}}</p>
+								<button class="button button-small fontsize-12 m-t-10 bg-blue" ng-click="followCompany(com)" ng-bind-html="com.is_follow ? '取消关注' : '关注'" ng-disabled="current_isGuest">
+								</button>
+							</div>
+						</div>
+					</ion-content>
+				</ion-view>
+			</ion-tab>
+			<ion-tab title="个人">
+				<ion-view>
+					<ion-content class="has-tabs">
+						<div class="list">
+							<div class="item item-avatar b-t-none  item-button-right" ng-repeat="item in items" style="margin-bottom: 1px;">
+								<img class="rouned-500"  ng-src="{{path.route_path}}{{path.photo_path}}{{item.one_inch_photo_url}}" err-src="img/icon_emptyPeron.png" alt="...">
+								<h2 class="calm color-black m-t-10" ui-sref="personalmsg({user_id:item.id,from:'mineconcern'})">{{item.name}}</h2>
+								<button class="button button-small fontsize-12 m-t-10 bg-blue" ng-click="followPersonal(item)" ng-bind-html="item.is_follow ? '取消关注' : '关注'" ng-disabled="current_isGuest">
+								</button>
+							</div>
+						</div>
+					</ion-content>
+				</ion-view>
+			</ion-tab>
+		</ion-tabs>
+	</ion-view>

@@ -1,0 +1,38 @@
+<ion-view view-title="行业标签" ng-controller="CompanyTagCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="myBack()">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">行业标签</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header" >
+		<div class="list">
+			<label class="item item-divider">
+				热门行业
+			</label>
+
+			<!-- <li class="item item-checkbox" ng-repeat="tag in tagInfo" ng-click="selectTag($index)">
+				<label class="checkbox">
+					<input class="checkbox">
+				</label> 
+				{{tag.business_label_des}}
+			</li> -->
+			<!--<ion-item class="item checkbox block" ng-repeat="tag in tagInfo" ng-click="selectTag($index)" style="line-height:28px;">
+				<input class="display-inline pull-left" type="checkbox" ng-model="tag.isSelect" ng-disabled="tag.choose" style="margin-right:10px;">				
+				{{tag.business_label_des}}
+			</ion-item>-->
+			<ion-list>
+				<ion-checkbox ng-model="tag.isSelect" ng-repeat="tag in tagInfo" ng-change="selectTag($index)">{{tag.business_label_des}}</ion-checkbox>
+			</ion-list>
+		</div>
+		<div class="padding">
+		<button class="button button-block button-calm" ng-click="updateTag();">
+			确认
+		</button>
+		</div>
+	</ion-content>
+	
+</ion-view>

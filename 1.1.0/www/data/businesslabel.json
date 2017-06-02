@@ -1,0 +1,17 @@
+{
+    "statuscode": 1,
+    "message": "操作成功",
+    "data": [
+        {"business_label_id":1,"business_label_des":"label1"},
+        {"business_label_id":2,"business_label_des":"label2"},
+        {"business_label_id":3,"business_label_des":"label3"},
+        {"business_label_id":4,"business_label_des":"label4"},
+        {"business_label_id":5,"business_label_des":"label5"},
+        {"business_label_id":6,"business_label_des":"label6"},
+        {"business_label_id":7,"business_label_des":"label7"},
+        {"business_label_id":8,"business_label_des":"label8"},
+        {"business_label_id":9,"business_label_des":"label9"},
+        {"business_label_id":10,"business_label_des":"label10"},
+        {"business_label_id":11,"business_label_des":"label11"}
+    ]
+}

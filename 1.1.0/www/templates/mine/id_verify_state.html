@@ -1,0 +1,28 @@
+<ion-view view-title="身份验证" ng-controller="IdVerifyStateCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ui-sref="tab.mine">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		 <h1 class="title fontsize-16 color-black">身份验证</h1>
+	</ion-header-bar>
+	<ion-content class="has-header bg-dark padding-15">
+	<p>当前状态为
+		<span class="badge badge-positive" ng-switch="state">
+			<span ng-switch-when="0">审核中</span>
+			<span ng-switch-when="1">已通过</span>
+			<span ng-switch-when="2">未通过</span>
+			<span ng-switch-when="3">已失效</span>
+		</span>
+	</p>
+	<h4>正面照片</h4>
+	<ion-gallery ion-gallery-items="img" ion-gallery-item-edit="false"></ion-gallery>
+	<small>{{stateText}}</small>
+	</ion-content>
+	<div class="tabs bg-blue" ng-click="updatePhoto()">
+		<a class="tab-item opacity">
+			更换照片
+		</a>
+	</div>
+</ion-view>

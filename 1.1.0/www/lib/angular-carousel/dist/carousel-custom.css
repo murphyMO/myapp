@@ -1,0 +1,38 @@
+ul[rn-carousel] {
+	width:100%;
+	height:220px;
+	margin: 0 auto;
+}
+
+.bgimage {
+	text-align:right;
+	color:white;
+	background-size:cover;
+	height: 100%;
+	background-position: center center;
+}
+
+.carousel-banner {
+	position: relative;
+}
+
+.rn-carousel-indicator {
+	position: absolute;
+	bottom: 10px;
+	width: 100%;
+	text-align: center;
+}
+.rn-carousel-indicator span {
+	font-size: 10px;
+	color : #e6e6e6 !important;
+}
+
+.rn-carousel-indicator span.active {
+	color:#00bbff !important;
+}
+
+/*活动轮播图*/
+div[rn-carousel-index="carouselIndex1"] .rn-carousel-indicator {
+	bottom: 75px;
+} 
+

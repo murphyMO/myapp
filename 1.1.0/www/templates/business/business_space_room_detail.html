@@ -1,0 +1,58 @@
+<ion-view view-title="活动场地详情" ng-controller="SpaceRoomDetailController">
+	<ion-header-bar align-title="center" class="bar-light">
+		<button class="button button-icon icon color-black" ng-click="topBack()">
+			<i class="ion-chevron-left color-blue"></i>
+		</button>
+		<h1 class="title color-black fontsize-16">活动场地详情</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-white" style="bottom:50px;">
+		<div class="bg-dark">
+			<ion-slide-box delegate-handle="bannerList" auto-play="true" does-continue="true" slide-interval=2000 show-pager="{{item.url.length > 1}}">
+				<ion-slide ng-repeat="detailImg in item.url">
+					<div class="box business-banner">
+						<img ng-src="{{detailImg}}" err-src="img/store4.jpg">
+					</div>
+				</ion-slide>
+			</ion-slide-box>
+
+			<div class="item row padding-10 b-l-none b-r-none b-t-none m-n">
+				<div class="col" style="white-space: normal;">
+					<h2>{{item.store_name}}{{item.meeting_room_name}}</h2>
+					<small class="xkd-recommend-list-content">
+						<i class="ion-ios-location"></i>
+						<span style="white-space: normal;">{{item.store_address}}</span>
+					</small>
+					<h2 class="assertive">￥{{item.fourHoursAgoPrice}}~{{item.fourHoursAfterPrice}}/小时</h2>
+					<h2 class="assertive">￥{{item.fourHoursAgoPriceMember}}~{{item.fourHoursAfterPriceMember}}/小时<span class="fontsize-12">（会员价）</span></h2>
+				</div>
+			<!-- 	<div class="col-25 text-right">
+
+				</div> -->
+			</div>
+
+			<a class="item text-center m-t-10 m-b-10" ui-sref="commsg({'com_id':133})">
+			侠客岛联合办公室
+			</a>
+
+
+<!-- 		<div class="card text-center">
+			<div class="item item-text-wrap">
+			侠客岛联合办公室
+			</div>
+		</div> -->
+			<div class="bg-white padding-15">
+				<h3 class="text-center">介绍</h3>
+				<div class="xkd-mainTextCon">
+					{{item.meeting_room_des}}
+				</div>
+			</div>
+		</div>
+
+	</ion-content>
+	<div class="tabs tabs-icon-top">
+		<div class="business-product-footthree bg-red fontsize-18" style="width:100%;color:white" ng-click="buy(item)">
+			立即预定
+		</div>
+	</div>
+</ion-view>

@@ -1,0 +1,103 @@
+<ion-view view-title="个人信息" ng-controller="PersonalMessageCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="myBack()">
+			<a >
+				<i class="ion-chevron-left color-blue"></i>
+			</a>
+		</div>
+		<h1 class="title fontsize-16 color-black">个人信息</h1>
+		<!-- <button class="button button-clear fontsize-16 color-blue" ng-click="report()">举报</button> -->
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-dark">
+	
+		<div class="list">
+			<a class="item item-thumbnail-left b-t-none">
+				<img class="rounded-500" ng-src="{{commonPath.route_path}}{{commonPath.photo_path}}{{person.one_inch_photo_url}}" err-src="img/icon_emptyPeron.png" >
+				<div class="item-note m-t-15" ng-switch="person.user_type">
+					<img src="img/newappIcons-27.png" height="50" width="50" ng-switch-when="0"/><!-- 侠客岛员工 （有状态码无图）-->
+					<img src="img/newappIcons-28.png" height="50" width="50" ng-switch-when="1"/><!-- 注册用户（有状态码无图） -->
+					<img src="img/newappIcons-08.png" height="50" width="50" ng-switch-when="2"/><!-- 云会员 -->
+					<img src="img/newappIcons-21.png" height="50" width="50" ng-switch-when="3"/><!-- 入驻会员 -->
+					<img src="img/newappIcons-09.png" height="50" width="50" ng-switch-when="9"/><!-- 灵活会员 -->
+				</div>
+				<h2 class="customer-card-footer m-t-15">{{person.full_name || '无名侠客'}}</h2>
+				<!-- <p>{{person.com_name||'公司暂无'}}</p>
+				<p>{{person.post_name||'职位暂无'}}</p> -->
+			</a>
+			<p></p><!-- 隔离 -->
+			<div ng-if="person.is_public != 1 && from !='chatSend'" class="text-center">
+				对方选择了个人信息保密哦~
+			</div>
+			<div ng-if="person.is_public == 1 || person.user_id == is_public_id || from =='chatSend'">
+				<a class="item">
+					<span class="gray">手机号</span>
+					<span class="pull-right color-blue" ng-model="person.phone">{{person.phone||'无'}}</span>
+				</a>
+				<a class="item">
+					<span class="gray">地区</span>
+					<span class="pull-right">{{person.locate_city||'无'}}</span>
+				</a>
+				<a class="item">
+					<span class="gray">微信号</span>
+					<span class="pull-right">{{person.weixin_name||'无'}}</span>
+				</a>
+				<a class="item">
+					<span class="gray">QQ</span>
+					<span class="pull-right">{{person.qq||'无'}}</span>
+				</a>
+				<a class="item">
+					<span class="gray">兴趣爱好</span>
+					<span class="pull-right xkd-hobbies"><span ng-repeat="hobbies in hobbies" >{{hobbies.interest_name||'无'}}&nbsp;</span></span>
+				</a>
+				<div class="item item-divider" ng-if="workLen">
+					<a ui-sref="addoccup">
+						<span class="fontsize-bold">工作经验</span>
+					</a>
+				</div>
+				<a class="item" ng-repeat="item in work">
+					<span class="fontsize-bold">{{item.com_name}} <span class="padding-l-15">{{item.post_name}}</span></span>
+					<p>{{item.start_date}} - {{item.end_time}}</p>
+					<p style="white-space:pre-line">{{item.content}}</p>
+					<span class="xkd-dotted"></span>
+				</a>
+
+				<div class="item item-divider" ng-if="studyLen">
+					<a ui-sref="addedu">
+						<span class="fontsize-bold">教育经历</span>
+					</a>
+				</div>
+				<a class="item" ng-repeat="study in study">
+					<span class="fontsize-bold">{{study.school}}<span class="padding-l-15">{{study.Specialty}}</span></span>
+					<p>{{study.start_date}} - {{study.end_date}}</p>
+				</a>
+			</div>
+
+			<div class="row">
+				<div class="col col-50">
+					<button class="button button-block  button-calm" ng-bind-html="followText" ng-click="followPerson()">
+					</button>
+				</div>
+				<div class="col col-50">
+					<button class="button button-block  button-calm" ng-click="concernUser()">
+						联系
+					</button>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+	<div ng-show="hasshare">
+			<div class="card share-com">
+				<div class="item item-divider" style="height:50px;line-height:34px">
+					举报
+				</div>
+				<div class="item item-text-wrap share-social">
+					<a class="col" ng-click="report()">
+						<img src="img/icon-jb.png">
+						<span>举报</span>
+					</a>
+				</div>
+			</div>
+			<div class="chat-image-cover" ng-click="closeshare()"></div>
+		</div>
+</ion-view>

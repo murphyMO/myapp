@@ -1,0 +1,51 @@
+<ion-view view-title="客户信息登记" ng-controller="CustomNeedController">
+	<ion-header-bar align-title="center" class="color-white bar-dark">
+		<button class="button button-icon icon" ng-click="topBack()">
+			<i class="ion-chevron-left"></i>
+		</button>
+		<h1 class="title fontsize-16 color-black">客户信息登记</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-white" style="bottom:50px;">
+		<div class="list list-inset m-t-15">
+			<label class="item item-input">
+				<span class="input-label label-width-1">公司名称</span>
+				<input type="text" placeholder="（选填）" class="border-center" ng-model="item.name">
+			</label>
+			<label class="item item-input item-icon-right" ui-sref="customTradeList">
+				<span class="input-label label-width-1">所属行业<i class="energized dot">*</i></span>
+				<input type="text" placeholder="（必填）" class="border-center">
+				<span ng-repeat="hobbies in hobbies" >{{hobbies.interest_name}}&nbsp;</span>
+			</label>
+			<label class="item item-input item-icon-right" ng-click="showDate()">
+				<span class="input-label label-width-1">客户姓名<i class="energized dot">*</i></span>
+				<input type="text" placeholder="（必填）" class="border-center" ng-model="item.username">
+			</label>
+			<label class="item item-input item-icon-right" ng-click="showDate()">
+				<span class="input-label label-width-1">联系方式<i class="energized dot">*</i></span>
+				<input type="text" placeholder="（必填）" class="border-center" ng-model="item.phone">
+			</label>
+			<label class="item item-input item-icon-right" ng-click="showDate()">
+				<span class="input-label label-width-1">邮箱<i class="energized dot">*</i></span>
+				<input type="text" placeholder="（必填）" class="border-center" ng-model="item.email">
+			</label>
+			<label class="item item-input item-icon-right" ng-click="showDate()">
+				<span class="input-label label-width-1">场地容纳人数<i class="energized dot">*</i></span>
+				<input type="text" placeholder="（必填）" class="border-center" ng-model="item.number">
+			</label>
+			<label class="item item-input item-icon-right" ng-click="showDate()">
+				<span class="input-label label-width-1">面积需求<i class="energized dot">*</i></span>
+				<input type="text" placeholder="（必填）" class="border-center" ng-model="item.mianji">
+			</label>
+			<label class="item item-input item-icon-right" ng-click="showDate()">
+				<span class="input-label label-width-1">位置筛选<i class="energized dot">*</i></span>
+				<input type="text" placeholder="（必填）" class="border-center" ng-model="item.place">
+			</label>
+		</div>
+	</ion-content>
+	<div class="tabs tabs-icon-top">
+		<div class="business-product-footfour button no-radius bg-red color-white" ng-click="create()">
+			提交
+		</div>
+	</div>
+</ion-view>

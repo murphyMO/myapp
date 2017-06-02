@@ -1,0 +1,37 @@
+<div class="modal">
+	<ion-header-bar align-title="center" class="bar-light">
+		<button class="button button-icon icon" ng-click="closeModal()">
+			<i class="ion-chevron-left color-blue"></i>
+		</button>
+		<h1 class="title fontsize-16 color-black">城市选择</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header">
+	   <div class="color-gray padding-10 padding-l-15">已开通城市</div>
+		<div class="alpha-list">
+			<!-- <ion-item class="item item-divider color-blue">
+				GPS定位 -->
+				<!-- <ion-spinner icon="ripple" class="spinner-assertive item-note" ng-show="loading"></ion-spinner>
+				<span class="item-note" ng-click="reloadPosition()" ng-hide="loading">重新定位</span> -->
+			<!-- </ion-item>
+			<ion-item ng-if="stores.lately_store_name" ng-click="citySelect(stores.lately_store_id, stores.lately_store_name)">
+				<span ng-if="stores.lately_store_name">距您最近：{{stores.lately_store_name}}</span>
+			</ion-item>
+			<ion-item ng-if="!stores.lately_store_name">
+				<small>获取位置信息失败</small>
+			</ion-item> -->
+			<ion-item class="item" ng-class="{'color-blue':allChecked}" ng-click="citySelect('', '全国')">
+				全国
+			</ion-item>
+			<span ng-repeat="store in stores.city">
+				<ion-item class="item" ng-class="{'color-blue' : store.checked == true,'color-black': store.checked == false}" ng-click="citySelect(store.city_official_code, store.city_name,$index)">
+					{{store.city_name}}
+				</ion-item>
+				<!-- <ion-item ng-click="citySelect(s.store_id, s.store_name)" ng-repeat="s in store.data">
+					{{s.store_name}}
+					<span class="item-note" ng-if="s.distance">{{s.distance}}</span>
+				</ion-item> -->
+			</span>
+		</div>
+	</ion-content>
+</div>

@@ -1,0 +1,27 @@
+<div class="modal xkd-select-city-modal">
+	<ion-header-bar class="bg-blue b-b-none">
+		<p class="title" style="text-align: center;">会员类别</p>
+		<div class="buttons">
+			<div class="item-input-inset" on-tap="closeModal()">
+				<i class="ion-close"></i>
+			</div>
+		</div>
+	</ion-header-bar>
+	<ion-content class="bg-dark">
+		<div class="selected-city-content">
+			<ion-scroll direction="y" style="height:200px" delegate-handle="selectCityScroll">
+				<div style="height:100%">
+					<div class="list">
+						<a ng-repeat="member in companyMember" ng-if="member.member_status == 0 && member.end_time >= sys_time" class="item fontsize-14" ng-class="{'positive' : member.checked}" on-tap="selectItem(member)">{{member.member_text}}
+						<small ng-if="member.product_serialize">({{member.product_serialize}})</small>
+						<span class="item-note fontsize-12">{{member.start_time}}~{{member.end_time}}</small>
+							<!-- <i class="icon ion-checkmark" ng-if="member.checked" style="font-size: inherit;"></i> -->
+						</a>
+						<a class="item fontsize-14" on-tap="selectItem('revert')">清空
+						</a>
+					</div>
+				</div>
+			</ion-scroll>
+		</div>
+</ion-content>
+</div>

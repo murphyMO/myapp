@@ -1,0 +1,46 @@
+<ion-view view-title="会议室预定" ng-controller="BoardReservationCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="back()">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		 <h1 class="title fontsize-16 color-black">会议室预定</h1>
+	</ion-header-bar>
+
+	<ion-content class="bg-white">
+		<div class="bg-divide">
+			<div class="calm title-word-1">会议室预定</div>
+		</div>
+		<div class="list list-inset m-t-15">
+			<label class="item item-input">
+				<span class="input-label label-width-1">预定人数<i class="energized dot">*</i></span>
+				<input type="text" ng-model="boardroom.people_number" placeholder="请输入您的人数" class="border-center">
+			</label>
+			<label class="item item-input item-icon-right" ng-click="showDate()">
+				<span class="input-label label-width-1">预定日期<i class="energized dot">*</i></span>
+				<span class="border-center">{{boardroom.appointment_time}}</span>
+				<i class="icon ion-android-calendar calm marks"></i>
+			</label>
+			<label class="item item-input item-icon-right" ng-click="showBegin()">
+				<span class="input-label label-width-1">开始时间<i class="energized dot">*</i></span>
+				<span class="border-center">{{boardroom.start_time}}</span>
+				<i class="icon ion-android-time calm marks"></i>
+			</label>
+			<label class="item item-input item-icon-right" ng-click="showEnd()">
+				<span class="input-label label-width-1">结束时间<i class="energized dot">*</i></span>
+				<span class="border-center">{{boardroom.end_time}}</span>
+				<i class="icon ion-android-time calm marks"></i>
+			</label>
+			<label class="item item-input item-icon-right" ng-click="willingisland()">
+				<span class="input-label label-width-1">选择分岛<i class="energized dot">*</i></span>
+				<span class="border-center">{{boardroom.store_name}}</span>
+				<i class="icon ion-chevron-right mark-right"></i>
+			</label>
+		</div>
+
+		<div class="padding">
+			<button class="button button-calm button-block button-style" ng-click="saveboardroomMsg()">保存</button>
+		</div>
+	</ion-content>
+</ion-view>

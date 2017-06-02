@@ -1,0 +1,74 @@
+<style type="text/css">
+	.border-center{
+		padding-left: 20px !important;
+		border-left: 1px solid #ddd !important;
+		height: 50% !important;
+	}
+	.label-width{
+		width: 20% !important;
+	}
+	.mark-right{
+		font-size: 15px !important;
+		color: #ddd;
+	}
+	.button-style{
+		width: 40% !important;
+		margin: auto !important;
+		font-size: 18px !important;
+		font-weight: bold !important;
+	}
+</style>
+<ion-view view-title="加入共享" ng-controller="bookFormCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="back()">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		 <h1 class="title fontsize-16 color-black">加入共享</h1>
+	</ion-header-bar>
+
+	<ion-content class="bg-white">
+		<img src="img/jrgx.png" style="width: 100%">
+		<div class="list list-inset">
+			<label class="item item-input">
+				<span class="input-label label-width">姓名</span>
+				<input type="text" ng-model="bookForm.bookName" placeholder="请输入您的姓名" class="border-center">
+			</label>
+			<label class="item item-input">
+				<span class="input-label label-width">电话</span>
+				<input type="text" ng-model="bookForm.bookPhone" placeholder="请输入您的联系电话" class="border-center">
+			</label>
+			<label class="item item-input">
+				<span class="input-label label-width">邮箱</span>
+				<input type="text" ng-model="bookForm.bookEmail" placeholder="请输入您的联系邮箱" class="border-center">
+			</label>
+			<label class="item item-input">
+				<span class="input-label label-width">企业</span>
+				<input type="text" ng-model="bookForm.bookCompanyName" placeholder="请输入您的企业名称" class="border-center">
+			</label>
+			<label class="item item-input">
+				<span class="input-label label-width">职位</span>
+				<input type="text" ng-model="bookForm.bookJob" placeholder="请输入您的职位信息" class="border-center">
+			</label>
+		</div>
+
+		<div class="list list-inset">
+			<label class="item item-input item-icon-right" ng-click="selectMatters()">
+				<span class="input-label label-width">合作事项</span>
+				<span ng-model="bookForm.bookMatter" class="border-center">{{bookForm.bookMatter}}</span>
+				<i class="icon ion-chevron-right mark-right"></i>
+			</label>
+			<label class="item item-input" style="border-bottom:none;">
+				<span class="input-label">详细描述</span>
+			</label>
+			<label class="item item-input" style="border-top:none;">
+				<textarea rows="5" ng-model="bookForm.extra" placeholder="请输入合作的详细事宜"></textarea>
+			</label>
+		</div>
+
+		<div class="padding">
+			<button class="button button-calm button-block button-style" ng-click="saveBookFormClick()">提交</button>
+		</div>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,24 @@
+<ion-view view-title="会员购买统计" ng-controller="MineMemberListCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="myBack()">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		 <h1 class="title fontsize-16 color-black">购买记录</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-white">
+	<ion-refresher pulling-text="下拉刷新" on-refresh="activityDoRefresh()"></ion-refresher>
+	<div ng-repeat="item in items"> <!-- ui-sref="mineorderdetail({meeting_reserve_id:item.meeting_room_reserve_id})" -->
+		<div class="list  bg-dark">
+			<div class="item item-text-wrap b-t-none">
+				<b>{{item.text}}</b>
+				<span class="pull-right xkd-text-danger">{{item.status_text}}</span>
+				<p>会员时间：{{item.cre_time}} - {{item.end_time}}</p>
+			</div>
+		</div>
+	</div>
+
+	</ion-content>
+</ion-view>

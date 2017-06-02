@@ -1,0 +1,93 @@
+<ion-view view-title="企业订单列表" ng-controller="CompanyBillListCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<button class="button button-clear" ng-click="myBack()">
+			<i class="ion-chevron-left color-blue"></i>
+		</button>
+		<h1 class="title fontsize-16 color-black">企业订单</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-white">
+		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+		<!-- <div ng-repeat="item in items" ng-click="goCompanyBilldetail(item,$index)">
+			<div class="bg-dark list">
+				<div class="item">
+					<b>{{item.com_name}}</b>
+					<span class="pull-right xkd-text-danger">{{item.status_text}}</span>
+				</div>
+				<div class="item item-text-wrap" ng-repeat="i in item.order_desc">
+					<h2>
+						<b>{{i.meeting_room_name}}</b>
+						<span class="fontsize-18 xkd-text-orange" style="float:right;">&yen;{{i.total}}</span>
+					</h2>
+					<p class="m-t-15">时间：{{i.reserve_time_from|limitTo:16}} - {{i.reserve_time_to|limitTo:5:11}}</p>
+					<p>单价：{{i.unit_price}}元/小时</p>
+					<p>数量：{{i.amount}}</p>
+				</div>
+				<div class="item m-b-10">
+					<span class="pull-right"><b>合计：￥{{item.to_pay}}元</b></span>
+				</div>
+			</div>
+		</div> -->
+		<div class="list" ng-repeat="item in items" ng-if="item.items.length != 0">
+			<a class="item bg-dark padding-b-10 padding-t-10">
+				{{item.time}}
+				<span class="item-note">￥{{item.sum}}</span>
+			</a>
+			<!-- <a class="item padding-none" ng-repeat="i in item.credit_items" ng-click="goCompanyBilldetail(i)">
+				<div class="row">
+					<div class="col col-20 text-center">
+						<p >{{i.cre_time|limitTo:5:5}}</p>
+						<p>{{i.cre_time|limitTo:5:11}}</p>
+					</div>
+					<div class="col col-80">
+						<h2>{{i.amount_paid}}</h2>
+						<p>{{i.meeting_room_name}}会议室预订</p>
+					</div>
+				</div>
+			</a> -->
+			<div ng-repeat="i in item.items" ng-click="goCompanyBilldetail(i)">
+				<div class="bg-dark list">
+					<div class="item item-text-wrap">
+						<h2>
+							<b>{{i.meeting_room_name}}</b>
+							<!-- <span class="fontsize-18 xkd-text-orange" style="float:right;">&yen;{{i.total}}</span> -->
+						</h2>
+						<p class="m-t-15">时间：{{i.reserve_time_from|limitTo:16}} - {{i.reserve_time_to|limitTo:5:11}}</p>
+						<p>单价：{{i.unit_price}}元/小时</p>
+						<p>数量：{{i.amount}}</p>
+						<p>下单时间：{{i.cre_time}}</p>
+					</div>
+				</div>
+			</div>
+<!-- 			<div ng-repeat="i in item.coupon_items" ng-click="goCompanyBilldetail(i)">
+				<div class="bg-dark list">
+					<div class="item item-text-wrap">
+						<h2>
+							<b>{{i.meeting_room_name}}</b>
+						</h2>
+						<p class="m-t-15">时间：{{i.reserve_time_from|limitTo:16}} - {{i.reserve_time_to|limitTo:5:11}}</p>
+						<p>单价：{{i.unit_price}}元/小时</p>
+						<p>数量：{{i.amount}}</p>
+					</div>
+				</div>
+			</div>
+			<div ng-repeat="i in item.alipay_items" ng-click="goCompanyBilldetail(i)">
+				<div class="bg-dark list">
+					<div class="item item-text-wrap">
+						<h2>
+							<b>{{i.meeting_room_name}}</b>
+						</h2>
+						<p class="m-t-15">时间：{{i.reserve_time_from|limitTo:16}} - {{i.reserve_time_to|limitTo:5:11}}</p>
+						<p>单价：{{i.unit_price}}元/小时</p>
+						<p>数量：{{i.amount}}</p>
+					</div>
+				</div>
+			</div> -->
+		</div>
+		<div class="text-center" ng-show="isOverLoad">
+			<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"
+>
+		</div>
+		<ion-infinite-scroll ng-if="isEmptyData" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+	</ion-content>
+</ion-view>

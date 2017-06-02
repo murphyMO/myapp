@@ -1,0 +1,56 @@
+<ion-view view-title="找回密码" name="forgetpwd-view">
+	<ion-header-bar align-title="center" class="bar bar-dark color-white">
+		<div class="item-input-inset" ui-sref="login">
+			<span>
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">忘记密码</h1>
+	</ion-header-bar>
+	<ion-content ng-controller="ForgetPwdCtrl">
+		<!-- <div class="login-logo login-height">
+			<img src="img/logo2.png" width="150">
+		</div> -->
+		<div ng-hide="smsConfirmed">
+			<div class="list list-inset regist-height">
+				<label class="item item-input">
+					<i class="icon ion-android-contact placeholder-icon"></i>
+					<input type="number" placeholder="手机号码" maxlength="11" ng-model="user.uname" ng-blur="checkPhone()">
+				</label>
+				<div class="item item-input item-button-right">
+					<i class="icon ion-ios-barcode placeholder-icon"></i>
+					<input type="number" placeholder="验证码" required maxlength="6" ng-model="user.verifyCode">
+					<button class="button button-outline button-calm fontsize-14" ng-disabled="isPhoneValid" ng-show="isTimeout" ng-click="smsCode()">获取验证码</button>
+					<button class="button button-outline button-calm fontsize-14" disabled ng-hide="isTimeout">{{waitTime}}s后重发</button>
+				</div>
+			</div>
+			<div class="padding">
+				<button class="button button-block button-outline button-calm button-regist" ng-click="confirmSms()">验证</button>
+				<!-- <button class="button button-block button-calm button-outline" ui-sref="login">
+					<i class="ion-android-arrow-back"></i>
+					&nbsp;&nbsp;返回登录
+				</button> -->
+			</div>
+		</div>
+		<!-- 验证通过的 -->
+		<div ng-show="smsConfirmed">
+			<div class="list list-inset regist-height">
+				<label class="item item-input">
+					<i class="icon ion-android-lock placeholder-icon" ></i>
+					<input type="password" placeholder="密码(6-12位字母、数字或符号)" ng-model="user.pwd">
+				</label>
+				<label class="item item-input">
+					<i class="icon ion-android-lock placeholder-icon" ></i>
+					<input type="password" placeholder="重复密码(6-12位字母、数字或符号)" ng-model="user.confirmPwd">
+				</label>
+			</div>
+			<div class="padding">
+				<button class="button button-block button-outline button-calm button-regist" ng-click="forgotPwd()">提交</button>
+				<!-- <button class="button button-block button-calm button-outline" ui-sref="login">
+					<i class="ion-android-arrow-back"></i>
+					&nbsp;&nbsp;返回登录
+				</button> -->
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

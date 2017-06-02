@@ -1,0 +1,34 @@
+<ion-view view-title="入驻手册" ng-controller="OfficeBookCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ui-sref="myofficezone">
+			<span>
+				<i class="ion-chevron-left color-black"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">入驻手册</h1>
+	</ion-header-bar>
+	<ion-content class="has-header bg-white">
+<!-- 		<div class="list">
+			<a class="item item-thumbnail-left" href="#">
+				<img ng-src="{{path.route_path}}{{path.com_logo_path}}{{comInfo.com_logo_path}}" err-src="img/icon_emptyCompany2.png">
+				<h2>{{comInfo.com_name}}</h2>
+			</a>
+		</div> -->
+		<div class="row">
+			<div class="col text-center">
+				<img class="XKD-mineHead" ng-src="{{path.route_path}}{{path.com_logo_path}}{{comInfo.com_logo_path}}" err-src="img/icon_emptyCompany2.png">
+				<h2 class="m-t-none" style="font-size: 18px;font-weight: bold;color: #000;">{{comInfo.com_name}}</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col padding-l-15 padding-r-15">
+				<button style="line-height: 42px;" class="button icon-left ion-checkmark-circled button-positive button-block" ui-sref="officeBookList({type:1})"  ng-if="user.isManager == '1'">入驻通知单</button>
+				<button style="line-height: 42px;" class="button icon-left ion-log-in button-positive button-block" ui-sref="officeBookList({type:2})"  ng-if="user.isManager == '1'">入驻手续清单</button>
+				<button style="line-height: 42px;" class="button icon-left ion-record button-positive button-block buttom" ui-sref="officeBookList({type:3})"  ng-if="user.isManager == '1'">离店申请</button>
+				<button style="line-height: 42px;" class="button icon-left ion-ios-book-outline button-positive button-block buttom" ui-sref="entryBook">办公手册</button>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>
+
+

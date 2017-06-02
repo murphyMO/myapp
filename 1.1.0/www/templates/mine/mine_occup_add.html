@@ -1,0 +1,45 @@
+<ion-view view-title="添加工作经历" ng-controller="AddOccupCtrl" style="font-family:微软雅黑;">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ui-sref="profile">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		 <h1 class="title fontsize-16 color-black">增加工作经历</h1>
+		 <button class="button button-clear fontsize-16 color-blue" ng-click="saveWorkClick()">确定</button>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-white">
+		<div class="list">
+			<label class="item item-input">
+				<input type="text" ng-model="work.com_name" placeholder="公司名称" ng-maxlength="20">
+			</label>
+
+			<label class="item item-input">
+				<input type="text" ng-model="work.post_name" placeholder="职位" ng-maxlength="20">
+			</label>
+
+			<a class="item fontsize-14" ng-click="showDate()">
+				<span id="start_date" ng-class="{'color-silver':!work.start_date}">{{work.start_date||"入职时间"}}</span>
+			</a>
+			<div class="item item-toggle">
+				     <span class="gray  fontsize-14">是否离职</span>
+				     <label class="toggle toggle-postive">
+				       <input type="checkbox" ng-model="isWork.isWorkBox" ng-change="isWorkFun()">
+				       <div class="track m-r-10">
+				         <div class="handle"></div>
+				       </div>
+				     </label>
+			</div>
+			<a class="item fontsize-14" ng-click="showDate1()" ng-if="isWork.isWorkBox == true">
+				<span id="end_time"  ng-class="{'color-silver':!work.end_time}">{{work.end_time||"离职时间"}}</span>
+			</a>
+			<label class="item item-input">
+				<textarea type="text" ng-model="work.content" placeholder="工作内容" rows='10'><textarea>
+			</label>
+
+		</div>
+
+	</ion-content>
+
+</ion-view>

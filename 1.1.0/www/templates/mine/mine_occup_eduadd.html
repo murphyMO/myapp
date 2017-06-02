@@ -1,0 +1,52 @@
+<ion-view view-title="添加教育经历" ng-controller="AddEduCtrl" style="font-family:微软雅黑;">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ui-sref="profile">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		 <h1 class="title fontsize-16 color-black">添加教育经历</h1>
+		 <button class="button button-clear fontsize-16 color-blue" ng-click="saveEducationClick()">确定</button>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-dark">
+		<div class="list">
+			<a class="item fontsize-14" ng-click="startDate()">
+				<span ng-model="education.start_date" ng-class="{'color-silver':!education.start_date}">{{education.start_date||"入学日期"}}</span>
+			</a>
+
+			<a class="item fontsize-14" ng-click="showDate()">
+				<span ng-model="education.end_date" ng-class="{'color-silver':!education.end_date}">{{education.end_date||"毕业日期"}}</span>
+			</a>
+
+			<label class="item item-input">
+
+				<input type="text" ng-model="education.school" placeholder="毕业学校" style="border:none;" ng-maxlength="20">
+			</label>
+
+			<label class="item item-input">
+
+				<input type="text" ng-model="education.Specialty" placeholder="专业" style="border:none;" ng-maxlength="20">
+			</label>
+
+			<label class="item item-input">
+
+				<select ng-model="education.type" style="border:none;background-color:#fff;">
+					<option value="">学位</option>
+					<option value="博士后" selected>博士后</option>
+					<option value="博士">博士</option>
+					<option value="MBA">MBA</option>
+					<option value="EMBA">EMBA</option>
+					<option value="硕士">硕士</option>
+					<option value="本科">本科</option>
+					<option value="大专">大专</option>
+					<option value="中专">中专</option>
+					<option value="中技">中技</option>
+					<option value="高中">高中</option>
+					<option value="初中">初中</option>
+				</select>
+			</label>
+		</div>
+
+	</ion-content>
+</ion-view>

@@ -1,0 +1,152 @@
+<ion-view view-title="服务" ng-controller="CompanyBussinessProductCtrl">
+	<ion-header-bar align-title="center" class="color-white bar-dark" >
+		<div class="item-input-inset" ng-click="myBack()">
+			<span>
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div>
+		
+		<div class="row text-center color-white">
+			<div class="col col-40 text-right" ng-click="changeTab(1)"><span ng-class="{'header-active' : tabType==1,'padding-b-3' : tabType==1}">服务</span></div>
+			<div class="col col-20"></div>
+			<!-- <div class="col col-40 text-left" ng-click="changeTab(2)"><span ng-class="{'header-active' : tabType==2,'padding-b-3' : tabType==2}">详情</span></div> -->
+		</div>
+		<a class="share fontsize-14 color-white" ng-click="WechatShare(item.com_name,item.comments,'http://www.heroera.com/heroera/share/company/service.html?service_id='+service.com_service_id)">
+			<i class="ion-android-share-alt fontsize-18"></i>
+		</a>
+		
+		
+	<!-- 	<div class="tabs-striped tabs-top tabs-color-light">
+			<div class="tabs product_tab bg-black color-white">
+				<a class="tab-item bg-black color-white" ng-click="changeTab(1)" ng-class="{'active':tabType==1}">
+					服务
+				</a>
+				<a class="tab-item bg-black color-white" ng-click="changeTab(2)" ng-class="{'active':tabType==2}">
+					详情
+				</a>
+				<a class="tab-item active" ui-sref="businessProduct({com_service_id:com_service_id})">
+					服务
+				</a>
+				<a class="tab-item" ui-sref="businessProductDetail({com_service_id:com_service_id,com_article_material_id:service.com_article_material_id})">
+					详情
+				</a>
+			</div>
+		</div>
+		<a class="share fontsize-14 color-white" ng-click="WechatShare(item.com_name,item.comments,'http://www.heroera.com/heroera/share/company/service.html?service_id='+service.com_service_id)">
+				<i class="ion-android-share-alt fontsize-18"></i>
+		</a> -->
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-dark has-footer" style="bottom:44px;">
+		<!-- 服务详情 -->
+		<div ng-show="tabType == 1" on-swipe-left="onSwipeLeft(2)">
+			<ion-slide-box delegate-handle="bannerList" auto-play="true" does-continue="true" slide-interval=2000 show-pager="{{service.com_service_thumb.length > 1}}">
+				<ion-slide ng-repeat="banner in service.com_service_thumb track by $index">
+					<div class="box business-banner">
+						<img ng-src="{{serviceThumbPath}}{{banner}}" err-src="img/icon_empty.png">
+					</div>
+				</ion-slide>
+			</ion-slide-box>
+	
+			<div class="row business-warpbox bg-white">
+				<div class="pull-left  padding-t-5 padding-l-10 dark fontsize-14 fontsize-bold">
+					{{service.com_service_name}}
+				</div>
+				<!-- <div class="pull-right col-20 text-center">
+					<i class="ion-share h2"></i>
+				</div>  -->
+			</div>
+			<div class="row business-warpbox bg-white" >
+				<div class="pull-left padding-t-10 padding-l-10 dark">
+					<a class="h3 product-jg padding-b-15" > 
+						￥{{service.unit_value}}{{service.unit}}
+						<!-- 
+						<i class="button biaoqian">会员省  {{service.unit_value}}</i> -->
+					</a>
+				</div>
+			</div>
+			
+			<div class="item item-text-wrap" ng-show="service.com_service_digest">
+				<p>{{service.com_service_digest}}</p>
+			</div>
+	
+			<!-- <div class="list m-t-15 m-b-none">
+				<a class="item item-icon-right" ng-click="changeTab(2)">
+					查看服务详情
+					<span class="item-note">
+						<i class="icon ion-ios-arrow-right"></i>
+					</span>
+				</a>
+			</div> -->
+			
+			<div class="m-t-15">
+				<ion-list >
+					<ion-item class="item-thumbnail-left" type="item-text-wrap" ng-click="toCompanyPage(service)">
+						<img ng-src="{{companyPath}}{{service.com_logo_path}}" err-src="img/icon_empty.png">
+						<h2 >{{service.com_name}}</h2>
+						<!-- <p>{serviceList.}</p> -->
+					</ion-item>
+				</ion-list>
+			</div>
+
+
+			<div class="m-t-15 list" ng-show="hasreply">
+				<a class="item">回复</a>
+				<a class="item item-avatar" on-hold="onHold(repaly)" ng-repeat="repaly in service.service_message_info track by $index">
+					<img ng-src="{{commonPath.route_path}}{{commonPath.photo_path}}{{repaly.message_user_photo_url}}" err-src="img/icon_empty_head.png">
+					<h2>{{repaly.message_user_name}}</h2>
+					<p style="white-space: normal;">{{repaly.message_content}}</p>
+					<p>{{repaly.message_cre_time}}</p>
+				</a>
+			</div>
+
+		</div>
+		
+		<!-- 素材详情 -->
+		<div ng-show="tabType == 2" on-swipe-right="onSwipeRight(1)" >
+			<div ng-show="!hasMaterial" class="text-center zwsc" >
+				<a style="line-height: 38px">抱歉( ▼-▼ )暂无素材哦~</a><br>
+				<!-- 
+				<button class="button button-balanced" ui-sref="postneeds">
+					去发布需求
+					<i class="ion-android-arrow-forward"></i>
+				</button>
+				 -->
+			</div>
+			<div ng-show="hasMaterial" class="card">
+				<div class="item item-divider">
+					<span class="h4 sucai-title">{{service.material_title}}</span><br>
+					<small>{{service.cre_time}}<span class="m-l-10">{{service.cre_name}}</span></small>
+				</div>
+				<div class="item item-text-wrap">
+					<p class="sucai-neirong" ng-bind-html="service.material_content"></p>
+				</div>
+				<!-- 
+				<div class="item item-divider">
+					<small>阅读量  5</small>
+				</div> -->
+			</div>
+		</div>
+	</ion-content>
+	
+	<div class="tabs tabs-icon-top">
+		<div class="business-product-footone" style="opacity:0">
+		</div>
+		<div class="business-product-foottwo">
+			<a class="tab-item" ng-click="hiMessageClick()">
+				<i class="icon ion-chatbox-working"></i>
+				回复
+			</a>
+		</div>
+		<div class="business-product-footthree">
+			<a class="tab-item" ng-class="{'calm': isLike}" ng-click="hiLickClick()">
+				<i class="icon ion-heart"></i>
+				点赞
+			</a>
+		</div>
+		<div class="business-product-footfour button no-radius bg-black color-white" ng-click="bottomRightClick()">
+			<i class="icon ion-chatbubble-working color-white"></i>
+			 &nbsp;{{bottomRightText}}
+		</div>
+	</div>
+</ion-view>

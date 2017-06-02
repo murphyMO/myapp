@@ -1,0 +1,55 @@
+<ion-view view-title="发布动态" ng-controller="PostDynamicCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset color-white" ng-click="myGoBack()">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">发布动态</h1>
+		<div class="buttons">
+			<div class="item-input-inset">
+				<a class="color-blue fontsize-16" on-tap="postDynamic()" ng-disabled="isGuest">发布</a>
+			</div>
+		</div>
+	</ion-header-bar>
+		<ion-content class="has-header bg-dark">
+			<div class="list">
+				<label class="item item-input item-select b-t-none">
+					<div class="input-label">
+						发布类型
+					</div>
+					<select ng-change="changeCheck()" ng-model="data.article_type_status" >
+							<option ng-repeat="item in items" value="{{item.id}}">{{item.name}}</option>
+					</select>
+				</label>
+				<label class="item item-input m-t-15">
+					<textarea elastic class="customer-textarea" ng-model="article.content" id="article_content" rows="5" placeholder="说点什么呗...(必填)" ng-keyup="checkInputLetter($event)"></textarea>
+				</label>
+				<div><span ng-repeat="item in article.imgs">{{item.id}}</span></div>
+				<ion-gallery ion-gallery-items="article.imgs" ng-if="article.imgs.length>0" ion-gallery-item-edit="true"></ion-gallery>
+				<div class="item">
+					<span class="customer-height-54 xkd-topic-content-bottom-icon">
+						<upload-image upload-images="article.imgs" camera-options="cameraOptions"></upload-image>
+					</span>
+					<span class="customer-height-54 xkd-topic-content-bottom-icon" on-tap="clickPoundSignButton()" ng-show="showRecommend">
+						<i class="icon ion-ios-grid-view-outline"></i>
+					</span>
+				</div>
+				<div ng-show="showRecommend">
+					<div class="item item-divider">
+						推荐话题
+					</div>
+					<a class="item" ng-repeat="item in recommendTopicList track by $index" on-tap="selectTopic(item)">
+						<h4>
+							<strong class="heroBlue">
+								#{{item.topic_title}}#
+							</strong>
+						</h4>
+						<p class="xkd-topic-content">{{item.topic_content}}</p>
+						<!-- <p>{{item.like_number}} 赞 &nbsp;&nbsp;{{item.message_number}} 回复 &nbsp;&nbsp;{{item.read_number}} 阅读量</p> -->
+					</a>
+				</div>
+
+			</div>
+		</ion-content>
+</ion-view>

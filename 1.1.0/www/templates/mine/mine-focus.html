@@ -1,0 +1,20 @@
+<div ng-controller="FocusCtrl">
+	<ion-header-bar align-title="center" class="bar bar-light color-white">
+		<div class="item-input-inset" ng-click="goBack()">
+			<span>
+				<i class="ion-chevron-left color-green"></i>
+			</span>
+		</div>
+		<h1 class="title">我的关注</h1>
+	</ion-header-bar>
+    <div class="content has-header ionic-pseudo">
+    	<div class="list">
+      		<a ng-repeat="item in focusData" class="item item-thumbnail-left" ui-sref="tab.mine({id:item.objectId})">
+          		<img src="{{item.avatar.url}}">
+          		<h2 class="padding-t-10 padding-b-20">{{item.username}}</h2>
+          		<p>{{item.description}}</p>
+        	</a>
+        	
+    	</div>
+    </div>
+</div>

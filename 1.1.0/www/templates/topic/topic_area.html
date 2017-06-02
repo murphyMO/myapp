@@ -1,0 +1,264 @@
+<!-- <ion-view view-title="话题专区" ng-controller="CommunityDynamicCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<h1 class="title">动态</h1>
+		<div class="button button-clear m-r-10" ui-sref="postdynamic"><i class="ion-plus fontsize-18" style="vertical-align: middle;"></i></div>
+	</ion-header-bar>
+
+	<div class="bar bar-subheader item-input-inset">
+	
+		<label class="item-input-wrapper text-center bg-dark">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" ng-model="dynamicSearch.keyword" placeholder="搜索">
+		</label>
+		
+	</div>
+	
+	<ion-content class="has-header" style="margin-top:43px;"">
+		<div class="row text-center recomNavBar">
+			<div class="col col-50" ng-class="{'business-xkd-header-active' : nowPage == 0,'padding-b-3' : nowPage == 0}"><span ng-click="clickRecommend()">推荐</span></div>
+			<div class="col col-50" ng-class="{'business-xkd-header-active' : nowPage == 1,'padding-b-3' : nowPage == 1}"><span ng-click="clickService()">服务</span></div>
+		</div>
+		
+		
+	
+		<ion-refresher pulling-text="下拉刷新" on-refresh="dynamicDoRefresh()"></ion-refresher>
+		
+		<div class="tabs-striped tabs-top">
+			<div class="tabs companytab">
+				<a class="tab-item " ng-click="changeTab(1)" ng-class="{'active':tabType==1}">
+					全部
+				</a>
+				<a class="tab-item " ng-click="changeTab(2)" ng-class="{'active':tabType==2}">
+					动态
+				</a>
+				<a class="tab-item active" ng-click="changeTab(3)" ng-class="{'active':tabType==3}">
+					话题专区
+				</a>
+			</div>
+		</div>
+		<div class="">
+			<div class="row-center text-center fontsize-16 b-b">
+				<a class="col col-50 pull-left heroYello b-b b-r" ng-click="">
+					#岛里直播#
+				</a>
+				<a class="col col-50 pull-left heroYello b-b b-r" ng-click="">
+					#侠客岛的午餐#
+				</a>
+				<a class="col col-50 pull-left heroYello b-b b-r" ng-click="">
+					#我在街子#
+				</a>
+				<a class="col col-50 pull-left heroBlack b-b b-r" ng-click="">
+					全部话题
+				</a>
+				
+			</div>
+			<span class="padding-l-20">当前阅读总量<span class="padding-l-10">1429</span></span>
+		</div>
+		
+		<div class="m-t-10 seviveBox" ng-repeat="dynamicItem in dynamicList" >
+					<div class="item item-avatar b-none">
+					
+					头像
+						<img ng-src="{{commonPath.route_path}}{{commonPath.photo_path}}{{dynamicItem.one_inch_photo_url}}" err-src="img/icon_emptyPeron.png" ng-click="change(dynamicItem)">
+					
+					name company_name
+						<div class="xkd-activeInfoCon">
+							<h3 ng-if="dynamicItem.article_type_status==1" style="text-overflow: ellipsis;white-space: nowrap;course:hand;width: 72%">
+								<strong class="xkd-recommend-list-title heroBule">{{dynamicItem.article_data_title}}</strong>
+							</h3>
+							<h3 ng-if="dynamicItem.article_type_status==2" style="text-overflow: ellipsis;white-space: nowrap;course:hand;width: 72%">
+								<strong class="xkd-recommend-list-title heroBule">匿名</strong>
+							</h3>
+							<small class="xkd-subTit gray" ui-sref="commsg({com_id:dynamicItem.article_com_id})">{{dynamicItem.com_name}}</small>
+						 </div>
+					</div>
+					
+					话题内容
+					<div class="item item-avatar b-t-none autoHeight padding-t-5 b-none">
+						<p class="m-b-10 heroBlack" style="white-space: pre-line;">{{dynamicItem.article_content}}</p>
+						<div>
+							<ion-gallery ion-gallery-items="dynamicItem.dynamicImgItems"></ion-gallery>
+						</div>
+						<div ui-sref="postMaterialDetail({id:dynamicItem.com_article_material_id,from:'tab.communitydynamic'})" class="item m-t-10" style="background: #f3f0f0;padding: 3px;border: none;" ng-if="dynamicItem.com_article_material_id">
+							<span class="pull-left" style="display: inline-block;width: 30px;height: 30px;">
+								<img style="width:80%;margin-top:50px" ng-src="{{dynamicItem.material_thumb}}" err-src="img/icon_empty_img.png">
+							</span>
+							<a class="pull-left m-l-10 m-t-5 fontsize-12 " >{{dynamicItem.material_abstract}}</a>
+						</div>
+					</div>
+					
+					话题时间 赞 评论
+					<div class="item item-avatar b-t-none padding-t-10 padding-b-10 b-l-none b-r-none ">
+						<div class="xkd-recommend-list-content pull-left m-b-10">
+							<i class="ion-ios-clock-outline m-r-5"></i>{{dynamicItem.article_cre_time}}
+						</div>
+						<div class="xkd-coumcit-gray-con pull-right fontsize-15">
+							<a ng-click="likeYou(1,dynamicItem,dynamicItem.is_like)" class="m-r-5">
+								<span ng-show="dynamicItem.is_like==0"><i class="ion-android-favorite-outline"></i> 赞</span>
+								<span class="heroBule" ng-show="dynamicItem.is_like==1"><i class="ion-heart"></i>&nbsp;赞</span>
+							</a>
+							<a ng-click="replayShow(1,dynamicItem,-1,1)" class="m-l-10 m-r-5"><i class="ion-android-textsms"></i> 评论</a>
+						</div>
+					</div>
+				</div>
+		</div>
+
+		<ion-infinite-scroll ng-if="!dynamicIsEmptyData" on-infinite="getDynamicList()" distance="1%"></ion-infinite-scroll>
+		<div class="text-center" ng-show="dynamicIsOverLoad">
+			<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"/>
+
+		</div>
+	</ion-content>
+	<div style="bottom:0">
+		<ion-footer-bar keyboard-attach class="bar bar-footer item-input-inset has-tabs" ng-show="replay_show" style="position:fixed;">
+			<label class="item-input-wrapper">
+				<input type="search" ng-blur="replayBlur()" ng-model="re.message_content" placeholder="说点什么呢？" auto-focus-when="replay_show">
+			</label>
+			<button class="button button-small button-calm" ng-click='sendReplay()'>
+				发送
+			</button>
+		</ion-footer-bar>
+	</div>
+	<i ng-click="scrollTop()" class="backtoTopBtn ion-android-arrow-up back-top rounded-500 text-center"></i>
+</ion-view> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ion-view view-title="话题专区" ng-controller="TopicAreaCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<h1 class="title">动态</h1>
+		<div class="button button-clear m-r-10" ui-sref="postdynamic"><i class="ion-plus fontsize-18" style="vertical-align: middle;"></i></div>
+	</ion-header-bar>
+
+	<div class="bar bar-subheader item-input-inset">
+	
+		<label class="item-input-wrapper text-center bg-dark">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" ng-model="dynamicSearch.keyword" placeholder="搜索">
+		</label>
+		
+	</div>
+	
+	<ion-content class="has-header" style="margin-top:43px;"">
+		<!-- <div class="row text-center recomNavBar">
+			<div class="col col-50" ng-class="{'business-xkd-header-active' : nowPage == 0}"><span ng-click="clickRecommend()">全部</span></div>
+			<div class="col col-50" ng-class="{'business-xkd-header-active' : nowPage == 1}"><span ng-click="clickService()">话题专区</span></div>
+			
+		</div> -->
+
+		<div class="row text-center">
+			<div class="col col-50 " ng-click="clickMine()"><span ng-class="{'header-active' : thisItem == 0}">全部</span></div>
+			<div class="col col-50 " ng-click="clickCom()"><span ng-class="{'header-active' : thisItem == 1}">话题专区</span></div>
+		</div>
+	
+		
+	
+		<ion-refresher pulling-text="下拉刷新" on-refresh="dynamicDoRefresh()"></ion-refresher>
+		
+<ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)" active-slide="thisItem">
+	<ion-slide>
+		<h2>这是混排的全部</h2>
+	</ion-slide>
+	<ion-slide>
+		<div class="">
+			<div class="row-center text-center fontsize-16 b-b">
+				<a class="col col-50 pull-left heroYello b-b b-r" ng-click="">
+					#岛里直播#
+				</a>
+				<a class="col col-50 pull-left heroYello b-b b-r" ng-click="">
+					#侠客岛的午餐#
+				</a>
+				<a class="col col-50 pull-left heroYello b-b b-r" ng-click="">
+					#我在街子#
+				</a>
+				<a class="col col-50 pull-left heroBlack b-b b-r" ng-click="">
+					全部话题
+				</a>
+				
+			</div>
+			<span class="padding-l-20">当前阅读总量<span class="padding-l-10">1429</span></span>
+		</div>
+		
+		<div class="m-t-10 seviveBox" ng-repeat="dynamicItem in dynamicList" >
+					<div class="item item-avatar b-none">
+					
+					<!-- 头像 -->
+						<img ng-src="{{commonPath.route_path}}{{commonPath.photo_path}}{{dynamicItem.one_inch_photo_url}}" err-src="img/icon_emptyPeron.png" ng-click="change(dynamicItem)">
+					
+					<!-- name company_name -->
+						<div class="xkd-activeInfoCon">
+							<h3 ng-if="dynamicItem.article_type_status==1" style="text-overflow: ellipsis;white-space: nowrap;course:hand;width: 72%">
+								<strong class="xkd-recommend-list-title heroBule">{{dynamicItem.article_data_title}}</strong>
+							</h3>
+							<h3 ng-if="dynamicItem.article_type_status==2" style="text-overflow: ellipsis;white-space: nowrap;course:hand;width: 72%">
+								<strong class="xkd-recommend-list-title heroBule">匿名</strong>
+							</h3>
+							<small class="xkd-subTit gray" ui-sref="commsg({com_id:dynamicItem.article_com_id})">{{dynamicItem.com_name}}</small>
+						 </div>
+					</div>
+					
+					<!-- 话题内容 -->
+					<div class="item item-avatar b-t-none autoHeight padding-t-5 b-none">
+						<p class="m-b-10 heroBlack" style="white-space: pre-line;">{{dynamicItem.article_content}}</p>
+						<div>
+							<ion-gallery ion-gallery-items="dynamicItem.dynamicImgItems" ion-gallery-item-edit="false"></ion-gallery>
+						</div>
+						<div ui-sref="postMaterialDetail({id:dynamicItem.com_article_material_id,from:'tab.communitydynamic'})" class="item m-t-10" style="background: #f3f0f0;padding: 3px;border: none;" ng-if="dynamicItem.com_article_material_id">
+							<span class="pull-left" style="display: inline-block;width: 30px;height: 30px;">
+								<img style="width:80%;margin-top:50px" ng-src="{{dynamicItem.material_thumb}}" err-src="img/icon_empty_img.png">
+							</span>
+							<a class="pull-left m-l-10 m-t-5 fontsize-12 " >{{dynamicItem.material_abstract}}</a>
+						</div>
+					</div>
+					
+					<!-- 话题时间 赞 评论 -->
+					<div class="item item-avatar b-t-none padding-t-10 padding-b-10 b-l-none b-r-none ">
+						<div class="xkd-recommend-list-content pull-left m-b-10">
+							{{dynamicItem.article_cre_time}}
+						</div>
+						<div class="xkd-coumcit-gray-con pull-right fontsize-15">
+							<a ng-click="likeYou(1,dynamicItem,dynamicItem.is_like)" class="m-r-5">
+								<span ng-show="dynamicItem.is_like==0"><i class="ion-android-favorite-outline"></i> 赞</span>
+								<span class="heroBule" ng-show="dynamicItem.is_like==1"><i class="ion-heart"></i>&nbsp;赞</span>
+							</a>
+							<a ng-click="replayShow(1,dynamicItem,-1,1)" class="m-l-10 m-r-5"><i class="ion-android-textsms"></i> 评论</a>
+						</div>
+					</div>
+				</div>
+		</div>
+	</ion-slide>
+	
+</ion-slide-box>
+
+		<ion-infinite-scroll ng-if="!dynamicIsEmptyData" on-infinite="getDynamicList()" distance="1%"></ion-infinite-scroll>
+		<div class="text-center" ng-show="dynamicIsOverLoad">
+			<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"/>
+
+		</div>
+	</ion-content>
+	<div style="bottom:0">
+		<ion-footer-bar keyboard-attach class="bar bar-footer item-input-inset has-tabs" ng-show="replay_show" style="position:fixed;">
+			<label class="item-input-wrapper">
+				<input type="search" ng-blur="replayBlur()" ng-model="re.message_content" placeholder="说点什么呢？" auto-focus-when="replay_show">
+			</label>
+			<button class="button button-small button-calm" ng-click='sendReplay()'>
+				发送
+			</button>
+		</ion-footer-bar>
+	</div>
+	<i ng-click="scrollTop()" class="backtoTopBtn ion-android-arrow-up back-top rounded-500 text-center"></i>
+</ion-view>
+
+

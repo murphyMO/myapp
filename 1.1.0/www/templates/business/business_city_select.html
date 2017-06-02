@@ -1,0 +1,63 @@
+<ion-view view-title="服务" ng-controller="BusinessCitySelectCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<button class="button button-icon icon" ng-click="topBack()">
+			<i class="ion-chevron-left color-blue"></i>
+		</button>
+		<h1 class="title fontsize-16 color-black">城市选择</h1>
+		<!-- <button class="button button-clear" ui-sref="businessCitySelectMap">地图</button> -->
+	</ion-header-bar>
+
+	<ion-content class="has-header">
+		<div class="alpha-list">
+			<ion-item class="item item-divider color-blue">
+				GPS定位
+				<!-- <ion-spinner icon="ripple" class="spinner-assertive item-note" ng-show="loading"></ion-spinner>
+				<span class="item-note" ng-click="reloadPosition()" ng-hide="loading">重新定位</span> -->
+			</ion-item>
+			<ion-item ng-if="stores.lately_store_name" ng-click="citySelect(stores.lately_store_id, stores.lately_store_name)">
+				<span ng-if="stores.lately_store_name">距您最近：{{stores.lately_store_name}}</span>
+			</ion-item>
+			<ion-item ng-if="!stores.lately_store_name">
+				<small>获取位置信息失败</small>
+			</ion-item>
+			<ion-item ng-click="citySelect(-1, '全国')">
+				全国
+			</ion-item>
+			<span ng-repeat="store in stores.city">
+				<ion-item class="item item-divider color-blue" >
+					{{store.city_name}}
+				</ion-item>
+				<ion-item ng-click="citySelect(s.store_id, s.store_name)" ng-repeat="s in store.data">
+					{{s.store_name}}
+					<span class="item-note" ng-if="s.distance">{{s.distance}}</span>
+				</ion-item>
+			</span>
+			
+
+<!-- 			<ion-item class="item item-divider color-blue">
+				北京
+			</ion-item>
+			<ion-item ng-click="citySelect(store.store_id, store.store_name)" ng-repeat="store in stores" ng-if="store.city_id == 110000">
+				{{store.store_name}}
+				<span class="item-note" ng-if="store.distance">{{store.distance}}</span>
+			</ion-item>
+			<ion-item class="item item-divider color-blue">
+				重庆
+			</ion-item>
+			<ion-item ng-click="citySelect(store.store_id, store.store_name)" ng-repeat="store in stores" ng-if="store.city_id == 500000">
+				{{store.store_name}}
+				<span class="item-note" ng-if="store.distance">{{store.distance}}</span>
+			</ion-item> -->
+			<!-- <ion-item ng-click="citySelect(21, '中新岛')">
+				中新岛
+			</ion-item> -->
+			<!-- <ion-item class="item item-divider color-blue">
+				上海
+			</ion-item>
+			<ion-item ng-click="citySelect(8, '虹桥岛')">
+				虹桥岛
+			</ion-item> -->
+			
+		</div>
+	</ion-content>
+</ion-view>

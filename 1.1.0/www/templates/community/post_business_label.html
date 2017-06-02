@@ -1,0 +1,29 @@
+<ion-view view-title="选择行业标签" ng-controller="PostBusinessLabelCtrl">
+	<ion-header-bar align-title="center" class="bar bar-header bar-dark">
+		<div class="item-input-inset color-white" ng-click="myGoBack()">
+			<span>
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">选择行业标签</h1>
+		<div class="buttons">
+			<!-- <button class="button button-calm button-small" ng-click="confirmSelectBusinessLabel()">
+				确认
+			</button> -->
+			<div class="item-input-inset">
+				<a style="color:#fff" ng-click="confirmSelectBusinessLabel()">确认</a>
+			</div>
+		</div>
+	</ion-header-bar>
+	<ion-content class="has-bottom">
+		<!-- <div class="checkbox m-l-md ng-scope" ng-repeat="item in businessLabelList">
+			<label class="i-checks ng-binding">
+				<input type="checkbox" name="businesslabel" value="{{item.business_label_id}}" text="{{item.business_label_des}}" ng-checked="{{businessLabelIds.indexOf(item.business_label_id) > -1}}"><i></i>
+				{{item.business_label_des}}
+			</label>
+		</div> -->
+		<ion-list>
+			<ion-checkbox ng-repeat="item in businessLabelList" name="businesslabel"  value="item.service_tag_info_id" text="item.service_tag_name" ng-model="item.checked">{{item.service_tag_name}}</ion-checkbox>
+		</ion-list>
+	</ion-content>
+</ion-view>

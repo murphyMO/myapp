@@ -1,0 +1,23 @@
+<ion-view view-title="选择地区">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ui-sref="profile">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		 <h1 class="title fontsize-16 color-black">选择区域{{test}}</h1>
+	</ion-header-bar>
+	<ion-content class="has-header" style="background-color: #f3f3f3">
+	<div class="list">
+		<div class="item item-divider">
+			{{test}}
+		</div>
+		<div class="item" ui-sref="province_name({province_name:area.province_name})" ng-repeat="area in areas.provinces">
+			{{area.province_name}}
+		</div>
+	</div>
+
+
+
+	</ion-content>
+</ion-view>

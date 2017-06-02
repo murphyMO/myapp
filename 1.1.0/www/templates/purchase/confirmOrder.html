@@ -1,0 +1,148 @@
+<ion-view view-title="确认订单" ng-controller="ConfirmOrderCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="topBack()">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		 <h1 class="title fontsize-16 color-black">确认订单</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-white">
+		<div class="b-t-none bg-light">
+
+			<div class="b-t-none dark text-center m-b-10">
+				<label class="bg-white item-input b-none">
+					<div class="input-label text-left gray" aria-label="企业名称" id="_label-8">订单编号</div>
+					<div class="ng-binding text-right padding-r-25" style="display:inline-block; width:70%"><strong>{{order.order_info.order_sn}}</strong></div>
+				</label>
+			</div><!-- 
+			<div class="b-t-none dark text-center">
+				<label class="item item-input">
+					<span class="input-label" aria-label="企业名称" id="_label-8">交易流水号</span>
+					<span class="ng-binding">6129384932020984</span>
+				</label>
+			</div> -->
+			<div class="item row m-b-10 b-none m-r-none m-l-none">
+				<!-- <div class="col col-25">
+					<img class="xkd-img-100 XKD-mineHead" ng-src="{{path.route_path}}{{path.photo_path}}{{response.userInfo.one_inch_photo_url}}" err-src="img/icon_emptyPeron.png" alt="...">
+				</div> -->
+				<div class="row" ng-repeat="orderItem in order.order_items">
+					<div class="col">
+						<h2 class="fontsize-18"><b>{{orderItem.meeting_room_name}}</b></h2>
+						<div class="xkd-recommend-list-content">{{orderItem.store_name}}</div>
+						<div class="xkd-recommend-list-content">时间：{{orderItem.reserve_time_from}}--{{orderItem.reserve_time_to}}</div>
+						<div class="xkd-recommend-list-content" ng-if="orderItem.room_type == 1">单价：<span class="assertive">￥{{orderItem.unit_price}}</span></div>
+						<div class="xkd-recommend-list-content" ng-if="orderItem.room_type == 2">单价：
+							<span ng-if="orderItem.fourHoursAgoPrice == orderItem.fourHoursAfterPrice">{{orderItem.fourHoursAgoPrice}}元/小时</span>
+							<span ng-if="orderItem.fourHoursAgoPrice != orderItem.fourHoursAfterPrice">{{orderItem.unit_price}}元/小时</span>
+						</div>
+						<div class="xkd-recommend-list-content" style="white-space: normal;" ng-if="orderItem.room_type == 2 && orderItem.fourHoursAgoPrice != orderItem.fourHoursAfterPrice">单价说明：四小时内{{orderItem.fourHoursAgoPrice}}元/小时 四小时后{{orderItem.fourHoursAfterPrice}}元/小时</div>
+					</div>
+						
+				</div>
+			</div>
+			<div class="dark m-b-10">
+				<a class="item item-icon-right" on-tap="selectPaymentMethod()">
+					付款方式
+					<span class="item-note">{{selectPaymentMethodResult}}</span><i class="icon item-note ion-ios-arrow-right"></i>
+				</a>
+			</div>
+
+			<div class="dark m-b-10" ng-if="payMethodId == 2 && order.coupon.detail" ng-click="clickDiscount()">
+				<a class="item item-icon-right">
+					是否使用优惠券
+					<i class="icon ion-ios-checkmark-outline gray" ng-if="!isDiscount"></i>
+					<i class="icon ion-ios-checkmark positive" ng-if="isDiscount"></i>
+				</a>
+			</div>
+
+			<div class="bg-light">
+				<div class="checkOrderBtnCon bg-white text-right m-b-10 padding-10" >
+					<div class="text-left" style="text-align: justify;">
+						<h4><strong>购买须知</strong></h4>
+						<strong>有效期</strong>
+						<p>{{order.order_items[0].valid_date}}</p>
+						<strong>营业时间</strong>
+						<p>
+							<span>{{order.order_items[0].office_hours|limitTo:5:11}}</span> ~ <span>{{order.order_items[0].office_hours|limitTo:5:28}}</span>
+						</p>
+						<strong>购买规则</strong>
+						<small style="text-indent:2em;">
+							<p>1、200元/小时以上（含）；提前72小时取消不收取任何费用，72小时内取消扣除20%，24小时内取消扣除50%，时间到未到场扣除100%；</p>
+							<p>2、按半天计费：200元/小时（不含）以下；提前24小时取消不收取任何费用，24小时内取消扣除20%，4小时内取消扣除50%，时间到未到场扣除100%；</p>
+						</small>
+						<strong>温馨提示</strong>
+						<small style="text-indent:2em;">
+							<p>支付后，我们会在30分钟内电话联系您，与您核实会务信息，并确定是否接单，请您保持电话通畅，如果商家确认接单，请您至少提前15分钟到场；如果商家无法接单，我们将在7个工作日内退还费用至原账号。</p>
+							<p>{{order.order_info.reminder}}</p>
+						</small>
+						<strong>重要提示：</strong>
+						<small style="text-indent:2em;">
+							<p>1、请您务必仔细阅读购买须知及产品/服务的详细信息。</p>
+							<p>2、若您购买非侠客岛自营的服务或产品，相关法律关系由您和供应商直接建立，侠客岛不对该服务或产品质量提供保证。请您务必仔细辨别并与供应商协商好交易细节。</p>
+							<p>若您已确认相关内容，请点击下方“确认支付”</p>
+						</small>
+					</div>
+				</div>
+			</div>
+
+
+
+
+			<div class="b-t-none dark text-center">
+				<label class="bg-white item-input">
+					<div class="input-label text-left gray" aria-label="企业名称" id="_label-8" style="display:inline-block;">商品总额</div>
+					<div class="ng-binding text-right xkd-text-danger padding-r-10" style="display:inline-block; width:70%">
+						<span class="item-note assertive" ng-if="order.order_items[0].room_type == 1">
+							<span>￥{{order.order_items[0].unit_price}}*{{order.order_items[0].amount}}</span>
+						</span>
+
+						<span class="item-note assertive" ng-if="order.order_items[0].room_type == 2">
+							<span ng-if="order.order_items[0].amount <= 4 && order.order_items[0].parent_type == 0">￥{{order.order_items[0].fourHoursAgoPrice}}*4</span>
+							<span ng-if="order.order_items[0].amount > 4 && order.order_items[0].parent_type == 0">￥{{order.order_items[0].fourHoursAgoPrice}}*4+{{order.order_items[0].fourHoursAfterPrice}}*{{order.order_items[0].amount-4}}</span>
+							<span ng-if="order.order_items[0].parent_type == 1">￥{{order.order_items[0].fourHoursAfterPrice}}*{{order.order_items[0].amount}}</span>
+						</span>
+					</div>
+				</label>
+			</div>
+			<div class="b-t-none dark text-center" ng-if="order.order_items[0].parent_type == 0">
+				<label class="bg-white item-input">
+					<div class="input-label text-left gray" aria-label="企业名称" id="_label-8"  style="display:inline-block;">押金</div> 
+					<div class="ng-binding text-right xkd-text-danger padding-r-10" style="display:inline-block; width:70%">+￥{{order.order_info.deposit_to_pay}}</div>
+				</label>
+			</div>
+			<div class="b-t-none dark text-center">
+				<label class="bg-white item-input">
+					<div class="input-label text-left gray" aria-label="企业名称" id="_label-8" style="display:inline-block;">优惠</div>
+					<div class="ng-binding text-right xkd-text-danger padding-r-10" style="display:inline-block; width:70%">-￥0</div>
+				</label>
+			</div>
+			<div class="bg-white text-right m-b-10 padding-5">
+				<p><b class="fontsize-18">实付款: <span class="xkd-text-danger">￥{{order.order_info.to_pay}}</span> </b></p>
+				<p><span class="fontsize-9 gray">创建时间：{{order.order_info.cre_time}}</span></p>
+			</div>
+		</div>
+
+<!-- 		<div class="bg-light padding-t-5">
+			<div class="bg-white m-t-10 m-b-10 padding-r-10 padding-10" >
+				
+			</div>
+
+		</div> -->
+
+
+		<div class="bg-light">
+			<div class="checkOrderBtnCon bg-white text-right m-t-10 m-b-10 padding-r-10 padding-t-10">
+				<button class="button button-stable bg-gray color-white" ng-click="topBack()">
+					修改订单
+				</button>
+				<button class="button button-assertive " ng-disabled="userAgree.$invalid" ng-click="clickPay()" >
+					确认支付
+				</button>
+				<p><span class="fontsize-12 gray">温馨提示:&nbsp; 请仔细确认你的订单细节然后再进行支付</span></p>
+			</div>
+		</div>
+		
+	</ion-content>
+</ion-view>

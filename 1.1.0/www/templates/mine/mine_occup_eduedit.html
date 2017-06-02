@@ -1,0 +1,54 @@
+<ion-view view-title="编辑教育经历" ng-controller="EditEduCtrl" style="font-family:微软雅黑;">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ui-sref="profile">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		 <h1 class="title fontsize-16 color-black">编辑教育经历</h1>
+		 <button class="button button-clear" ng-click="saveEducationClick()">确定</button>
+	</ion-header-bar>
+
+	<ion-content class="has-header bg-dark">
+	<div class="list">
+		<a class="item fontsize-14 padding-t-10 padding-b-10" ng-click="startDate()">
+			<span ng-bind-html="education.start_date" ng-model="education.start_date"></span>
+			<!-- <span class="item-note m-r-15" data-pack="default">入学日期</span> -->
+		</a>
+
+		<a class="item fontsize-14 padding-t-10 padding-b-10" ng-click="showDate()">
+			<span ng-bind-html="education.end_date" ng-model="education.end_date"></span>
+			<!-- <span class="item-note m-r-15" data-pack="default">毕业日期</span> -->
+		</a>
+
+		<label class="item item-input">
+			<input type="text" ng-model="education.school" placeholder="毕业学校" ng-maxlength="20">
+		</label>
+
+		<label class="item item-input">
+			<input type="text" ng-model="education.Specialty" placeholder="专业" ng-maxlength="20">
+		</label>
+
+		<label class="item item-input">
+			<select ng-model="education.type" style="border:none;background-color:#fff;">
+				<option value="">学位</option>
+				<option value="博士后" selected>博士后</option>
+				<option value="博士">博士</option>
+				<option value="MBA">MBA</option>
+				<option value="EMBA">EMBA</option>
+				<option value="硕士">硕士</option>
+				<option value="本科">本科</option>
+				<option value="大专">大专</option>
+				<option value="中专">中专</option>
+				<option value="中技">中技</option>
+				<option value="高中">高中</option>
+				<option value="初中">初中</option>
+			</select>
+		</label>
+	</div>
+
+		<div class="padding">
+			<button class="button button-assertive button-block" ng-click="deleteEducationClick()">删除</button>
+		</div>
+	</ion-content>
+</ion-view>

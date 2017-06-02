@@ -1,0 +1,41 @@
+<ion-view view-title="入驻手册" ng-controller="OfficeBookListCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="back()">
+			<span>
+				<i class="ion-chevron-left color-black"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">
+			<span ng-if="type == 1">入驻通知书</span>
+			<span ng-if="type == 2">入驻手续清单</span>
+			<span ng-if="type == 3">离店登记</span>
+		</h1>
+	</ion-header-bar>
+	<ion-content class="has-header bg-white">
+		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+		<div class="list" ng-if="type == 1">
+			<a class="item" ng-click="goEntryNotice(item.id)" ng-repeat="item in items">
+				入驻通知书--{{item.store_name}}
+			</a>
+		</div>
+		<div class="list" ng-if="type == 2">
+			<a class="item" ng-click="goEntryLst(item.id)" ng-repeat="item in items">
+				入驻手续清单--{{item.store_name}}
+
+			</a>
+		</div>
+		<div class="list" ng-if="type == 3">
+			<a class="item" ui-sref="checkoutReg({id:items.out_store_id})" ng-repeat="items in CheckOutRegListData track by $index">
+				离店登记--<span ng-bind="items.store_name"></span>
+				<span class="pull-right color-gray fontsize-12">{{items.cre_time}}</span>
+			</a>
+		</div>
+		<div class="text-center" ng-show="isOverLoad">
+			<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"
+>
+		</div>
+		<ion-infinite-scroll ng-if="isEmptyData" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+	</ion-content>
+</ion-view>
+
+

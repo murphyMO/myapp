@@ -1,0 +1,56 @@
+<ion-view view-title="发布公司简介" ng-controller="PostCompanyIntrCtrl">
+	<ion-header-bar align-title="center" class="bar bar-header bar-dark">
+		<div class="item-input-inset color-white" ng-click="myGoBack()">
+			<span>
+				<i class="ion-chevron-left"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">发布公司简介</h1>
+
+	</ion-header-bar>
+	<form name="postForm">
+		<ion-content class="has-header bg-dark has-bottom-button">
+			<div class="list">
+				<label class="item item-input m-t-15">
+					<textarea class="customer-textarea" ng-model="article.title" rows="1" placeholder="整个主题呗...(必填)" required></textarea>
+				</label>
+				<label class="item item-input m-t-15">
+					<textarea class="customer-textarea" ng-model="article.content" rows="5" placeholder="说说咱们公司呗...(必填)" required></textarea>
+				</label>
+				<ion-gallery ion-gallery-items="article.imgs" ion-gallery-item-edit="true"></ion-gallery>
+				<!-- <div class="item item-icon-left customer-height-54"><i class="icon ion-ios-camera-outline" ng-click="getPic()"></i></div> -->
+				<div class="item item-icon-left customer-height-54"><upload-image upload-images="article.imgs" camera-options="cameraOptions"></upload-image></div>
+
+				<div ng-if="article.material" class="item item-divider">引文</div>
+				<!-- <a class="item item-icon-right" ng-if="!article.material" ng-click="goSelectMaterial()">
+					选择引文
+					<span class="item-note" >
+						<i class="icon ion-ios-plus" ></i>
+					</span>
+				</a> -->
+				<div class="item item-thumbnail-left item-icon-right" ng-model="article.material" ng-if="article.material">
+					<img ng-src="{{article.material.material_thumb}}" err-src="img/icon_empty_img.png">
+					<h2>{{article.material.material_title}}</h2>
+					<p>{{article.material.material_abstract}}</p>
+					<label class="icon item-note" ng-click="goSelectMaterial()">
+						<i class="icon ion-edit" ></i>
+					</label>
+				</div>
+				<!-- <a class="item item-icon-right" ng-click="goSelectBusinessLabel()">
+					
+					行业标签
+					<span class="item-note">
+						<i class="icon ion-ios-arrow-right"></i>
+					</span>	
+					<span ng-show="article.businesslabels" style="display:block;word-wrap:break-word;white-space:normal">
+						<button ng-repeat="labelitem in article.businesslabels" class="button button-small button-calm" style="margin-left:5px;margin-top:5px">{{labelitem.business_label_des}}
+						</button>
+					</span>
+				</a> -->
+			</div>
+		</ion-content>
+		<ion-footer-bar class="bottom-button-bar bg-dark">
+			<button class="button button-block button-calm bottom-button fontsize-16" ng-click="postCompanyIntr()" ng-disabled="postForm.$invalid">发布</button>
+		</ion-footer-bar>
+	</form>
+</ion-view>

@@ -1,0 +1,25 @@
+<ion-view view-title="入驻企业" ng-controller="CompanyListCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="topBack()">
+			<span>
+				<i class="ion-chevron-left color-blue"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">入驻企业</h1>
+	</ion-header-bar>
+
+	<ion-content class="has-header  bg-dark">
+		<div class="list" ng-show="!isEmptyData">
+			<a class="item item-avatar" ng-repeat="company in recomCompanyList" ng-click="showCompany(company.com_id)">
+				<img ng-src="{{companyPath}}{{company.com_logo_path}}" err-src="img/icon_empty_head.png">
+				<h2>{{company.com_name}}</h2>
+				<p>{{company.comments}}</p>
+			</a>
+		</div>
+		
+		<div class="text-center" ng-show="isEmptyData">
+			<img style="width: 50%;margin-top:50px" src="img/icon_empty_img.png"/>
+		</div>
+	</ion-content>
+
+</ion-view>

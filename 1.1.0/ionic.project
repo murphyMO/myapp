@@ -1,0 +1,10 @@
+{
+  "name": "firstApp",
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "http://101.204.247.17/heroera/hi/admin/v101/",
+      "proxyUrl": "http://101.204.247.17/heroera/hi/admin/v101/"
+    }
+  ]
+}

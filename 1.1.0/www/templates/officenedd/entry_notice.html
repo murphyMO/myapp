@@ -1,0 +1,102 @@
+<ion-view view-title="入驻通知" ng-controller="EntryNoticeCtrl">
+	<ion-header-bar align-title="center" class="bar-light">
+		<div class="item-input-inset" ng-click="back()">
+			<span>
+				<i class="ion-chevron-left color-black"></i>
+			</span>
+		</div>
+		<h1 class="title fontsize-16 color-black">入驻通知</h1>
+	</ion-header-bar>
+	<ion-content class="has-header bg-white padding-r-10 padding-l-10" style="text-align: justify;">
+<!-- 		<div class="row text-center">
+			<div class="col">
+				<h3>欢迎登岛！</h3>
+			</div>
+		</div> -->
+		<div class="row">
+			<div class="col">
+				<!-- <p>侠客岛入驻通知</p> -->
+				<strong>亲爱的侠客岛家人：</strong>
+				<p class="text-indent2">您有幸选择侠客岛，我们也有幸与您合作，我们将在相互尊重、相互信任的基础上，开始一段愉快的侠客岛之旅。侠客岛的全体成员真诚欢迎您的加入！以下是入驻的相关说明：</p>
+				<div class="row padding-none">
+					<div style="display: inline-table;">1、</div>
+					<div>
+						<p>您所入驻门店的地址是：{{entryNoticeDetail.store_address}}</p>
+						<p ng-if="entryNoticeDetail.seat_telephone">前台座机：{{entryNoticeDetail.seat_telephone}}</p>
+						<p>店长联系方式：{{entryNoticeDetail.store_telephone}}</p>
+					</div>
+				</div>
+				<div class="row padding-none">
+					<div style="display: inline-table;">2、</div>
+					<div>
+						<p>和您约定的入驻时间是：<span>{{entryNoticeDetail.start_time|limitTo:4:0}}</span>年<span>{{entryNoticeDetail.start_time|limitTo:2:5}}</span>月<span>{{entryNoticeDetail.start_time|limitTo:2:8}}</span>日。如果您入驻的时间有调整，请提前与侠客岛管家联系。</p>
+					</div>
+				</div>
+				<div class="row padding-none">
+					<div style="display: inline-table;">3、</div>
+					<div>
+						<p>您的签约房间号（工位号）为：{{entryNoticeDetail.contract_seat_area}}</p>
+					</div>
+				</div>
+				<div class="row padding-none">
+					<div style="display: inline-table;">
+						4、
+					</div>
+					<div>
+						<p>入驻当天请您携带以下资料到前台管家处办理入驻手续：</p>
+						<div class="row padding-none">
+							<div style="display: inline-table;"><small>（1）</small></div>
+							<div>
+								<p><small>营业执照复印件1张（盖鲜章）；</small></p>
+							</div>
+						</div>
+						<div class="row padding-none">
+							<div style="display: inline-table;"><small>（2）</small></div>
+							<div>
+								<p><small>法定代表人身份证复印件1份（盖鲜章）；</small></p>
+							</div>
+						</div>
+						<div class="row padding-none">
+							<div style="display: inline-table;"><small>（3）</small></div>
+							<div>
+								<p><small>法定代表人手持身份证正面照1张；</small></p>
+							</div>
+						</div>
+						<div class="row padding-none">
+							<div style="display: inline-table;"><small>（4）</small></div>
+							<div>
+								<p><small>所有入驻员工身份证正反面照片各一张，办理门禁卡专用（可下载岛里APP在“我的”——“身份验证”处上传）。</small></p>
+							</div>
+						</div>
+						<div class="row padding-none">
+							<div style="display: inline-table;"><small>（5）</small></div>
+							<div>
+								<p><small>所有入驻员工电子档半身单人照片1张，如没有合适的照片，我们也可以为您现场拍摄。（可下载岛里APP在“我的”——“身份验证”处上传）。</small></p>
+							</div>
+						</div>
+						<div class="row padding-none">
+							<p><small>注*以上资料若在签定侠客岛《管理服务协议》时已提供，入驻时不需要携带。</small></p>
+						</div>
+					</div>
+				</div>
+				<div class="row padding-none">
+					<div style="display: inline-table;">5、</div>
+					<div>
+						<p>入驻流程：提交资料→签署《入驻公约》→签署三方孵化协议（规定场地）→录入人脸识别系统→签收门禁卡、钥匙。</p>
+					</div>
+				</div>
+				<div class="text-right">
+					<p>成都侠客岛联合办公室</p>
+					<p><span >{{entryNoticeDetail.update_time|limitTo:4:0}}</span>年{{entryNoticeDetail.update_time|limitTo:2:5}}</span>月{{entryNoticeDetail.update_time|limitTo:2:8}}</span>日</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<button class="button button-block button-positive" ng-click="goEntryLst(entryNoticeDetail)">确认</button>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>
+
+
