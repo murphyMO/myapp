@@ -2,8 +2,38 @@
  * 联系列表控制器
  */
 app.controller('ContactListCtrl',
-	['$scope', '$window', '$rootScope','$state','ContactService','$localStorage','$cordovaLocalNotification','$ionicModal','$timeout','$ionicHistory','$ionicListDelegate',
-		function ($scope, $window, $rootScope,$state,ContactService,$localStorage,$cordovaLocalNotification,$ionicModal,$timeout,$ionicHistory,$ionicListDelegate) {
+	['$scope', '$window', '$rootScope','$state','ContactService','$localStorage','$cordovaLocalNotification','$ionicModal','$timeout','$ionicHistory','$ionicListDelegate','$ionicSlideBoxDelegate',
+		function ($scope, $window, $rootScope,$state,ContactService,$localStorage,$cordovaLocalNotification,$ionicModal,$timeout,$ionicHistory,$ionicListDelegate,$ionicSlideBoxDelegate) {
+		$scope.nowPage = 0;
+
+
+		$scope.boxChanged = function(i){
+					$scope.nowPage = i;
+					// $localStorage.set("communityPage",i);
+				}
+
+		$scope.clickAll = function(){
+			$ionicSlideBoxDelegate.slide(0)
+		}
+
+		$scope.clickTopic = function(){
+			$ionicSlideBoxDelegate.slide(1)
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		var accesstoken = $rootScope.getAccessToken();
 		var pathTemp = $localStorage.getObject(KEY_COMMON_PATH);
@@ -206,20 +236,6 @@ app.controller('ContactListCtrl',
 					getContactList();
 				}
 				,100);
-			//console.log($rootScope.lastId,1);
-			// if ($state.current.name == 'tab.contact' && $rootScope.lastId && data.id && $rootScope.lastId != data.id) {
-			// 	$rootScope.lastId = data.id;
-			// 	var index = readArry($scope.lists,data.msg.senderUserId);
-			// 	if (index != '-1') {
-			// 		var array = changLists($scope.lists,index);
-			// 		$timeout(function(){
-			// 			$scope.lists = array;
-			// 			$scope.$apply();
-			// 		},100);
-			// 	} else {
-			// 		getContactList();
-			// 	}
-			// }
 		}
 
 		//刷新点赞数
@@ -248,14 +264,7 @@ app.controller('ContactListCtrl',
 			}
 		});
 
-		//清除消息通知,检查融云链接
-		var notificationClear = function () {
-			if (window.cordova && window.cordova.plugins) {
-				$rootScope.connectionCheck();
-				$cordovaLocalNotification.clearAll();
-			}
-		}
-		notificationClear();
+		
 
 		$scope.goBack = function(){
 			$ionicHistory.goBack();

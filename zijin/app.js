@@ -4,18 +4,28 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override')
 var AV = require('leanengine');
-var cors = require('cors');//跨域
+//跨域
+var cors = require('cors');
+app.use(cors());
+
+
+
 //文件模块
 var users = require('./routes/users');
 var todos = require('./routes/todos');
 var find = require('./routes/find');
+var chat = require('./routes/chat');
 var app = express();
+
+
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(cors());//跨域
+
 
 //express.static 是 Express 内置的唯一一个中间件，负责托管 Express 应用内的静态资源（public文件夹）
 //http://www.expressjs.com.cn/starter/static-files.html
@@ -36,10 +46,12 @@ app.use(methodOverride('_method'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
 // 可以将一类的路由单独保存在一个文件中
 app.use('/todos', todos);
 app.use('/users', users);
 app.use('/find', find);
+app.use('/chat', chat);
 
 app.get('/', function(req, res) {
   res.redirect('/todos');
