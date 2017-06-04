@@ -229,6 +229,10 @@ app.controller('PersonalChangeCtrl',
 			pictureSource = navigator.camera.PictureSourceType;
 			destinationType = navigator.camera.DestinationType;
 		}
+
+
+
+		
 		//选择图片指令
 		$scope.cameraOptions = {
 			quality: 50,

@@ -83,7 +83,7 @@ commonDirective.directive('systemMessageCard', function() {
 */
 commonDirective.directive('uploadImage',['$ionicActionSheet', '$localStorage', '$cordovaCamera', '$rootScope', function($ionicActionSheet, $localStorage, $cordovaCamera, $rootScope){
 	var accesstoken = $rootScope.getAccessToken();
-	var uri = window.platformServer+'commons/common-upload?accesstoken='+accesstoken;
+	var uri = window.platformServer+'users/upload';
 	var commonPath = $localStorage.getObject(KEY_COMMON_PATH);
 	console.log(commonPath);
 	var imgPath = commonPath.route_path;
@@ -128,6 +128,7 @@ commonDirective.directive('uploadImage',['$ionicActionSheet', '$localStorage', '
 		function selectImg(index) {
 			scope.cameraOptions.destinationType =  Camera.DestinationType.FILE_URI;
 			scope.cameraOptions.sourceType =  index;
+			// 相册
 			if(index == 0){
 				window.imagePicker.getPictures(
 					function(results) {
@@ -140,6 +141,7 @@ commonDirective.directive('uploadImage',['$ionicActionSheet', '$localStorage', '
 					},scope.cameraOptions);
 				$cordovaCamera.cleanup();
 			}
+			// 拍照
 			if(index == 1){
 				scope.cameraOptions.sourceType = Camera.PictureSourceType.CAMERA;
 				$cordovaCamera.getPicture(scope.cameraOptions).then(function(imageURI){
@@ -176,6 +178,7 @@ commonDirective.directive('uploadImage',['$ionicActionSheet', '$localStorage', '
 		
 
 		function uploadImg(uri, fileURL) {
+			//新建文件上传选项，并设置文件key，name，type
 			var options = new FileUploadOptions();
 			options.fileKey="file";
 			options.fileName=fileURL.substr(fileURL.lastIndexOf('/')+1);
@@ -185,8 +188,11 @@ commonDirective.directive('uploadImage',['$ionicActionSheet', '$localStorage', '
 
 			options.headers = headers;
 
+			//把params添加到options的params中
 			var params = {'type': scope.cameraOptions.post_type};
 			options.params = params;
+
+			//新建FileTransfer对象
 			var ft = new FileTransfer();
 
 			/*ft.onprogress = function(progressEvent) {
@@ -196,6 +202,7 @@ commonDirective.directive('uploadImage',['$ionicActionSheet', '$localStorage', '
 					loadingStatus.increment();
 				}
 			};*/
+			// uri:把图片及其他参数发送到这个uri，相当于一个请求，在后台接收图片及其他参数然后处理
 			ft.upload(fileURL, uri, win, fail, options);
 
 		}

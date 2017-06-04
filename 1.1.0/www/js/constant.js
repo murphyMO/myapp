@@ -3,12 +3,9 @@
  */
 
 //服务请求地址
- var platformServer = "http://localhost:3000/";
-//var platformServer = "http://www.heroera.com/heroera/hi/admin/v102/"
-//18是内网ip，17是对应的外网ip---在家可以访问
-// var platformServer = "http://10.255.159.18/heroera/hi/admin/v102/";
-// var platformServer = "http://101.204.247.17/heroera/hi/admin/v102/";
-// var platformServer = "http://10.255.159.26/heroera/hi/admin/v102/";
+ // var platformServer = "http://localhost:3000/";
+  var platformServer = "http://murphy.leanapp.cn/";
+
 
 //工单提交路径--测试
 var workPlatformServer = "http://101.204.247.17/heroera/mhi/admin/v102/";
