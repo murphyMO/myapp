@@ -5,6 +5,7 @@ var AV = require('leanengine');
 
 
 router.post('/login', function(req, res, next) {
+  console.log(111111111111111111);
   var username = req.body.username;
   var password = req.body.password;
   if (!username || username.trim().length == 0       //trim()函数：去掉左右空格
@@ -18,6 +19,7 @@ router.post('/login', function(req, res, next) {
   }
   AV.User.logIn(username, password).then(function(user) {
     var currentUser = AV.User.current();
+    console.log(55555555555555555555);
     console.log(currentUser)
     res.saveCurrentUser(user);   // 保存当前用户到 Cookie
     var msg = {
@@ -266,9 +268,15 @@ router.get('/current-user-follow', function(req, res, next) {
 
 // 文件上传
 router.post('/upload', function(req, res, next){
-  var file = req.body;
-  console.log(file);
   
+  console.log(555555555555555);
+  console.log(req.body)
+   msg = {
+      'data': user,
+      'statuscode': 1,
+      'message': '操作成功'
+    }
+    res.json(msg);
 })
 
 

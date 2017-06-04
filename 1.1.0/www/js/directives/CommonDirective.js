@@ -215,7 +215,7 @@ commonDirective.directive('uploadImage',['$ionicActionSheet', '$localStorage', '
 */
 commonDirective.directive('userimg',['$ionicActionSheet', '$localStorage', '$cordovaCamera', '$rootScope', function($ionicActionSheet, $localStorage, $cordovaCamera, $rootScope){
 	var accesstoken = $rootScope.getAccessToken();
-	var uri = window.platformServer+'commons/common-upload?accesstoken='+accesstoken;
+	var uri = window.platformServer+'users/upload';
 	var commonPath = $localStorage.getObject(KEY_COMMON_PATH);
 	var imgPath = commonPath.route_path;
 	return {

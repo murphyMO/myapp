@@ -100,7 +100,7 @@ app.run(function($ionicPlatform, $ionicHistory, $rootScope, $localStorage,$cordo
 		}
 		timeout = $timeout(function () {
 			// 用户未登录，跳转到登陆画面
-			if (!$rootScope.getAccessToken()) {
+			if (!$rootScope.getCurrentUser()) {
 				event.preventDefault();// 取消默认跳转行为
 				$state.go("start");
 			}
@@ -276,16 +276,6 @@ app.run(function($ionicPlatform, $ionicHistory, $rootScope, $localStorage,$cordo
 		chatFactory.disconnect();
 	}
 
-	//切换路径---1.2.1~1.2.2过度用
-	var changePath = function(){
-		var temp = $localStorage.getObject(KEY_COMMON_PATH);
-		if(temp && temp.route_path && temp.route_path.indexOf('hicoffice') > '-1'){
-			$localStorage.removeAll();
-			$rootScope.rongYunLogout();
-			$state.go('login');
-		}
-	}
-	changePath();
 
 //android定位
 	$rootScope.androidPosition = function(){
