@@ -264,6 +264,15 @@ router.get('/current-user-follow', function(req, res, next) {
 })
 
 
+// 文件上传
+router.post('/upload', function(req, res, next){
+  var file = req.body;
+  console.log(file);
+  
+})
+
+
+
 //获取当前用用户
 router.get('/current-user', function(req, res, next){
   var user = req.AV.user;
