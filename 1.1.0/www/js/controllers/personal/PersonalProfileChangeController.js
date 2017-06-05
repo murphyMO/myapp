@@ -109,6 +109,7 @@ app.controller('PersonalChangeCtrl',
 
 		$scope.$on("user-img", function (event, data) {
 			$scope.xkdUserImg = {'background-image':'url('+data+')'};
+			
 		})
 
 

@@ -214,7 +214,6 @@ commonDirective.directive('uploadImage',['$ionicActionSheet', '$localStorage', '
 *	上传头像指令
 */
 commonDirective.directive('userimg',['$ionicActionSheet', '$localStorage', '$cordovaCamera', '$rootScope', function($ionicActionSheet, $localStorage, $cordovaCamera, $rootScope){
-	var accesstoken = $rootScope.getAccessToken();
 	var uri = window.platformServer+'users/upload';
 	var commonPath = $localStorage.getObject(KEY_COMMON_PATH);
 	var imgPath = commonPath.route_path;
@@ -258,6 +257,7 @@ commonDirective.directive('userimg',['$ionicActionSheet', '$localStorage', '$cor
 				window.imagePicker.getPictures(
 					function(results) {
 						for (var i = 0; i < results.length; i++) {
+							console.log(results);
 							scope.$emit('user-img', results[i]);
 							uploadImg(uri, results[i]);
 						}
@@ -282,9 +282,10 @@ commonDirective.directive('userimg',['$ionicActionSheet', '$localStorage', '$cor
 		};
 
 		function win(r) {
-			/*console.log("Code = " + r.responseCode);
+			console.log(r);
+			console.log("Code = " + r.responseCode);
 			console.log("Response = " + r.response);
-			console.log("Sent = " + r.bytesSent);*/
+			console.log("Sent = " + r.bytesSent);
 			var results = JSON.parse(r.response);
 			if(results.statuscode == window.CODE_SUCCESS){
 				var img = {};
@@ -297,13 +298,13 @@ commonDirective.directive('userimg',['$ionicActionSheet', '$localStorage', '$cor
 
 		function fail(error) {
 			alert("An error has occurred: Code = " + error.code);
-			console.log("upload error source " + error.source);
-			console.log("upload error target " + error.target);
+			console.log(error);
 		};
 
 		
 
 		function uploadImg(uri, fileURL) {
+			//新建文件上传选项，并设置文件key，name，type
 			var options = new FileUploadOptions();
 			options.fileKey="file";
 			options.fileName=fileURL.substr(fileURL.lastIndexOf('/')+1);
@@ -312,18 +313,14 @@ commonDirective.directive('userimg',['$ionicActionSheet', '$localStorage', '$cor
 			var headers={'headerParam':'headerValue'};
 
 			options.headers = headers;
-
+			//把params添加到options的params中
 			var params = {'type': scope.cameraOptions.post_type};
 			options.params = params;
-			var ft = new FileTransfer();
+			//新建FileTransfer对象
 
-			/*ft.onprogress = function(progressEvent) {
-				if (progressEvent.lengthComputable) {
-					loadingStatus.setPercentage(progressEvent.loaded / progressEvent.total);
-				} else {
-					loadingStatus.increment();
-				}
-			};*/
+			var ft = new FileTransfer();
+			console.log(fileURL);
+			console.log(uri);
 			ft.upload(fileURL, uri, win, fail, options);
 
 		}

@@ -1951,18 +1951,30 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 			'js/controllers/mine/ServiceAgreementController.js'
 		])
 	})
+	// 新功能介绍
 	.state('aboutnewfunction',{
 		url:'/aboutnewfunction',
 		templateUrl:'templates/mine/about_new_function.html'
 	})
-	//欢迎页
-	.state('welcome', {
-		url: '/welcome',
-		templateUrl: 'templates/mine/welcome.html',
+	// 扫码下载
+	.state('download',{
+		url:'/download',
+		templateUrl:'templates/mine/download.html',
 		resolve: load([
-			'js/controllers/mine/WelcomeController.js'
+			'js/controllers/mine/DownloadController.js'
 		])
 	})
+	// 更改密码
+	.state('changepassword',{
+		url:'/changepassword',
+		templateUrl:'templates/mine/change_password.html',
+		resolve: load([
+			'js/controllers/mine/ChangePasswordController.js',
+			'js/services/CommonService.js'
+		])
+	})
+
+
 	//消息接收
 	.state('msgreceiving', {
 		url: '/msgreceiving',

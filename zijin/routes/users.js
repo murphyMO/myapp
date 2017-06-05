@@ -3,6 +3,9 @@ var router = express.Router();
 
 var AV = require('leanengine');
 
+// 上传文件
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
 
 router.post('/login', function(req, res, next) {
   console.log(111111111111111111);
@@ -85,6 +88,8 @@ router.post('/register', function(req, res, next) {
   }).catch(next);
 });
 
+
+
 //获取用户基本信息
 router.get('/current-user', function(req, res, next) {
     var currentUserId = req.query.currentUserId;
@@ -109,12 +114,7 @@ router.get('/current-user', function(req, res, next) {
 
 //编辑用户基本信息
 router.post('/current-user-edit', function(req, res, next) {
-  if(AV.User.current()){
-    console.log(5555555555555555)
-  }
-  
-    var objectId = req.body.objectId;
-    console.log(req.body);
+     var objectId = req.body.objectId;
      var user = AV.Object.createWithoutData('_User', objectId);
      user.set('username',req.body.username);
      user.set('description',req.body.description);
@@ -266,17 +266,53 @@ router.get('/current-user-follow', function(req, res, next) {
 })
 
 
-// 文件上传
-router.post('/upload', function(req, res, next){
-  
-  console.log(555555555555555);
-  console.log(req.body)
-   msg = {
-      'data': user,
-      'statuscode': 1,
-      'message': '操作成功'
-    }
-    res.json(msg);
+
+// 头像上传
+var fs = require('fs');
+router.post('/upload', multipartMiddleware,function(req, res, next){
+  var avatar = req.files.file;
+  if(avatar){
+     fs.readFile(avatar.path, function(err, data){
+            if(err){
+              console.log("读取文件失败"+err);
+              msg = {
+                'statuscode': -1,
+                'message': '读取文件失败'
+              }
+              res.json(msg);
+            }  
+            var base64Data = data.toString('base64');
+            var theFile = new AV.File(avatar.name, {base64: base64Data});
+
+            // 上传头像到_File
+            theFile.save().then(function(result){
+              console.log("上传头像成功！"+result);
+              // 保存头像到当前用户
+              var currentUser = AV.User.current();
+              currentUser.set('avatar', theFile);
+              currentUser.save().then(function() {
+                console.log('保存头像到用户成功');
+                  msg = {
+                    'statuscode': 1,
+                    'message': '保存头像到用户成功'
+                  }
+                  res.json(msg);
+               }, function(error) {
+                  error = JSON.stringify(error);
+                  msg = {
+                    'data': error,
+                    'statuscode': -1,
+                    'message': '保存头像到用户失败'
+                  }
+                  res.json(msg);
+                  console.log('保存头像到用户失败'+error);
+                });
+            });
+        });
+
+      
+  }
+
 })
 
 

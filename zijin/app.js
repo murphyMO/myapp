@@ -6,6 +6,8 @@ var methodOverride = require('method-override')
 var AV = require('leanengine');
 //跨域
 var cors = require('cors');
+//上传文件
+var multipart = require('connect-multiparty');
 
 
 
@@ -47,6 +49,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // 跨域
 app.use(cors());
+
 
 
 // 可以将一类的路由单独保存在一个文件中
