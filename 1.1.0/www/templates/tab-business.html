@@ -9,266 +9,34 @@
 		    </a>
 		</div>
 	</ion-header-bar>
-	<div class="xkd-bannegradit" ng-if="scrollTop<230">
-	</div>
-	<ion-content style="top:0;" on-scroll="getScrollTop()">
-		<ion-slide-box style="z-index:-999" ng-if="bannerList.length>0" delegate-handle="bannerList" auto-play="true" does-continue="true" slide-interval=4000  show-pager="{{bannerList.length>1}}">
-			<ion-slide ng-repeat="slide in bannerList track by $index" repeat-finish>
-				<div class="box business-banner" ng-click="bannerClick(slide.banner_link)">
-					<img ng-src="{{bannerPath + slide.banner_thumb}}" err-src="img/test.jpg">
-				</div>
-			</ion-slide>
-		</ion-slide-box>
-		<!-- 头像区 -->
-		<div class="bg-white xkd-sy-qingxie" style="">
-			<div class="flex-around xkd-sy-qingxiefuyuan xkd-sy-mine">
-				<div class="m-t-15 xkd-sy-touxiang" ng-click="personalmsg()">
-<!-- 					<img ng-src="{{commonPath.route_path}}{{commonPath.photo_path}}{{user.userInfo.photo}}" err-src="img/icon_emptyPeron.png" style="width: 80px;height: 80px;border-radius: 50%;"> -->
-					<div style="display:inline-block;width:80px;height:80px;overflow:hidden;border-radius:100px;background-repeat:no-repeat;background-position:center;background-size:cover;background-image:url(img/icon_emptyPeron.png)" ng-style="userImg"></div>
-					<img ng-src="img/{{user.userInfo.user_type_img}}" class="xkd-cutomCkeck">
-				</div>
-				<div class="xkd-sy-xiaoxitj" ui-sref="tab.contact">
-					<p class="margin-none">未读信息</p>
-					<p class="text-center fontsize-16 xkd-sy-xiaoxitj-p">{{newMsgCount}}</p>
-				</div>
-				<div class="xkd-sy-xiaoxitj" ng-click="mineorderslist()">
-					<p class="margin-none">今日会务</p>
-					<p class="text-center fontsize-16 xkd-sy-xiaoxitj-p" >{{getTodayOrders}}</p>
-				</div>
-				<div>
-					<div class="xkd-sy-kaimen" ng-if="openButtonShow" ng-click="openDoorModal()">
-						<img src="img/opendoor-28.png" width="100%">
-					</div>
-					<div class="xkd-sy-kaimen" ng-if="!openButtonShow" ng-click="openDoorMsg()">
-						<img src="img/1.1icon-29.png" width="100%">
-					</div>
-					<div class="m-t-5 xkd-sy-xiaoxitj">
-						<p class="margin-none text-center">当前岛</p>
-						<p class="text-center fontsize-12 xkd-sy-xiaoxitj-p">{{user.userInfo.store_name_by_ip||'无'}}</p>
-					</div>
-				</div>
-			</div>
-			<div class="xkd-sy-huanyin b-b-gyay" ng-if="accesstoken == 'youketoken'">
-				<strong class="color-deepblack fontsize-12">HI,大侠</strong>
-				<small class="fontsize-12 color-silver m-l-5">欢迎来到侠客岛岛里，您还未<span class="color-blue  m-l-5  m-r-5" ui-sref="login">登录</span>哟。</small>
 
-			</div>
-			<div class="xkd-sy-huanyin b-b-gyay" ng-if="accesstoken !='youketoken'">
-				<div class="pull-left">
-					<strong class="color-deepblack fontsize-12">HI,{{user.userInfo.name}}<span class="fontsize-12 color-silver m-l-5" ng-if="!user.userInfo.store_name_by_ip">侠客岛里欢迎您。</span>
-					<span class="fontsize-12 color-silver m-l-5" ng-if="user.userInfo.store_name_by_ip">欢迎进入您的智能办公空间，您已成功接入网络。</span>
-					</strong>
-				</div>
-			</div>
-		</div>
+	<ion-content class="has-subheader">
+		<tab-slide-box tab="0">
+			<ion-slide-box show-pager="false" on-slide-changed="boxChanged($index)" active-slide="nowPage">
+				<ion-slide>
+					<ion-scroll style="height:100%">
+						<!-- <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh(null)"></ion-refresher> -->
+						<div class="text-center">这里是日签</div>
+						<!-- <ion-infinite-scroll ng-if="!allIsEmptyData && nowPage ==0" on-infinite="getList(null)" distance="1%"></ion-infinite-scroll>
+						<div class="text-center" ng-show="allIsOverLoad">
+							<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"/>
 
-		<div style="position: relative;height: 90px;">
-			<!-- 公告 -->
-			<div class="xkd-sy-gonggao row">
-				<div class="col col-10">
-					<span class="lineheight-30 text-center color-white xkd-sy-gonggao-span">公告</span>
-				</div>
-				<div class="col col-90 lineheight-30 padding-l-15">
-					<!-- <marquee behavior="scroll" width="100%">
-						<small class="color-deepblack fontsize-12" ng-repeat="n in notice" ng-click="clickNotice(n)">{{$index+1}}.<span ng-if="n.agoComments">{{n.agoComments}}</span><span ng-if="!n.agoComments">{{n.comments}}</span><span ng-if="n.agoComments">...</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small>
-					</marquee> -->
-					<span ng-if="notice.length == 0">暂无公告</span>
-					<node-marquee notice_ary="notice" ng-if="notice.length > 0"></node-marquee>
-				</div>
-			</div>
-			<!-- 精彩活动 -->
-			<div class="flex-between xkd-sy-fuwubar">
-				<div class="text-center xkd-sy-fuwu" ng-click="viewAllPosts()">
-				<i class="icon-hiicons_activityPortal heroBlue"></i>
-				 <p>精彩活动</p>
-				</div>
-				<div class="text-center xkd-sy-fuwu" ui-sref="conferenceRoomList({store_id:currentStoreId})">
-				<i class="icon-hiicons_meetingRoomPortal heroBlue" ></i><br>
-				<p>场地预订</p>
-				</div>
-				<div class="text-center xkd-sy-fuwu" ui-sref="myofficezone">
-				<i class="icon-hiicons_placesrverpor heroBlue"></i><br>
-				<p>办公空间</p>
-				</div>
-				<div class="text-center xkd-sy-fuwu" ng-click="goApartment()">
-				<i class="icon-hiicons_apartment heroBlue" ></i><br>
-				<p>侠客寓</p>
-				</div>
-			</div>
-		</div>
-		<!-- 开始办公 -->
-		<div class="list bg-white  m-b-none">
-			<div class="item b-none b-b-gyay">
-				<h5>
-					<div class="pull-left strat-to-work-left-box m-r-5 bg-blue"></div>
-					<b class="fontsize-14 bg-white">开始办公</b>
-					<span class="color-gray  fontsize-12 m-l-5 ">Start to work</span>
-					<span class="pull-right color-gray fontsize-14" ui-sref="myofficezone">更多&nbsp;+</span>
-				</h5>
-			</div>
-			<!-- <ion-scroll class="b-b-gyay" direction="x" scrollbar-x="false"> -->
-				<div class="row ">
-					<div class="col  text-center">
-						<div class="strat-to-work-li-box rounded-5" ng-class="{true:'bg-blue',false:'color-silver'}[listType==1]" ng-click="listType=1;" ui-sref="employ">
-							我要</br>招聘
-						</div>
-					</div>
-					<div class="col  text-center">
-						<div class="strat-to-work-li-box rounded-5" ng-class="{true:'bg-blue',false:'color-silver'}[listType==2]" ng-click="listType=2;" ui-sref="finance">
-							财务</br>服务
-						</div>
-					</div>
-					<div class="col  text-center">
-						<div class="strat-to-work-li-box rounded-5" ng-class="{true:'bg-blue',false:'color-silver'}[listType==3]" ng-click="listType=3;" ui-sref="legal">
-							法律</br>助手
-						</div>
-					</div>
-					<div class="col  text-center">
-						<div class="strat-to-work-li-box rounded-5" ng-class="{true:'bg-blue',false:'color-silver'}[listType==4]" ng-click="listType=4;" ui-sref="market">
-							整合</br>营销
-						</div>
-					</div>
-<!-- 					<div class="col  text-center">
-						<div class="strat-to-work-li-box rounded-5" ng-class="{true:'bg-blue',false:'color-silver'}[listType==5]" ng-click="listType=5;" ui-sref="policy">
-							政策</br>申报
-						</div>
-					</div> -->
-				</div>
-			<!-- </ion-scroll> -->
-			<div class="row b-b-gyay">
-				<div style="margin: 0 auto">
-					<div class="pull-left m-t-15">
-						<i class="ion-ios-partlysunny s-t-w-weather-icon color-blue"></i>
-					</div>
-					<div class="pull-left m-t-15 padding-t-10 m-l-5 text-center">
-						<div class="fontsize-14">{{weather.location.name}}</div>
-						<div class="color-gray fontsize-12 ">{{weather.daily[0].text_day}}</div>
-					</div>
-					<div class="pull-left color-gray fontsize-12 m-t-15 padding-15">{{weather.daily[0].wind_direction}}</div>
-					<div class="pull-left m-t-15 padding-t-10 text-center">
-						<div class="fontsize-14">{{weather.daily[0].high}}&deg;</div>
-						<div class="color-gray fontsize-12">{{weather.daily[0].high}}&deg;/{{weather.daily[0].low}}&deg;</div>
-					</div>
-				</div>
-			</div>
-		</div>
+						</div> -->
+					</ion-scroll>
+				</ion-slide>
 
-		<div ng-repeat="i in user.userInfo.app_show.used">
-			<div class="b-b-gyay padding-b-15" ng-if="i.type == 'todo'">
-				<!--待办事项： nzy -->
-				<div class="row bg-white">
-					<div class="col">
-						<h5>
-							<i class="icon-hiicons_backlog color-blue pull-left"></i>
-							<span class="pull-left m-l-5">待办事项</span>
-							<span class="pull-left color-gray fontsize-12 m-l-5" ng-if="TodoList.length == 0">暂无</span>
-						</h5>
-					</div>
-				</div>
-				<div class="col padding-r-15 padding-l-15">
-					<div ng-repeat="item in TodoList">
-						<div class="item item-text-wrap fontsize-14 padding-5 rounded-5">
-							<i class="ion-android-attach color-blue padding-r-5 padding-l-5"></i>
-							{{item}}
-						</div>
-					</div>
-				</div>
-			</div>
-			<div  class="b-b-gyay" ng-if="i.type == 'activity'">
-				<!--今日活动： nzy -->
-				<div class="row bg-white">
-					<div class="col">
-						<h5>
-							<i class="icon-hiicons_newactive color-blue pull-left"></i>
-							<span class="pull-left  m-l-5">今日活动</span>
-							<span class="pull-left color-gray  fontsize-12 m-l-5 ">每天更新最新活动</span>
-						</h5>
-					</div>
-				</div>
-				<div class="col padding-r-15 padding-l-15 xkd-firstNobord">
-					<a class="item item-thumbnail-left b-r-none b-l-none b-b-none" ng-repeat="item in todayactList |limitTo:3" ui-sref="activityitem({id:item.party_id})">
-						<img ng-src="{{commonPath.route_path}}{{commonPath.party_path}}{{item.party_thumb[0]}}" err-src="img/store4.jpg" style="height:auto;width:30%;">
-						<h4>{{item.title}}</h4>
-						<p class="fontsize-12">时间：{{item.apply_end_time}} -- {{item.end_time}}}</p>
-						<p class="fontsize-12">地点：{{item.address}}</p>
-						<!-- <span class="badge badge-positive" style="right: 16px;"  >立即参与</span> -->
-					</a>
-					<a class="padding-15 fontsize-12" ng-if="todayactList.length == 0" ng-click="goActivity()">大侠不巧，今日没有活动哦，去看看其他精彩活动吧</a>
-				</div>
-			</div>
+				<ion-slide>
+					<ion-scroll style="height:100%;clear:both;">
+						<!-- <ion-refresher style="opacity:0" pulling-text="下拉刷新" on-refresh="doRefresh(9)"></ion-refresher> -->
+						<div class="text-center">这里是圈子，点击进入话题</div>
+						<!-- <ion-infinite-scroll ng-if="!topicIsEmptyData && nowPage ==1" on-infinite="getList(9)" distance="1%"></ion-infinite-scroll>
+						<div class="text-center" ng-show="topicIsOverLoad">
+							<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"/>
 
-			<div class="b-b-gyay" ng-if="i.type == 'meeting'">
-				<!--会议室预订： nzy -->
-				<div class="row bg-white">
-					<div class="col">
-						<h5>
-							<i class="icon-hiicons_meetingroom color-blue pull-left"></i>
-							<span class="pull-left  m-l-5">会议室预订</span>
-						</h5>
-					</div>
-				</div>
-
-				<div class="col padding-r-15 padding-l-15 xkd-firstNobord">
-					<a class="item item-button-right b-r-none b-l-none b-b-none"  ng-repeat="item in meetingroomList |limitTo:3"   ng-click="buy(item)">
-						<h4>{{item.store_name}}--{{item.meeting_room_sn}}  {{item.meeting_room_name}}</h4>
-						<p class="fontsize-12">{{item.store_address}}</p>
-						<span class="badge badge-positive fontsize-12" style="right: 16px; font-weight: 400;">立即预定</span>
-					</a>
-				</div>
-			</div>
-		</div>
-
-
-		<div class="b-b-gyay m-b-5" ng-if="storeNotice.length > 0 && user.userInfo.store_name_by_ip">
-			<div class="row bg-white">
-				<div class="col">
-					<h5>
-						<i class="icon-hiicons_broadcast color-blue pull-left"></i>
-						<span class="pull-left  m-l-5">岛内公告</span>
-					</h5>
-				</div>
-			</div>
-			<div class="col">
-				<div class="xkd-afterNobord" ng-repeat="n in storeNotice" style="margin-right: 30px;margin-left: 30px;">
-					<div class="m-t-5 m-b-5" ng-class="{'b-b':$index == 0}">
-						<p style="word-break: break-all;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;" class="color-deepblack fontsize-12" ng-click="clickNotice(n)">
-						{{n.comments}}
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-
-		<!-- 推荐公司	-->
-		<div class="b-t-none bg-white" ng-if="recomCompanyList.length != 0">
-			<div class="item b-none">
-				<h5>
-					<div class="pull-left strat-to-work-left-box m-r-5 bg-blue"></div>
-					<b class="fontsize-14 bg-white">推荐企业</b>
-					<span class="color-gray  fontsize-12 m-l-5 ">Our client</span>
-					<span class="pull-right color-gray fontsize-14" ng-click="seecom()">更多&nbsp;+</span>
-				</h5>
-			</div>
-
-			<ion-scroll direction="x" scrollbar-x="false">
-				<div class="row text-center">
-					<div class="col col-25" ng-click="showCompany(company.com_id)" ng-repeat="company in recomCompanyList" ng-if="company.status == 1" style="position:relative;">
-						<img ng-src="{{companyPath}}{{company.com_logo_path}}" err-src="img/icon_emptyCompany2.png" style="width: 54px;height:54px">
-						<span class="company-name fontsize-12">{{company.com_name}}</span>
-					</div>
-				</div>
-			</ion-scroll>
-		</div>
-		<!--编辑按钮： nzy-->
-		<div class="row text-center">
-			<div class="col col-offset-33 col-33">
-				<button class="button button-small button-positive button-block bg-blue fontsize-14" ng-click="openEditModal(user.userInfo.user_type)">
-				· 编辑 ·
-				</button>
-			</div>
-		</div>
-
+						</div> -->
+					</ion-scroll>
+				</ion-slide>
+			</ion-slide-box>
+		</tab-slide-box>
 	</ion-content>
 </ion-view>

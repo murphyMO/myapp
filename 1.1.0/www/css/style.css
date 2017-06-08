@@ -3467,7 +3467,7 @@ animation-iteration-count:infinite;
 }
 /*开门动画end*/
 .xkd-topSwitchTab{
-    width: 230px;
+    /*width: 230px;*/
     margin: 0 auto;
     border: 1px solid #e3e3e3;
     border-radius: 50px;
