@@ -505,20 +505,20 @@ img.xkd-profucPhoto{
 /*ionic.css 覆盖*/
 
 ion-tabs.tabs-color-active-calm .tab-item.tab-item-active, ion-tabs.tabs-color-active-calm .tab-item.active, ion-tabs.tabs-color-active-calm .tab-item.activated {
-    color: #0081fe!important;
+    color: #33cd5f!important;
 }
 ion-tabs.tabs-color-active-calm .tab-item.tab-item-active, ion-tabs.tabs-color-active-calm .tab-item.active, ion-tabs.tabs-color-active-calm .tab-item.activated {
-    color: #0081fe!important; }
+    color: #33cd5f!important; }
 
 ion-tabs.tabs-color-active-calm .tab-item {
 	 color: #999999;
 }
 
 ion-tabs.tabs-striped.tabs-color-active-calm .tab-item.tab-item-active, ion-tabs.tabs-striped.tabs-color-active-calm .tab-item.active, ion-tabs.tabs-striped.tabs-color-active-calm .tab-item.activated {
-  color: #0081fe; }
+  color: #33cd5f; }
 
   .assertive, a.assertive {
-    color: #dc6369;
+    color: #33cd5f;
 }
 .slider-pager {
     top: 50px;
@@ -1320,7 +1320,7 @@ li.xkd-service-type-scroll {
 	width: 30px;
 	height:30px;
 	/*background-color: rgba(68,68,68,.5)*/
-	background:#0081fe;
+	background:#33cd5f;
 }
 .companytab{
 	padding-top: 0;
@@ -3485,7 +3485,7 @@ animation-iteration-count:infinite;
 	/*border-bottom: 2px solid #fff;*/
 
     font-size: 14px;
-    background: #0081fe;
+    background: #33cd5f;
     border-radius: 50px;
     color: #fff;
 }

@@ -18,13 +18,36 @@
 	</ion-header-bar>
 
 
-	<ion-content class="has-subheader">
+	<ion-content class="has-header">
 		<tab-slide-box tab="0">
 			<ion-slide-box show-pager="false" on-slide-changed="boxChanged($index)" active-slide="nowPage">
 				<ion-slide>
 					<ion-scroll style="height:100%">
-						<!-- <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh(null)"></ion-refresher> -->
-						<div class="text-center">这里是推荐列表</div>
+						<ion-refresher pulling-text="下拉刷新" on-refresh="refreshAll()"></ion-refresher>
+						
+						<div class="list card padding-10" ng-repeat="item in allInfo">
+								<!-- 用户信息 -->
+						        <div class="item item-avatar" ui-sref='tab.mine({id:item.cre_user.objectId})'>
+						          <img src="{{item.cre_user.avatar.url}}">
+						          <h2>{{item.cre_user.username}}</h2>
+						          <p style="font-size: 10px;">{{item.cre_user.description}}</p>
+						        </div>
+						        <!-- 内容 -->
+						        <div class="item item-image">
+						          <img src="{{item.img.url}}">
+						        </div>
+						        <!-- 点赞回复 -->
+						        <div class="item assertive text-center">
+						        	<span class="m-10"> <i class="ion-android-favorite"></i>(5)</span>
+						        	<span class="m-10"> <i class="ion-chatbubble-working"></i>(5)</span>
+						        	<span class="m-10"> <i class="ion-ios-redo"></i>(5)</span>
+						        	
+						        </div>
+
+						      </div>
+						      <div ng-show="isEmptyAll" class="text-center">暂时没有动态哦</div>
+							
+						</div>
 						<!-- <ion-infinite-scroll ng-if="!allIsEmptyData && nowPage ==0" on-infinite="getList(null)" distance="1%"></ion-infinite-scroll>
 						<div class="text-center" ng-show="allIsOverLoad">
 							<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"/>
@@ -35,13 +58,28 @@
 
 				<ion-slide>
 					<ion-scroll style="height:100%;clear:both;">
-						<!-- <ion-refresher style="opacity:0" pulling-text="下拉刷新" on-refresh="doRefresh(9)"></ion-refresher> -->
-						<div class="text-center">这里是关注列表</div>
-						<!-- <ion-infinite-scroll ng-if="!topicIsEmptyData && nowPage ==1" on-infinite="getList(9)" distance="1%"></ion-infinite-scroll>
-						<div class="text-center" ng-show="topicIsOverLoad">
-							<img style="width:50%;margin-top:50px" src="img/icon_empty_img.png"/>
+						<ion-refresher style="opacity:0" pulling-text="下拉刷新" on-refresh="refreshMine()"></ion-refresher>
+						<div class="list card padding-10" ng-repeat="item in mineInfo">
+								<!-- 用户信息 -->
+						        <div class="item item-avatar" ui-sref='tab.mine({id:item.cre_user.objectId})'>
+						          <img src="{{item.cre_user.avatar.url}}">
+						          <h2>{{item.cre_user.username}}</h2>
+						          <p style="font-size: 10px;">{{item.cre_user.description}}</p>
+						        </div>
+						        <!-- 内容 -->
+						        <div class="item item-image">
+						          <img src="{{item.img.url}}">
+						        </div>
+						        <!-- 点赞回复 -->
+						        <div class="item assertive text-center">
+						        	<span class="m-10"> <i class="ion-android-favorite"></i>(5)</span>
+						        	<span class="m-10"> <i class="ion-chatbubble-working"></i>(5)</span>
+						        	<span class="m-10"> <i class="ion-ios-redo"></i>(5)</span>
+						        	
+						        </div>
 
-						</div> -->
+						      </div>
+						      <div ng-show="isEmptyMine" class="text-center">暂时没有动态哦</div>
 					</ion-scroll>
 				</ion-slide>
 			</ion-slide-box>

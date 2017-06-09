@@ -3,8 +3,8 @@
  */
 
 //服务请求地址
- // var platformServer = "http://localhost:3000/";
-  var platformServer = "https://murphy.leanapp.cn/";
+ var platformServer = "http://localhost:3000/";
+  // var platformServer = "https://murphy.leanapp.cn/";
 
 
 //工单提交路径--测试

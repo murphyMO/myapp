@@ -197,7 +197,7 @@ router.get('/current-user-topics', function(req, res, next) {
 
 //关注的人
 router.get('/current-user-focus', function(req, res, next) {
-     var currentUserId = req.query.currentUserId
+    var currentUserId = req.query.currentUserId
     var User = AV.Object.createWithoutData('_User', currentUserId);
     // 用户收藏话题relation
     var query = new AV.Query('obj_focus');
