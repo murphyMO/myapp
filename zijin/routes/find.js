@@ -58,18 +58,38 @@ router.get('/mine',function(req, res, next) {
     query.equalTo('user_id',currentUser);
     query.find().then(function(results){
         // 遍历每个id，查询发布的内容
-        // var focusArr = [];
-        // results.forEach(function(result){
-          
+        var focusArr = [];
+        results.forEach(function(result){
+          // focusArr.push(result.get('target_id').id);
+          var focusId =result.get('target_id').id.toString();
+          var focusquery = new AV.Query('obj_article');
+          console.log(focusId);
+          focusquery.get(focusId).then(function (focusData) {
+            console.log(2222222222222222222222222)
+            console.log(focusData)
+            }, function (error) {
+             JSON.stringify(error);
+              console.log(error)
+            });
+        })
+
+        // var focusquery = new AV.Query('obj_article');
+        // console.log(focusArr);
+        // focusquery.containsAll('objectId ', focusArr);
+        // focusquery.find().then(function(focusData){
+        //   console.log(focusData)
+         
         // })
 
+         var msg = {
+              'statuscode': '1',
+              'message': '操作成功',
+              'data': focusArr
+            }
+          res.json(msg);
+       
 
-      var msg = {
-         'statuscode': '1',
-         'message': '操作成功',
-         'data': results
-       }
-       res.json(msg);
+        
     },function(err){
       JSON.stringify(err);
       var msg = {
@@ -79,24 +99,6 @@ router.get('/mine',function(req, res, next) {
        }
        res.json(msg);
     }).catch(next);
-
-
-    // var query = new AV.Query('obj_article');
-    // query.equalTo('cre_user_id', '5927ca2944d904006411e5b0');
-    // query.find().then(function(results){
-    //     var msg = {
-    //   'statuscode': '1',
-    //   'message': '操作成功',
-    //   'mine': results
-    //  }
-    // res.json(msg);
-    // },function(err){
-    //    var msg = {
-    //   'statuscode': '-1',
-    //   'message': '操作失败'
-    //   }
-    //   res.json(msg);
-    // }).catch(next)
 })
 
 
